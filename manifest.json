@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+
+  "name": "Silencer",
+  "description": "A conscious way to filter the Internet",
+  "version": "0.1",
+
+  "browser_action": {
+    "default_icon": "/icons/icon-mini.png",
+    "default_popup": "popup.html"
+  }
+}
