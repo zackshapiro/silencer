@@ -5,6 +5,14 @@
   "description": "A conscious way to filter the Internet",
   "version": "0.1",
 
+  "content_scripts": [
+    {
+      // http://developer.chrome.com/extensions/match_patterns.html
+      "matches": ["http://getpocket.com/*"],
+      "js": ["jquery-1.9.1.min.js", "my_script.js"],
+      "all_frames": true
+    }
+  ], 
   "browser_action": {
     "default_icon": "/icons/icon-mini.png",
     "default_popup": "popup.html"
