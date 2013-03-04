@@ -9,7 +9,7 @@
     {
       // http://developer.chrome.com/extensions/match_patterns.html
       "matches": ["http://getpocket.com/*"],
-      "js": ["jquery-1.9.1.min.js", "my_script.js"],
+      "js": ["jquery-1.9.1.min.js", "silencer.js"],
       "all_frames": true
     }
   ], 
