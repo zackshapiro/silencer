@@ -2,16 +2,20 @@
 (function() {
 
   $(function() {
-    var article, articles, articlesArray, articlesLength, _i, _len, _results;
+    var article, articles, articlesArray, articlesLength, filterTerms, _i, _len, _results;
+    filterTerms = ["Apple", "Frank Chimero", "Coke", "Privacy"];
     if ($('#queue').length > 0) {
       articles = $('#queue');
-      articlesLength = articles.children().length;
       articlesArray = articles.children();
-      debugger;
+      articlesLength = articles.children().length;
       _results = [];
       for (_i = 0, _len = articlesArray.length; _i < _len; _i++) {
         article = articlesArray[_i];
-        _results.push(console.log("article!"));
+        if ($($(article).find(".title").children()[0]).text().indexOf("Staying") > -1) {
+          _results.push($(article).hide());
+        } else {
+          _results.push(void 0);
+        }
       }
       return _results;
     }
