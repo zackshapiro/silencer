@@ -7,4 +7,4 @@ To Do:
 * Let user remove terms
 * Build for Twitter
 
-#### crafted with love by (http://twitter.com/zackshapiro)[Zack Shapiro]
+#### crafted with love by [Zack Shapiro](http://twitter.com/zackshapiro)
