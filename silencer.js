@@ -4,6 +4,11 @@
   $(function() {
     var article, articles, articlesArray, articlesLength, filterTerms, term, _i, _len, _results;
     filterTerms = ["Apple", "Frank Chimero", "Coke", "Privacy", "San Francisco", "Canon"];
+    chrome.extension.sendMessage({
+      greeting: "hello"
+    }, function(response) {
+      return console.log(response.farewell);
+    });
     if ($('#queue').length > 0) {
       articles = $('#queue');
       articlesArray = articles.children();

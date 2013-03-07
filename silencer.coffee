@@ -9,6 +9,8 @@ $ ->
     "Canon"
   ]
 
+  chrome.extension.sendMessage({greeting: "hello"}, (response) -> console.log(response.farewell))
+
   if $('#queue').length > 0
     articles = $('#queue')
     articlesArray = articles.children()
