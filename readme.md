@@ -6,3 +6,5 @@ To Do:
 * Let user add terms
 * Let user remove terms
 * Build for Twitter
+
+#### crafted with love by (http://twitter.com/zackshapiro)[Zack Shapiro]
