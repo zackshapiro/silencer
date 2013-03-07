@@ -4,7 +4,9 @@ $ ->
     "Apple",
     "Frank Chimero",
     "Coke",
-    "Privacy"
+    "Privacy",
+    "San Francisco",
+    "Canon"
   ]
 
   if $('#queue').length > 0
@@ -13,7 +15,5 @@ $ ->
     articlesLength = articles.children().length
 
     for article in articlesArray
-      # TODO: Loop through filter terms and plug them into indexOf
-      if $($(article).find(".title").children()[0]).text().indexOf("Staying") > -1 then $(article).hide()
-
-    # console.log filterTerms
+      for term in filterTerms
+        if $($(article).find(".title").children()[0]).text().indexOf(term) > -1 then $(article).hide()

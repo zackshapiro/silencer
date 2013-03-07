@@ -3,9 +3,11 @@
   <head>
     <title>Getting Started Extension's Popup</title>
     <style>
+
       body {
-        min-width: 357px;
+        min-width: 300px;
         overflow-x: hidden;
+        /* To Do: Open Sans or Source Sans */
         font-family: "Helvetica Neue";
         text-align: center;
       }
@@ -17,6 +19,37 @@
         width: 75px;
         height: 75px;
       }
+
+      input {
+        height: 25px;
+        width: 70%;
+        font-size: 15px;
+        padding-left: 4px;
+      }
+
+      .welcome { text-decoration: underline; }
+
+      .tag-line { color: #999; font-size: 12px; margin-top: -12px; }
+
+      .examples { font-size: 11px; color: #999; }
+
+      .add-term { padding: 16px 0; }
+
+      .button {
+        border: 1px solid black;
+        padding: 4px 8px;
+        width: 30%;
+        display: inline-block;
+        border-radius: 15px;
+        background: #1d7efa;
+        border-color: #0456be;
+        letter-spacing: .1em;
+        color: white;
+        text-decoration: none;
+      }
+
+      .primary { margin-top: 0px; }
+
     </style>
 
     <!--
@@ -27,6 +60,21 @@
      -->
   </head>
   <body>
-    Welcome to Silencer
+    <p class="welcome">Silencer</p>
+    <p class="tag-line">turn down the internet</p>
+
+    <div class="add-term">
+      <input placeholder="Enter a term to filter"></input>
+      <p class="examples">(ex. Yankees, 4sq.com, country music, #sxsw)</p>
+      <a href="#" class="primary button">Add Term</a>
+    </div>
+
+    <!-- Idea! Hate speech filter auto add -->
+    <!-- Idea! Find a hashtag on a page? Bubble next to it to mute! -->
+
+    <div class="current-terms">
+      Your terms currently being filtered:
+    </div>
+
   </body>
 </html>
