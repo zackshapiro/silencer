@@ -52,12 +52,6 @@
 
     </style>
 
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
-     -->
   </head>
   <body>
     <p class="welcome">Silencer</p>
@@ -74,23 +68,12 @@
 
     <div class="current-terms">
       Your terms currently being filtered:
+      <ul class="terms">
+      </ul>
     </div>
 
-    <script>
-    chrome.tabs.getSelected(null, function(tab) {
-      chrome.tabs.sendMessage(tab.id, {greeting: "hello"}, function(response) {
-        console.log(response.farewell);
-      });
-    });
-
-    chrome.extension.onMessage.addListener(
-      function(request, sender, sendResponse) {
-        console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
-        
-        if (request.greeting == "hello")
-          sendResponse({farewell: "goodbye"});
-    });
-    </script>
+    <script src="jquery-1.9.1.min.js"></script>
+    <script src="popup.js"></script>
 
   </body>
 </html>

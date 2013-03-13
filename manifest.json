@@ -3,8 +3,11 @@
 
   "name": "Silencer",
   "description": "A conscious way to filter the Internet",
-  "version": "0.1",
-
+  "version": "0.2",
+  "background":{
+    "scripts":["background.js"]
+  },
+  
   "content_scripts": [
     {
       // http://developer.chrome.com/extensions/match_patterns.html
