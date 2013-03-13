@@ -12,7 +12,7 @@ $ ->
     "SXSW",
     "humblebrag",
     "who.unfollowed.me",
-    "Benny"
+    "Benny  "
   ]
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
