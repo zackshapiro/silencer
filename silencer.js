@@ -3,7 +3,7 @@
 
   $(function() {
     var article, articles, articlesArray, articlesLength, filterTerms, hideChild, term, tweet, tweets, tweetsArray, tweetsLength, _i, _j, _k, _len, _len1, _len2, _results;
-    filterTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag"];
+    filterTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Benny"];
     chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       return sendResponse(filterTerms);
     });
@@ -36,8 +36,12 @@
           _results1 = [];
           for (_l = 0, _len3 = filterTerms.length; _l < _len3; _l++) {
             term = filterTerms[_l];
-            if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-              _results1.push(hideChild($(tweet)));
+            if ($(tweet).is(":visible")) {
+              if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                _results1.push(hideChild($(tweet)));
+              } else {
+                _results1.push(void 0);
+              }
             } else {
               _results1.push(void 0);
             }

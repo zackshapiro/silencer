@@ -10,7 +10,9 @@ $ ->
     "#sxsw",
     "#sxsw2013",
     "SXSW",
-    "humblebrag"
+    "humblebrag",
+    "who.unfollowed.me",
+    "Benny"
   ]
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
@@ -37,7 +39,8 @@ $ ->
 
     for tweet in tweetsArray
       for term in filterTerms
-        if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
+        if $(tweet).is(":visible")
+          if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
 
         # TODO: refactor, DRY this up
 
