@@ -9,7 +9,8 @@ $ ->
     "@andrewhyde",
     "#sxsw",
     "#sxsw2013",
-    "SXSW"
+    "SXSW",
+    "humblebrag"
   ]
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->

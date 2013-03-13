@@ -3,7 +3,7 @@
 ### An extension for Google Chrome to define terms to be filtered from select websites
 
 To Do:
-* Show terms
+* All lowercase everything
 * Let user add terms
 * Let user remove terms
 
