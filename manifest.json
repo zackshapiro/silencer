@@ -11,7 +11,8 @@
   "content_scripts": [
     {
       // http://developer.chrome.com/extensions/match_patterns.html
-      "matches": ["http://getpocket.com/*", "https://twitter.com/*"],
+      // Consider changing this to matches: * (everything), so terms show up on all page
+      "matches": ["https://twitter.com/*"],
       "js": ["jquery-1.9.1.min.js", "silencer.js"],
       "all_frames": true
     }

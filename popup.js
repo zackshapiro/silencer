@@ -9,6 +9,7 @@
     }, function(tab) {
       return chrome.tabs.sendMessage(tab[0].id, "stuff", function(response) {
         var term, _i, _len, _results;
+        console.log(JSON.stringify(response));
         terms = response;
         _results = [];
         for (_i = 0, _len = terms.length; _i < _len; _i++) {
