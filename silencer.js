@@ -4,7 +4,7 @@
   $(function() {
     var addTerm, hideChild, myFilteredTerms, reservedWords, term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
     reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
-    myFilteredTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "@chexee"];
+    myFilteredTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "@chexee", "rape"];
     hideChild = function(child) {
       return child.hide();
     };

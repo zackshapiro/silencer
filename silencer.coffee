@@ -25,7 +25,8 @@ $ ->
     "Google Reader",
     "Samsung",
     "@ttunguz",
-    "@chexee"
+    "@chexee",
+    "rape"
   ]
 
   hideChild = (child) ->
