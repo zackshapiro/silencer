@@ -2,54 +2,42 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTerms, hideChild, reservedWords;
+    var filterTerms, hideChild, reservedWords, term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
     reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
-    filterTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz"];
+    filterTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "chexee"];
     hideChild = function(child) {
       return child.hide();
-    };
-    addTerm = function(newTerm, filterTerms) {
-      debugger;      if (filterTerms.indexOf(newTerm.toLowerCase()) === 1) {
-        return alert("You're already filtering that term");
-      } else {
-        return filterTerms.push(newTerm);
-      }
     };
     chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       return sendResponse(filterTerms);
     });
-    return {
-      init: function() {
-        var term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
-        if ($(".stream-items").children().length > 0) {
-          tweets = $(".stream-items");
-          tweetsArray = tweets.children();
-          tweetsLength = tweetsArray.length;
-          _results = [];
-          for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
-            tweet = tweetsArray[_i];
-            _results.push((function() {
-              var _j, _len1, _results1;
-              _results1 = [];
-              for (_j = 0, _len1 = filterTerms.length; _j < _len1; _j++) {
-                term = filterTerms[_j];
-                if ($(tweet).is(":visible")) {
-                  if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                    _results1.push(hideChild($(tweet)));
-                  } else {
-                    _results1.push(void 0);
-                  }
-                } else {
-                  _results1.push(void 0);
-                }
+    if ($(".stream-items").children().length > 0) {
+      tweets = $(".stream-items");
+      tweetsArray = tweets.children();
+      tweetsLength = tweetsArray.length;
+      _results = [];
+      for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
+        tweet = tweetsArray[_i];
+        _results.push((function() {
+          var _j, _len1, _results1;
+          _results1 = [];
+          for (_j = 0, _len1 = filterTerms.length; _j < _len1; _j++) {
+            term = filterTerms[_j];
+            if ($(tweet).is(":visible")) {
+              if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                _results1.push(hideChild($(tweet)));
+              } else {
+                _results1.push(void 0);
               }
-              return _results1;
-            })());
+            } else {
+              _results1.push(void 0);
+            }
           }
-          return _results;
-        }
+          return _results1;
+        })());
       }
-    };
+      return _results;
+    }
   });
 
 }).call(this);
