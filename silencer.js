@@ -2,14 +2,25 @@
 (function() {
 
   $(function() {
-    var filterTerms, hideChild, reservedWords, term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+    var addTerm, hideChild, myFilteredTerms, reservedWords, term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
     reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
-    filterTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "chexee"];
+    myFilteredTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "@chexee"];
     hideChild = function(child) {
       return child.hide();
     };
+    addTerm = function(newTerm, myFilteredTerms) {
+      myFilteredTerms.push(newTerm);
+      return console.log(myFilteredTerms);
+    };
     chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
-      return sendResponse(filterTerms);
+      var newFilteredTermList;
+      console.log(message);
+      if (message !== "showTerms") {
+        newFilteredTermList = addTerm(message, myFilteredTerms);
+        return sendResponse(newFilteredTermList);
+      } else {
+        return sendResponse(myFilteredTerms);
+      }
     });
     if ($(".stream-items").children().length > 0) {
       tweets = $(".stream-items");
@@ -21,8 +32,8 @@
         _results.push((function() {
           var _j, _len1, _results1;
           _results1 = [];
-          for (_j = 0, _len1 = filterTerms.length; _j < _len1; _j++) {
-            term = filterTerms[_j];
+          for (_j = 0, _len1 = myFilteredTerms.length; _j < _len1; _j++) {
+            term = myFilteredTerms[_j];
             if ($(tweet).is(":visible")) {
               if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
                 _results1.push(hideChild($(tweet)));
