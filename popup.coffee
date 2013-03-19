@@ -1,6 +1,7 @@
 $ ->
 
-  $('.submit').click ->
+  # Handles both forms of form submit. Enter or button click.
+  $('.my-form').submit ->
     newTerm = $('.term-to-submit').val()    
     unless newTerm == ""
       chrome.tabs.query("active": true, "currentWindow": true,
@@ -10,6 +11,18 @@ $ ->
               console.log response
           )
       )
+
+  $('.submit').click -> 
+    newTerm = $('.term-to-submit').val()    
+    unless newTerm == ""
+      chrome.tabs.query("active": true, "currentWindow": true,
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, newTerm,
+            (response) ->
+              console.log response
+          )
+      )
+
 
   chrome.tabs.query("active": true, "currentWindow": true,
   (tab) -> 

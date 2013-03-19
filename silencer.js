@@ -2,53 +2,112 @@
 (function() {
 
   $(function() {
-    var addTerm, hideChild, myFilteredTerms, reservedWords, term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+    var addTerm, filterTwitter, getTerms, hideChild, myFilteredTerms, reservedWords, storeTerms, termListToUse;
     reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
-    myFilteredTerms = ["4sq.com", "vine.co", "@vine", "Andrew Hyde", "@andrewhyde", "#sxsw", "#sxsw2013", "SXSW", "humblebrag", "who.unfollowed.me", "Pope", "Google Reader", "Samsung", "@ttunguz", "@chexee", "rape"];
+    myFilteredTerms = [
+      {
+        "term": "4sq.com"
+      }, {
+        "term": "vine.co"
+      }, {
+        "term": "@vine"
+      }, {
+        "term": "Andrew Hyde"
+      }, {
+        "term": "@andrewhyde"
+      }, {
+        "term": "#sxsw"
+      }, {
+        "term": "#sxsw2013"
+      }, {
+        "term": "SXSW"
+      }, {
+        "term": "humblebrag"
+      }, {
+        "term": "who.unfollowed.me"
+      }, {
+        "term": "Pope"
+      }, {
+        "term": "Google Reader"
+      }, {
+        "term": "Samsung"
+      }, {
+        "term": "@ttunguz"
+      }, {
+        "term": "@chexee"
+      }, {
+        "term": "rape"
+      }
+    ];
+    storeTerms = function(myFilteredTerms) {};
+    localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms));
+    getTerms = function(myFilteredTerms) {
+      var item, myList, myNewList, terms, _i, _len;
+      myList = localStorage.getItem("myFilteredTerms");
+      myNewList = JSON.parse(myList);
+      terms = [];
+      for (_i = 0, _len = myNewList.length; _i < _len; _i++) {
+        item = myNewList[_i];
+        terms.push(item['term']);
+      }
+      return terms;
+    };
     hideChild = function(child) {
       return child.hide();
     };
     addTerm = function(newTerm, myFilteredTerms) {
-      myFilteredTerms.push(newTerm);
-      return console.log(myFilteredTerms);
-    };
-    chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
-      var newFilteredTermList;
-      console.log(message);
-      if (message !== "showTerms") {
-        newFilteredTermList = addTerm(message, myFilteredTerms);
-        return sendResponse(newFilteredTermList);
+      if (myFilteredTerms.indexOf(newTerm.toLowerCase()) > -1) {
+        return alert("You're already filtering that term");
       } else {
-        return sendResponse(myFilteredTerms);
+        return myFilteredTerms.push(newTerm);
       }
-    });
-    if ($(".stream-items").children().length > 0) {
-      tweets = $(".stream-items");
-      tweetsArray = tweets.children();
-      tweetsLength = tweetsArray.length;
-      _results = [];
-      for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
-        tweet = tweetsArray[_i];
-        _results.push((function() {
-          var _j, _len1, _results1;
-          _results1 = [];
-          for (_j = 0, _len1 = myFilteredTerms.length; _j < _len1; _j++) {
-            term = myFilteredTerms[_j];
-            if ($(tweet).is(":visible")) {
-              if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                _results1.push(hideChild($(tweet)));
+    };
+    filterTwitter = function(myFilteredTerms) {
+      var term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+      if ($(".stream-items").children().length > 0) {
+        tweets = $(".stream-items");
+        tweetsArray = tweets.children();
+        tweetsLength = tweetsArray.length;
+        _results = [];
+        for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
+          tweet = tweetsArray[_i];
+          _results.push((function() {
+            var _j, _len1, _results1;
+            _results1 = [];
+            for (_j = 0, _len1 = termListToUse.length; _j < _len1; _j++) {
+              term = termListToUse[_j];
+              if ($(tweet).is(":visible")) {
+                if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                  _results1.push(hideChild($(tweet)));
+                } else {
+                  _results1.push(void 0);
+                }
               } else {
                 _results1.push(void 0);
               }
-            } else {
-              _results1.push(void 0);
             }
-          }
-          return _results1;
-        })());
+            return _results1;
+          })());
+        }
+        return _results;
       }
-      return _results;
+    };
+    if (localStorage.getItem('myFilteredTerms') === null) {
+      storeTerms(myFilteredTerms);
+    } else {
+      termListToUse = getTerms(myFilteredTerms);
     }
+    filterTwitter(termListToUse);
+    return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
+      var newFilteredTermList;
+      console.log(message);
+      if (message !== "showTerms") {
+        newFilteredTermList = addTerm(message, termListToUse);
+        return sendResponse(newFilteredTermList);
+      } else {
+        return sendResponse(termListToUse);
+      }
+    });
   });
 
 }).call(this);

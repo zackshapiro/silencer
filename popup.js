@@ -2,6 +2,20 @@
 (function() {
 
   $(function() {
+    $('.my-form').submit(function() {
+      var newTerm;
+      newTerm = $('.term-to-submit').val();
+      if (newTerm !== "") {
+        return chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, newTerm, function(response) {
+            return console.log(response);
+          });
+        });
+      }
+    });
     $('.submit').click(function() {
       var newTerm;
       newTerm = $('.term-to-submit').val();
