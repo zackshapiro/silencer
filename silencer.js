@@ -73,10 +73,12 @@
     }
     filterTwitter(termList);
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
+      var termArray;
+      termArray = makeTermArray();
       console.log(message);
       if (message !== "showTerms") {
-        addTerm(message, makeTermArray());
-        return sendResponse(makeTermArray());
+        addTerm(message, termArray);
+        return sendResponse(termArray);
       } else {
         return sendResponse(termList);
       }

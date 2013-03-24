@@ -25,8 +25,9 @@ $ ->
 
   addTerm = (newTerm, myFilteredTerms) ->
     # for filteredTerm in myFilteredTerms
-      # alert "You're already filtering that term" if newTerm.indexOf(filterTwitter['term'])
-      # break
+    #   if filteredTerm['term'].indexOf(newTerm)
+    #     alert "You're already filtering that term" 
+    #     break
 
     # adds an item to the array above
     myFilteredTerms.push({ "term": newTerm })
@@ -69,7 +70,7 @@ $ ->
     termArray = makeTermArray()
     console.log message
     if message != "showTerms"
-      addTerm(message, termArray
+      addTerm(message, termArray)
       sendResponse(termArray)
       # filterTwitter(getTerms(newFilteredTermList))
     else
