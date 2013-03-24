@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, getTerms, hideChild, myFilteredTerms, reservedWords, storeTerms, termListToUse;
+    var addTerm, filterTwitter, getTerms, hideChild, myFilteredTerms, reservedWords, storeTerms, termListToUse, termListTouse;
     reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
     myFilteredTerms = [
       {
@@ -24,6 +24,8 @@
       }, {
         "term": "humblebrag"
       }, {
+        "term": "rape"
+      }, {
         "term": "who.unfollowed.me"
       }, {
         "term": "Pope"
@@ -36,11 +38,16 @@
       }, {
         "term": "@chexee"
       }, {
-        "term": "rape"
+        "term": "#ravens"
+      }, {
+        "term": "semil"
+      }, {
+        "term": "#fb"
       }
     ];
-    storeTerms = function(myFilteredTerms) {};
-    localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms));
+    storeTerms = function(myFilteredTerms) {
+      return localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms));
+    };
     getTerms = function(myFilteredTerms) {
       var item, myList, myNewList, terms, _i, _len;
       myList = localStorage.getItem("myFilteredTerms");
@@ -59,7 +66,10 @@
       if (myFilteredTerms.indexOf(newTerm.toLowerCase()) > -1) {
         return alert("You're already filtering that term");
       } else {
-        return myFilteredTerms.push(newTerm);
+        myFilteredTerms.push({
+          "term": newTerm
+        });
+        return storeTerms(myFilteredTerms);
       }
     };
     filterTwitter = function(myFilteredTerms) {
@@ -93,7 +103,7 @@
       }
     };
     if (localStorage.getItem('myFilteredTerms') === null) {
-      storeTerms(myFilteredTerms);
+      termListTouse = storeTerms(myFilteredTerms);
     } else {
       termListToUse = getTerms(myFilteredTerms);
     }
@@ -102,7 +112,7 @@
       var newFilteredTermList;
       console.log(message);
       if (message !== "showTerms") {
-        newFilteredTermList = addTerm(message, termListToUse);
+        newFilteredTermList = addTerm(message, myFilteredTerms);
         return sendResponse(newFilteredTermList);
       } else {
         return sendResponse(termListToUse);

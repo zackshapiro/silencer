@@ -3,7 +3,7 @@
 
   "name": "Silencer",
   "description": "A conscious way to filter the Internet",
-  "version": "0.2",
+  "version": "0.25",
   "background":{
     "scripts":["background.js"]
   },

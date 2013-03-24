@@ -20,17 +20,20 @@ $ ->
     { "term": "#sxsw2013" },
     { "term": "SXSW" },
     { "term": "humblebrag" },
+    { "term": "rape" },
     { "term": "who.unfollowed.me" },
     { "term": "Pope" },
     { "term": "Google Reader" },
     { "term": "Samsung" },
     { "term": "@ttunguz" },
     { "term": "@chexee" },
-    { "term": "rape" }
+    { "term": "#ravens" },
+    { "term": "semil" },
+    { "term": "#fb" }
   ]
 
   storeTerms = (myFilteredTerms) ->
-  localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms))
+    localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms))
 
   getTerms = (myFilteredTerms) ->
     myList = localStorage.getItem("myFilteredTerms")
@@ -48,8 +51,9 @@ $ ->
   addTerm = (newTerm, myFilteredTerms) ->
     if myFilteredTerms.indexOf(newTerm.toLowerCase()) > -1
       alert "You're already filtering that term"
-    else 
-      myFilteredTerms.push(newTerm)
+    else
+      myFilteredTerms.push({ "term": newTerm })
+      storeTerms(myFilteredTerms)
 
   filterTwitter = (myFilteredTerms) ->
     # for Twitter
@@ -63,11 +67,15 @@ $ ->
           if $(tweet).is(":visible")
             if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
 
+
+
+
  # Init code stars here 
   if localStorage.getItem('myFilteredTerms') == null
-    storeTerms(myFilteredTerms)
+    # Stores terms if localStorage is empty
+    termListTouse = storeTerms(myFilteredTerms)
   else
-    # This is the acting variable used to filter
+    # This is the acting variable used to filter, This should be a different list from what's above, that's the starter list
     termListToUse = getTerms(myFilteredTerms)
 
   filterTwitter(termListToUse)
@@ -75,7 +83,7 @@ $ ->
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     console.log message
     if message != "showTerms"
-      newFilteredTermList = addTerm(message, termListToUse)
+      newFilteredTermList = addTerm(message, myFilteredTerms)
       sendResponse(newFilteredTermList)
       # location.reload()
       # filterTwitter(newFilteredTermList)
