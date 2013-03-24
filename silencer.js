@@ -2,51 +2,9 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, getTerms, hideChild, myFilteredTerms, reservedWords, storeTerms, termListToUse, termListTouse;
-    reservedWords = ["favorite", "like", "retweet", "reply", "view summary", "expand", "view conversation"];
-    myFilteredTerms = [
-      {
-        "term": "4sq.com"
-      }, {
-        "term": "vine.co"
-      }, {
-        "term": "@vine"
-      }, {
-        "term": "Andrew Hyde"
-      }, {
-        "term": "@andrewhyde"
-      }, {
-        "term": "#sxsw"
-      }, {
-        "term": "#sxsw2013"
-      }, {
-        "term": "SXSW"
-      }, {
-        "term": "humblebrag"
-      }, {
-        "term": "rape"
-      }, {
-        "term": "who.unfollowed.me"
-      }, {
-        "term": "Pope"
-      }, {
-        "term": "Google Reader"
-      }, {
-        "term": "Samsung"
-      }, {
-        "term": "@ttunguz"
-      }, {
-        "term": "@chexee"
-      }, {
-        "term": "#ravens"
-      }, {
-        "term": "semil"
-      }, {
-        "term": "#fb"
-      }
-    ];
-    storeTerms = function(myFilteredTerms) {
-      return localStorage.setItem("myFilteredTerms", JSON.stringify(myFilteredTerms));
+    var addTerm, filterTwitter, getTerms, hideChild, makeTermArray, storeTerms, termList;
+    storeTerms = function(terms) {
+      return localStorage.setItem("myFilteredTerms", JSON.stringify(terms));
     };
     getTerms = function(myFilteredTerms) {
       var item, myList, myNewList, terms, _i, _len;
@@ -59,20 +17,28 @@
       }
       return terms;
     };
+    addTerm = function(newTerm, myFilteredTerms) {
+      myFilteredTerms.push({
+        "term": newTerm
+      });
+      return storeTerms(myFilteredTerms);
+    };
+    makeTermArray = function() {
+      var term, termArray, terms, _i, _len;
+      termArray = [];
+      terms = getTerms();
+      for (_i = 0, _len = terms.length; _i < _len; _i++) {
+        term = terms[_i];
+        termArray.push({
+          "term": "" + term
+        });
+      }
+      return termArray;
+    };
     hideChild = function(child) {
       return child.hide();
     };
-    addTerm = function(newTerm, myFilteredTerms) {
-      if (myFilteredTerms.indexOf(newTerm.toLowerCase()) > -1) {
-        return alert("You're already filtering that term");
-      } else {
-        myFilteredTerms.push({
-          "term": newTerm
-        });
-        return storeTerms(myFilteredTerms);
-      }
-    };
-    filterTwitter = function(myFilteredTerms) {
+    filterTwitter = function(termList) {
       var term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
       if ($(".stream-items").children().length > 0) {
         tweets = $(".stream-items");
@@ -84,8 +50,8 @@
           _results.push((function() {
             var _j, _len1, _results1;
             _results1 = [];
-            for (_j = 0, _len1 = termListToUse.length; _j < _len1; _j++) {
-              term = termListToUse[_j];
+            for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
+              term = termList[_j];
               if ($(tweet).is(":visible")) {
                 if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
                   _results1.push(hideChild($(tweet)));
@@ -102,20 +68,17 @@
         return _results;
       }
     };
-    if (localStorage.getItem('myFilteredTerms') === null) {
-      termListTouse = storeTerms(myFilteredTerms);
-    } else {
-      termListToUse = getTerms(myFilteredTerms);
+    if (localStorage['myFilteredTerms']) {
+      termList = getTerms(localStorage['myFilteredTerms']);
     }
-    filterTwitter(termListToUse);
+    filterTwitter(termList);
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
-      var newFilteredTermList;
       console.log(message);
       if (message !== "showTerms") {
-        newFilteredTermList = addTerm(message, myFilteredTerms);
-        return sendResponse(newFilteredTermList);
+        addTerm(message, makeTermArray());
+        return sendResponse(makeTermArray());
       } else {
-        return sendResponse(termListToUse);
+        return sendResponse(termList);
       }
     });
   });
