@@ -2,7 +2,17 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, getTerms, hideChild, makeTermArray, storeTerms, termList;
+    var addTerm, filterTwitter, getTerms, hideChild, makeTermArray, removeTerm, storeTerms, termList;
+    Array.prototype.remove = function() {
+      var ax, what;
+      while (arguments.length && this.length) {
+        what = arguments[--arguments.length];
+        while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+        }
+      }
+      return this;
+    };
     storeTerms = function(terms) {
       return localStorage.setItem("myFilteredTerms", JSON.stringify(terms));
     };
@@ -13,15 +23,25 @@
       terms = [];
       for (_i = 0, _len = myNewList.length; _i < _len; _i++) {
         item = myNewList[_i];
-        terms.push(item['term']);
+        terms.push(item['term'].toLowerCase());
       }
       return terms;
     };
-    addTerm = function(newTerm, myFilteredTerms) {
-      myFilteredTerms.push({
+    addTerm = function(newTerm, termArray) {
+      termArray.push({
         "term": newTerm
       });
-      return storeTerms(myFilteredTerms);
+      return storeTerms(termArray);
+    };
+    removeTerm = function(termToBeRemoved, termArray) {
+      var term, _i, _len;
+      for (_i = 0, _len = termArray.length; _i < _len; _i++) {
+        term = termArray[_i];
+        if (term === termToBeRemoved) {
+          termArray.remove(term);
+        }
+      }
+      return storeTerms(termArray);
     };
     makeTermArray = function() {
       var term, termArray, terms, _i, _len;
@@ -71,6 +91,7 @@
     if (localStorage['myFilteredTerms']) {
       termList = getTerms(localStorage['myFilteredTerms']);
     }
+    debugger;
     filterTwitter(termList);
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;

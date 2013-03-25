@@ -10,6 +10,13 @@ $ ->
   #   "view conversation"
   # ]
 
+  Array.prototype.remove = ->
+    while (arguments.length && this.length)
+      what = arguments[--arguments.length]
+      while ((ax = @.indexOf(what)) != -1 )
+        this.splice(ax, 1)
+    return this
+
   storeTerms = (terms) ->
     # stores terms in LS
     localStorage.setItem("myFilteredTerms", JSON.stringify(terms))
@@ -19,20 +26,25 @@ $ ->
     myNewList = JSON.parse(myList)
     terms = []
     # put all the terms in an array
-    terms.push(item['term']) for item in myNewList
+    terms.push(item['term'].toLowerCase()) for item in myNewList
     # returns an array of terms
     terms
 
-  addTerm = (newTerm, myFilteredTerms) ->
+  addTerm = (newTerm, termArray) ->
     # for filteredTerm in myFilteredTerms
     #   if filteredTerm['term'].indexOf(newTerm)
     #     alert "You're already filtering that term" 
     #     break
 
     # adds an item to the array above
-    myFilteredTerms.push({ "term": newTerm })
+    termArray.push({ "term": newTerm })
     # stores that array in LS
-    storeTerms(myFilteredTerms)
+    storeTerms(termArray)
+
+  removeTerm = (termToBeRemoved, termArray) ->
+    for term in termArray
+      termArray.remove(term) if term == termToBeRemoved
+    storeTerms(termArray)
 
   makeTermArray = ->
     termArray = []
@@ -63,6 +75,7 @@ $ ->
   # grabs what's in localStorage, assigns a varible for use
   termList = getTerms(localStorage['myFilteredTerms']) if localStorage['myFilteredTerms']
 
+  debugger
  # Filters terms
   filterTwitter(termList)
 
