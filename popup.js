@@ -2,6 +2,7 @@
 (function() {
 
   $(function() {
+    var _this = this;
     $('.my-form').submit(function() {
       var newTerm;
       newTerm = $('.term-to-submit').val();
@@ -10,7 +11,7 @@
           "active": true,
           "currentWindow": true
         }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, newTerm, function(response) {
+          return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm, function(response) {
             return console.log(response);
           });
         });
@@ -24,31 +25,54 @@
           "active": true,
           "currentWindow": true
         }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, newTerm, function(response) {
+          return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm, function(response) {
             return console.log(response);
           });
         });
       }
     });
-    return chrome.tabs.query({
+    chrome.tabs.query({
       "active": true,
       "currentWindow": true
     }, function(tab) {
       return chrome.tabs.sendMessage(tab[0].id, "showTerms", function(response) {
-        var term, terms, _i, _len, _results;
+        var child, term, terms, _i, _j, _len, _len1, _ref, _results;
         console.log(JSON.stringify(response));
         terms = response;
-        _results = [];
         for (_i = 0, _len = terms.length; _i < _len; _i++) {
           term = terms[_i];
-          _results.push($(".terms").append($('<li></li>', {
+          $(".terms").append($('<li></li>', {
             "class": "term",
+            "data-term": "" + term,
             "text": "" + term
+          }));
+        }
+        _ref = $(".terms").children();
+        _results = [];
+        for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+          child = _ref[_j];
+          _results.push($(child).append($('<a></a>', {
+            "href": "#",
+            "class": "remove-term",
+            "text": "x"
           })));
         }
         return _results;
       });
     });
+    return $(".terms").on('click', 'li a', (function(e) {
+      var termToBeRemoved;
+      e.preventDefault();
+      termToBeRemoved = "remove" + $(e.currentTarget).parent().data("term");
+      return chrome.tabs.query({
+        "active": true,
+        "currentWindow": true
+      }, function(tab) {
+        return chrome.tabs.sendMessage(tab[0].id, termToBeRemoved, function(response) {
+          return console.log(response);
+        });
+      });
+    }));
   });
 
 }).call(this);

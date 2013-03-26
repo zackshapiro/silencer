@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, getTerms, hideChild, makeTermArray, removeTerm, storeTerms, termList;
+    var addTerm, filterTwitter, first, getTerms, hideChild, makeTermArray, removeTerm, storeTerms, termList;
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -33,15 +33,23 @@
       });
       return storeTerms(termArray);
     };
-    removeTerm = function(termToBeRemoved, termArray) {
-      var term, _i, _len;
-      for (_i = 0, _len = termArray.length; _i < _len; _i++) {
-        term = termArray[_i];
+    removeTerm = function(termToBeRemoved) {
+      var newTermList, term, terms, _i, _j, _len, _len1;
+      terms = getTerms();
+      for (_i = 0, _len = terms.length; _i < _len; _i++) {
+        term = terms[_i];
         if (term === termToBeRemoved) {
-          termArray.remove(term);
+          terms.remove(term);
         }
       }
-      return storeTerms(termArray);
+      newTermList = [];
+      for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
+        term = terms[_j];
+        newTermList.push({
+          "term": term
+        });
+      }
+      return storeTerms(newTermList);
     };
     makeTermArray = function() {
       var term, termArray, terms, _i, _len;
@@ -89,17 +97,29 @@
       }
     };
     if (localStorage['myFilteredTerms']) {
-      termList = getTerms(localStorage['myFilteredTerms']);
+      termList = getTerms();
+    } else {
+      first = {
+        "term": "please enter a term to filter"
+      };
+      localStorage.setItem('myFilteredTerms', JSON.stringify(first));
+      termList = getTerms();
     }
-    debugger;
     filterTwitter(termList);
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
       termArray = makeTermArray();
       console.log(message);
       if (message !== "showTerms") {
-        addTerm(message, termArray);
-        return sendResponse(termArray);
+        if (message.substring(0, 3) === "add") {
+          message = message.slice(3);
+          addTerm(message, termArray);
+          return sendResponse(termArray);
+        } else if (message.substring(0, 6) === "remove") {
+          message = message.slice(6);
+          removeTerm(message);
+          return sendResponse(termArray);
+        }
       } else {
         return sendResponse(termList);
       }

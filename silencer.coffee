@@ -4,9 +4,12 @@ $ ->
   #   "favorite",
   #   "like",
   #   "retweet",
+  #   "silencer",
   #   "reply",
   #   "view summary",
   #   "expand",
+  #   "add",
+  #   "remove",
   #   "view conversation"
   # ]
 
@@ -31,8 +34,8 @@ $ ->
     terms
 
   addTerm = (newTerm, termArray) ->
-    # for filteredTerm in myFilteredTerms
-    #   if filteredTerm['term'].indexOf(newTerm)
+    # for term in termArray
+      # if filteredTerm['term'].indexOf(newTerm)
     #     alert "You're already filtering that term" 
     #     break
 
@@ -41,10 +44,17 @@ $ ->
     # stores that array in LS
     storeTerms(termArray)
 
-  removeTerm = (termToBeRemoved, termArray) ->
-    for term in termArray
-      termArray.remove(term) if term == termToBeRemoved
-    storeTerms(termArray)
+  removeTerm = (termToBeRemoved) ->
+    terms = getTerms()
+    # removes term
+    for term in terms
+      terms.remove(term) if term == termToBeRemoved
+
+    # creates a new term array and stores it
+    newTermList = []
+    for term in terms
+      newTermList.push({ "term": term})
+    storeTerms(newTermList)
 
   makeTermArray = ->
     termArray = []
@@ -70,12 +80,15 @@ $ ->
 
 
 
-
  # Init code stars here 
   # grabs what's in localStorage, assigns a varible for use
-  termList = getTerms(localStorage['myFilteredTerms']) if localStorage['myFilteredTerms']
+  if localStorage['myFilteredTerms']
+    termList = getTerms() 
+  else
+    first = { "term": "please enter a term to filter" }
+    localStorage.setItem('myFilteredTerms', JSON.stringify(first))
+    termList = getTerms() 
 
-  debugger
  # Filters terms
   filterTwitter(termList)
 
@@ -83,9 +96,14 @@ $ ->
     termArray = makeTermArray()
     console.log message
     if message != "showTerms"
-      addTerm(message, termArray)
-      sendResponse(termArray)
-      # filterTwitter(getTerms(newFilteredTermList))
+      if message.substring(0,3) == "add"
+        message = message.slice(3)
+        addTerm(message, termArray)
+        sendResponse(termArray)
+      else if message.substring(0,6) == "remove"
+        message = message.slice(6)
+        removeTerm(message)
+        sendResponse(termArray)
     else
       sendResponse(termList)
 
