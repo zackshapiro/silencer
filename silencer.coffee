@@ -66,8 +66,8 @@ $ ->
   hideChild = (child) ->
     child.hide()
 
-  filterTwitter = (termList) ->
-    # for Twitter
+  filterTwitter = ->
+    termList = getTerms()
     if $(".stream-items").children().length > 0
       tweets = $(".stream-items")
       tweetsArray = tweets.children()
@@ -80,17 +80,15 @@ $ ->
 
 
 
- # Init code stars here 
+ ## Init code stars here ##
+ 
   # grabs what's in localStorage, assigns a varible for use
-  if localStorage['myFilteredTerms']
-    termList = getTerms() 
-  else
+  unless localStorage['myFilteredTerms']
     first = { "term": "please enter a term to filter" }
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
-    termList = getTerms() 
 
- # Filters terms
-  filterTwitter(termList)
+  # Filter every 4 seconds
+  setInterval(filterTwitter, 4000)
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
@@ -105,5 +103,6 @@ $ ->
         removeTerm(message)
         sendResponse(termArray)
     else
-      sendResponse(termList)
+      # gets the freshest terms
+      sendResponse(getTerms())
 

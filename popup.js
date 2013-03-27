@@ -26,7 +26,17 @@
           "currentWindow": true
         }, function(tab) {
           return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm, function(response) {
-            return console.log(response);
+            console.log(JSON.stringify(response));
+            $(".terms").append($('<li></li>', {
+              "class": "term",
+              "data-term": "" + newTerm,
+              "text": "" + newTerm
+            }));
+            return $(".terms").children().last().append($('<a></a>', {
+              "href": "#",
+              "class": "remove-term",
+              "text": "x"
+            }));
           });
         });
       }

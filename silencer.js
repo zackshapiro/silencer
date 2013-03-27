@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, first, getTerms, hideChild, makeTermArray, removeTerm, storeTerms, termList;
+    var addTerm, filterTwitter, first, getTerms, hideChild, makeTermArray, removeTerm, storeTerms;
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -66,8 +66,9 @@
     hideChild = function(child) {
       return child.hide();
     };
-    filterTwitter = function(termList) {
-      var term, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+    filterTwitter = function() {
+      var term, termList, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+      termList = getTerms();
       if ($(".stream-items").children().length > 0) {
         tweets = $(".stream-items");
         tweetsArray = tweets.children();
@@ -96,16 +97,13 @@
         return _results;
       }
     };
-    if (localStorage['myFilteredTerms']) {
-      termList = getTerms();
-    } else {
+    if (!localStorage['myFilteredTerms']) {
       first = {
         "term": "please enter a term to filter"
       };
       localStorage.setItem('myFilteredTerms', JSON.stringify(first));
-      termList = getTerms();
     }
-    filterTwitter(termList);
+    setInterval(filterTwitter, 4000);
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
       termArray = makeTermArray();
@@ -121,7 +119,7 @@
           return sendResponse(termArray);
         }
       } else {
-        return sendResponse(termList);
+        return sendResponse(getTerms());
       }
     });
   });
