@@ -41,7 +41,8 @@ $ ->
 
   $(".terms").on('click', 'li a', ( (e) => 
     e.preventDefault()
-    termToBeRemoved = "remove" + $(e.currentTarget).parent().data("term")
+    term = $(e.currentTarget).parent().data("term")
+    termToBeRemoved = "remove" + term
     chrome.tabs.query("active": true, "currentWindow": true, 
       (tab) -> 
         chrome.tabs.sendMessage(tab[0].id, termToBeRemoved,

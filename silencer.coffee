@@ -64,7 +64,7 @@ $ ->
     termArray    
 
   hideChild = (child) ->
-    child.hide()
+    child.slideUp()
 
   filterTwitter = ->
     termList = getTerms()
@@ -81,13 +81,14 @@ $ ->
 
 
  ## Init code stars here ##
- 
+
   # grabs what's in localStorage, assigns a varible for use
   unless localStorage['myFilteredTerms']
     first = { "term": "please enter a term to filter" }
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
 
-  # Filter every 4 seconds
+  # Filter once, then every 4 seconds
+  filterTwitter()
   setInterval(filterTwitter, 4000)
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
@@ -100,8 +101,9 @@ $ ->
         sendResponse(termArray)
       else if message.substring(0,6) == "remove"
         message = message.slice(6)
-        removeTerm(message)
-        sendResponse(termArray)
+        if confirm "are you sure you want to remove this term?"
+          removeTerm(message)
+          sendResponse(termArray)
     else
       # gets the freshest terms
       sendResponse(getTerms())

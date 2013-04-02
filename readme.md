@@ -2,19 +2,13 @@
 
 ### An extension for Google Chrome to define terms to be filtered from select websites
 
-To Do:
-* Make sure visual cue of remove works
-
-* Nothing. Release to 10-20 people (anyone who wants it in Bold, Bart Lorang, Jay Crain, Jana, Jake Levine, Patrick)
-
-* Release v1 (0.5)
-
-***
-
+* Organize files (bump to .51)
+* Build on pocket (code should be in Evernote)
+* User tracking (know how many I have) (mixpanel)
 * Make it work for other websites (and 1-3 next)
-* User tracking (know how many I have)
 * Refactor popup.coffee
 * User accounts and NUX
-* Filter on refresh (xhr promise or ajax promise)
+* User tracking (know how many I have) (mixpanel)
+* Sync terms across multiple browsers (via terms stored in a db somewhere)
 
 #### crafted with love by [Zack Shapiro](http://twitter.com/zackshapiro)

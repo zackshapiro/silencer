@@ -71,9 +71,10 @@
       });
     });
     return $(".terms").on('click', 'li a', (function(e) {
-      var termToBeRemoved;
+      var term, termToBeRemoved;
       e.preventDefault();
-      termToBeRemoved = "remove" + $(e.currentTarget).parent().data("term");
+      term = $(e.currentTarget).parent().data("term");
+      termToBeRemoved = "remove" + term;
       return chrome.tabs.query({
         "active": true,
         "currentWindow": true
