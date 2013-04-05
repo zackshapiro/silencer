@@ -4,6 +4,9 @@ $ ->
   $('.my-form').submit ->
     newTerm = $('.term-to-submit').val()    
     unless newTerm == ""
+      # This doens't work, why???
+      mixpanel.track('Term Added', {"id": newTerm})
+
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "add" + newTerm,
@@ -15,6 +18,8 @@ $ ->
   $('.submit').click -> 
     newTerm = $('.term-to-submit').val()    
     unless newTerm == ""
+      mixpanel.track('Term Added (button)', {"id": newTerm})
+
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "add" + newTerm,
@@ -36,13 +41,17 @@ $ ->
 
         for child in $(".terms").children()
           $(child).append($('<a></a>', {"href": "#", "class": "remove-term", "text": "x"} ))
+
+        mixpanel.track('Silencer Opened')
     )
   )
 
   $(".terms").on('click', 'li a', ( (e) => 
     e.preventDefault()
     term = $(e.currentTarget).parent().data("term")
+    mixpanel.track("Term Removed", {"id": term})
     termToBeRemoved = "remove" + term
+    
     chrome.tabs.query("active": true, "currentWindow": true, 
       (tab) -> 
         chrome.tabs.sendMessage(tab[0].id, termToBeRemoved,
@@ -51,7 +60,5 @@ $ ->
         )
     )
   ))
-
-
 
 

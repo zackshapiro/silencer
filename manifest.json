@@ -3,7 +3,7 @@
 
   "name": "Silencer",
   "description": "Turn down the Internet",
-  "version": "0.5",
+  "version": "0.52",
   "background":{
     "scripts":["background.js"]
   },
@@ -13,12 +13,14 @@
       // http://developer.chrome.com/extensions/match_patterns.html
       // Consider changing this to matches: * (everything), so terms show up on all page
       "matches": ["https://twitter.com/*"],
-      "js": ["jquery-1.9.1.min.js", "silencer.js"],
+      "js": ["jquery-1.9.1.min.js", "mixpanel.js", "silencer.js"],
       "all_frames": true
     }
   ], 
   "browser_action": {
     "default_icon": "/icons/icon-mini.png",
     "default_popup": "popup.html"
-  }
+  },
+  "permissions": ["https://*.twitter.com/*"],
+  "content_security_policy": "script-src 'self' https://cdn.mxpnl.com; object-src 'self'"
 }

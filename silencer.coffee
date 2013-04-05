@@ -1,18 +1,5 @@
 $ ->
 
-  # reservedWords = [
-  #   "favorite",
-  #   "like",
-  #   "retweet",
-  #   "silencer",
-  #   "reply",
-  #   "view summary",
-  #   "expand",
-  #   "add",
-  #   "remove",
-  #   "view conversation"
-  # ]
-
   Array.prototype.remove = ->
     while (arguments.length && this.length)
       what = arguments[--arguments.length]

@@ -7,6 +7,9 @@
       var newTerm;
       newTerm = $('.term-to-submit').val();
       if (newTerm !== "") {
+        mixpanel.track('Term Added', {
+          "id": newTerm
+        });
         return chrome.tabs.query({
           "active": true,
           "currentWindow": true
@@ -21,6 +24,9 @@
       var newTerm;
       newTerm = $('.term-to-submit').val();
       if (newTerm !== "") {
+        mixpanel.track('Term Added (button)', {
+          "id": newTerm
+        });
         return chrome.tabs.query({
           "active": true,
           "currentWindow": true
@@ -46,7 +52,7 @@
       "currentWindow": true
     }, function(tab) {
       return chrome.tabs.sendMessage(tab[0].id, "showTerms", function(response) {
-        var child, term, terms, _i, _j, _len, _len1, _ref, _results;
+        var child, term, terms, _i, _j, _len, _len1, _ref;
         console.log(JSON.stringify(response));
         terms = response;
         for (_i = 0, _len = terms.length; _i < _len; _i++) {
@@ -58,22 +64,24 @@
           }));
         }
         _ref = $(".terms").children();
-        _results = [];
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           child = _ref[_j];
-          _results.push($(child).append($('<a></a>', {
+          $(child).append($('<a></a>', {
             "href": "#",
             "class": "remove-term",
             "text": "x"
-          })));
+          }));
         }
-        return _results;
+        return mixpanel.track('Silencer Opened');
       });
     });
     return $(".terms").on('click', 'li a', (function(e) {
       var term, termToBeRemoved;
       e.preventDefault();
       term = $(e.currentTarget).parent().data("term");
+      mixpanel.track("Term Removed", {
+        "id": term
+      });
       termToBeRemoved = "remove" + term;
       return chrome.tabs.query({
         "active": true,
