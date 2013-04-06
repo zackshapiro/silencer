@@ -42,20 +42,32 @@ input {
 }
 .button:hover {}
 
+.current-terms { margin-bottom: -12px; }
+
+.terms {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
 .term { text-align: left; }
+
 /*      .term:hover {
   .remove-term { display: inherit; }
 }*/
 
 .primary { margin-top: 0px; }
 
-.tri {
-  border-width: 25px;
-  border-style: solid;
-  border-color: transparent transparent transparent green;
-  float: right;
-  margin: -81px -33px 0 0;
-  -webkit-transform: rotate(-45deg);
+.feedback-link {
+  float: left;
+  font-size: 11px;
+  text-transform: lowercase;
+}
+
+.email-img {
+  height: 25px;
+  width: 25px;
+  border: none;
+  margin-top: -3px;
 }
 
 .remove-term { float: right; margin-right: 28px; }

@@ -3,12 +3,7 @@
 ### An extension for Google Chrome to define terms to be filtered from select websites
 
 ###
-  
-  Before the 5.5 release:
-
-  - Email link in and working
-  - New fonts
-
+  Release to list
 ### 
 
 * User accounts and NUX
