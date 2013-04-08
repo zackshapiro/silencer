@@ -1,8 +1,7 @@
 body {
   min-width: 300px;
   overflow-x: hidden;
-  /* To Do: Open Sans or Source Sans */
-  font-family: "Helvetica Neue";
+  font-family: "Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
   text-align: center;
 }
 
@@ -15,34 +14,41 @@ img {
 }
 
 input {
-  height: 25px;
+  height: 30px;
   width: 70%;
+  border: 1px solid #aaa;
+  border-radius: 6px;
   font-size: 15px;
   padding-left: 4px;
 }
 
-.welcome { text-decoration: underline; }
+.welcome { text-decoration: underline; font-size: 17px; }
 
 .tag-line { color: #999; font-size: 12px; margin-top: -12px; }
 
 .examples { font-size: 11px; color: #999; }
 
+.my-form { margin-bottom: 4px; }
+
 .add-term { padding: 16px 0; }
 
 .button {
-  border: 2px solid #0456be;
   padding: 4px 8px;
-  width: 30%;
+  width: 65%;
+  height: 21px;
+  font-size: 12px;
   display: inline-block;
-  border-radius: 15px;
-  background: #1d7efa;
+  border-radius: 6px;
+  line-height: 23px;
+  background: #013c94;
   letter-spacing: .1em;
   color: white;
   text-decoration: none;
+  margin-top: 8px !important;
 }
 .button:hover {}
 
-.current-terms { margin-bottom: -12px; }
+.term-holder { margin-bottom: -12px; }
 
 .terms {
   padding-bottom: 12px;
@@ -50,10 +56,6 @@ input {
 }
 
 .term { text-align: left; }
-
-/*      .term:hover {
-  .remove-term { display: inherit; }
-}*/
 
 .primary { margin-top: 0px; }
 
@@ -70,4 +72,9 @@ input {
   margin-top: -3px;
 }
 
-.remove-term { float: right; margin-right: 28px; }
+.remove-term { 
+  float: right;  
+  color: #8db6fa;
+  margin-right: 28px; 
+}
+

@@ -67,12 +67,11 @@
       return child.slideUp();
     };
     filterTwitter = function() {
-      var term, termList, tweet, tweets, tweetsArray, tweetsLength, _i, _len, _results;
+      var term, termList, tweet, tweets, tweetsArray, _i, _len, _results;
       termList = getTerms();
       if ($(".stream-items").children().length > 0) {
         tweets = $(".stream-items");
         tweetsArray = tweets.children();
-        tweetsLength = tweetsArray.length;
         _results = [];
         for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
           tweet = tweetsArray[_i];
@@ -103,8 +102,10 @@
       };
       localStorage.setItem('myFilteredTerms', JSON.stringify(first));
     }
-    filterTwitter();
-    setInterval(filterTwitter, 4000);
+    if (document.URL.indexOf('twitter') > -1) {
+      filterTwitter();
+      setInterval(filterTwitter, 4000);
+    }
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
       termArray = makeTermArray();
@@ -116,7 +117,7 @@
           return sendResponse(termArray);
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);
-          if (confirm("are you sure you want to remove this term?")) {
+          if (confirm("are you sure you want to remove this filter?")) {
             removeTerm(message);
             return sendResponse(termArray);
           }

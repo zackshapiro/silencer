@@ -58,14 +58,11 @@ $ ->
     if $(".stream-items").children().length > 0
       tweets = $(".stream-items")
       tweetsArray = tweets.children()
-      tweetsLength = tweetsArray.length
 
       for tweet in tweetsArray
         for term in termList
           if $(tweet).is(":visible")
             if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
-
-
 
  ## Init code stars here ##
 
@@ -75,8 +72,10 @@ $ ->
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
 
   # Filter once, then every 4 seconds
-  filterTwitter()
-  setInterval(filterTwitter, 4000)
+  if document.URL.indexOf('twitter') > -1
+    filterTwitter()
+    setInterval(filterTwitter, 4000)
+
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
@@ -88,7 +87,7 @@ $ ->
         sendResponse(termArray)
       else if message.substring(0,6) == "remove"
         message = message.slice(6)
-        if confirm "are you sure you want to remove this term?"
+        if confirm "are you sure you want to remove this filter?"
           removeTerm(message)
           sendResponse(termArray)
     else

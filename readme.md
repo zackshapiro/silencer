@@ -2,9 +2,8 @@
 
 ### An extension for Google Chrome to define terms to be filtered from select websites
 
-###
-  Release to list
-### 
+(this only serves as a place to sketch ideas as I have them)
+(see Trello for the official backlog)
 
 * User accounts and NUX
 * User tracking (know how many I have) (mixpanel)
@@ -15,6 +14,9 @@
 * Refactor popup.coffee
 
 * Annoying URLs pack (4sq, vine, instagram, nike, path, fb)
-* Reserved words pack
+* Reserved words pack (including single vowels)
 
 #### crafted with love by [Zack Shapiro](http://twitter.com/zackshapiro)
+
+
+(this can be anything you want it to be)
