@@ -2,7 +2,10 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, first, getTerms, hideChild, makeTermArray, removeTerm, storeTerms;
+    var addTerm, filterTwitter, first, getTerms, headlines, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
+    supportedSites = function() {
+      return ["twitter", "espn.go", "instapaper"];
+    };
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -12,6 +15,14 @@
         }
       }
       return this;
+    };
+    injectJquery = function() {
+      var body, script;
+      script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "/lib/jquery-1.9.1.min.js";
+      body = document.getElementsByTagName("body")[0];
+      return body.appendChild(script);
     };
     storeTerms = function(terms) {
       return localStorage.setItem("myFilteredTerms", JSON.stringify(terms));
@@ -101,6 +112,13 @@
         "term": "please enter a term to filter"
       };
       localStorage.setItem('myFilteredTerms', JSON.stringify(first));
+    }
+    if (document.URL.indexOf('espn.go') > -1) {
+      injectJquery();
+      headlines = $('.headlines');
+      if (headlines.length > 0) {
+        alert("injection worked");
+      }
     }
     if (document.URL.indexOf('twitter') > -1) {
       filterTwitter();

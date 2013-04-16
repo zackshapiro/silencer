@@ -1,11 +1,21 @@
 $ ->
 
+  supportedSites = ->
+    ["twitter", "espn.go", "instapaper"]
+
   Array.prototype.remove = ->
     while (arguments.length && this.length)
       what = arguments[--arguments.length]
       while ((ax = @.indexOf(what)) != -1 )
         this.splice(ax, 1)
     return this
+
+  injectJquery = ->
+    script = document.createElement("script")
+    script.type = "text/javascript"
+    script.src = "/lib/jquery-1.9.1.min.js";
+    body = document.getElementsByTagName("body")[0]
+    body.appendChild(script)
 
   storeTerms = (terms) ->
     # stores terms in LS
@@ -64,12 +74,22 @@ $ ->
           if $(tweet).is(":visible")
             if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
 
+
  ## Init code stars here ##
 
   # grabs what's in localStorage, assigns a varible for use
   unless localStorage['myFilteredTerms']
     first = { "term": "please enter a term to filter" }
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
+
+
+  if document.URL.indexOf('espn.go') > -1
+    injectJquery()
+
+    headlines = $('.headlines')
+    if headlines.length > 0
+      alert "injection worked"
+
 
   # Filter once, then every 4 seconds
   if document.URL.indexOf('twitter') > -1
