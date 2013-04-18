@@ -74,6 +74,16 @@ $ ->
           if $(tweet).is(":visible")
             if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
 
+  filterFacebook = ->
+    termList = getTerms()
+
+    stream = $(".uiStream")
+    children = $(stream).children(".genericStreamStory")
+    for child in children
+      for term in termList
+        $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+
+
 
  ## Init code stars here ##
 
@@ -83,12 +93,10 @@ $ ->
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
 
 
-  if document.URL.indexOf('espn.go') > -1
+  if document.URL.indexOf('facebook') > -1
     injectJquery()
-
-    headlines = $('.headlines')
-    if headlines.length > 0
-      alert "injection worked"
+    filterFacebook()
+    setInterval(filterFacebook, 4000)
 
 
   # Filter once, then every 4 seconds

@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterTwitter, first, getTerms, headlines, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
+    var addTerm, filterFacebook, filterTwitter, first, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
     supportedSites = function() {
       return ["twitter", "espn.go", "instapaper"];
     };
@@ -107,18 +107,40 @@
         return _results;
       }
     };
+    filterFacebook = function() {
+      var child, children, stream, term, termList, _i, _len, _results;
+      termList = getTerms();
+      stream = $(".uiStream");
+      children = $(stream).children(".genericStreamStory");
+      _results = [];
+      for (_i = 0, _len = children.length; _i < _len; _i++) {
+        child = children[_i];
+        _results.push((function() {
+          var _j, _len1, _results1;
+          _results1 = [];
+          for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
+            term = termList[_j];
+            if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+              _results1.push($(child).slideUp());
+            } else {
+              _results1.push(void 0);
+            }
+          }
+          return _results1;
+        })());
+      }
+      return _results;
+    };
     if (!localStorage['myFilteredTerms']) {
       first = {
         "term": "please enter a term to filter"
       };
       localStorage.setItem('myFilteredTerms', JSON.stringify(first));
     }
-    if (document.URL.indexOf('espn.go') > -1) {
+    if (document.URL.indexOf('facebook') > -1) {
       injectJquery();
-      headlines = $('.headlines');
-      if (headlines.length > 0) {
-        alert("injection worked");
-      }
+      filterFacebook();
+      setInterval(filterFacebook, 4000);
     }
     if (document.URL.indexOf('twitter') > -1) {
       filterTwitter();

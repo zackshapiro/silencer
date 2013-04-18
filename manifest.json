@@ -12,7 +12,7 @@
     {
       // http://developer.chrome.com/extensions/match_patterns.html
       // Consider changing this to matches: * (everything), so terms show up on all page
-      "matches": ["https://twitter.com/*", "http://espn.go.com/*"],
+      "matches": ["https://twitter.com/*", "http://espn.go.com/*", "https://www.facebook.com/*"],
       "js": ["/lib/jquery-1.9.1.min.js", "/lib/mixpanel.js", "/src/silencer.js"],
       "all_frames": true
     }
@@ -21,6 +21,6 @@
     "default_icon": "/icons/icon-mini.png",
     "default_popup": "/src/popup.html"
   },
-  "permissions": ["https://*.twitter.com/*"],
+  "permissions": ["https://*.twitter.com/*", "http://espn.go.com/*", "https://www.facebook.com/*"],
   "content_security_policy": "script-src 'self' https://cdn.mxpnl.com; object-src 'self'"
 }
