@@ -1,30 +1,34 @@
 $ ->
 
+  newTerm = ->
+    $('.term-to-submit').val()
+
+  $('.term-to-submit').keyup (event) ->
+    $('.primary.button.submit').text("Mute #{newTerm()}")
+
   # Handles both forms of form submit. Enter or button click.
   $('.my-form').submit ->
-    newTerm = $('.term-to-submit').val()    
-    unless newTerm == ""
-      mixpanel.track('Term Added (enter pressed)', {"id": newTerm}) # This isn't working, get it working
+    unless newTerm() == ""
+      mixpanel.track('Term Added (enter pressed)', {"id": newTerm()}) # This isn't working, get it working
 
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm,
+          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(),
             (response) ->
               console.log response
           )
       )
 
   $('.submit').click -> 
-    newTerm = $('.term-to-submit').val()    
-    unless newTerm == ""
-      mixpanel.track('Term Added (button)', {"id": newTerm})
+    unless newTerm() == ""
+      mixpanel.track('Term Added (button)', {"id": newTerm()})
 
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm,
+          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(),
             (response) ->
               console.log (JSON.stringify(response))
-              $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm}", "text": "#{newTerm}"} ))
+              $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm()}", "text": "#{newTerm()}"} ))
               $(".terms").children().last().append($('<a></a>', {"href": "#", "class": "remove-term", "text": "x"} ))
           )
       )
