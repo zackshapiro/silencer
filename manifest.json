@@ -3,7 +3,7 @@
 
   "name": "Silencer",
   "description": "Turn down the Internet",
-  "version": "0.56",
+  "version": "0.57",
   "background":{
     "scripts":["/src/background.js"]
   },
