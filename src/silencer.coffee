@@ -63,16 +63,18 @@ $ ->
   hideChild = (child) ->
     child.slideUp()
 
-  filterTwitter = ->
+  genericFilter = (parentNode) ->
     termList = getTerms()
-    if $(".stream-items").children().length > 0
-      tweets = $(".stream-items")
-      tweetsArray = tweets.children()
+    parent = parentNode
+    children = parentNode.children()
 
-      for tweet in tweetsArray
-        for term in termList
-          if $(tweet).is(":visible")
-            if $($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1 then hideChild($(tweet))
+    for child in children
+      for term in termList
+        if $(child).is(":visible")
+          hideChild($(child)) if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+
+  filterTwitter = ->
+    genericFilter($('.stream-items'))
 
   filterFacebook = ->
     termList = getTerms()
@@ -83,6 +85,8 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
+  filterEspn = ->
+    genericFilter($('.headlines'))
 
 
  ## Init code stars here ##
@@ -98,11 +102,13 @@ $ ->
     filterFacebook()
     setInterval(filterFacebook, 4000)
 
-
-  # Filter once, then every 4 seconds
   if document.URL.indexOf('twitter') > -1
     filterTwitter()
     setInterval(filterTwitter, 4000)
+
+  if document.URL.indexOf('espn') > -1
+    filterEspn()
+    setInterval(filterEspn, 4000)
 
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->

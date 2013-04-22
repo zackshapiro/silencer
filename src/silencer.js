@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterFacebook, filterTwitter, first, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
+    var addTerm, filterEspn, filterFacebook, filterTwitter, first, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
     supportedSites = function() {
       return ["twitter", "espn.go", "instapaper"];
     };
@@ -77,35 +77,36 @@
     hideChild = function(child) {
       return child.slideUp();
     };
-    filterTwitter = function() {
-      var term, termList, tweet, tweets, tweetsArray, _i, _len, _results;
+    genericFilter = function(parentNode) {
+      var child, children, parent, term, termList, _i, _len, _results;
       termList = getTerms();
-      if ($(".stream-items").children().length > 0) {
-        tweets = $(".stream-items");
-        tweetsArray = tweets.children();
-        _results = [];
-        for (_i = 0, _len = tweetsArray.length; _i < _len; _i++) {
-          tweet = tweetsArray[_i];
-          _results.push((function() {
-            var _j, _len1, _results1;
-            _results1 = [];
-            for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
-              term = termList[_j];
-              if ($(tweet).is(":visible")) {
-                if ($($(tweet)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                  _results1.push(hideChild($(tweet)));
-                } else {
-                  _results1.push(void 0);
-                }
+      parent = parentNode;
+      children = parentNode.children();
+      _results = [];
+      for (_i = 0, _len = children.length; _i < _len; _i++) {
+        child = children[_i];
+        _results.push((function() {
+          var _j, _len1, _results1;
+          _results1 = [];
+          for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
+            term = termList[_j];
+            if ($(child).is(":visible")) {
+              if ($($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                _results1.push(hideChild($(child)));
               } else {
                 _results1.push(void 0);
               }
+            } else {
+              _results1.push(void 0);
             }
-            return _results1;
-          })());
-        }
-        return _results;
+          }
+          return _results1;
+        })());
       }
+      return _results;
+    };
+    filterTwitter = function() {
+      return genericFilter($('.stream-items'));
     };
     filterFacebook = function() {
       var child, children, stream, term, termList, _i, _len, _results;
@@ -131,6 +132,9 @@
       }
       return _results;
     };
+    filterEspn = function() {
+      return genericFilter($('.headlines'));
+    };
     if (!localStorage['myFilteredTerms']) {
       first = {
         "term": "please enter a term to filter"
@@ -145,6 +149,10 @@
     if (document.URL.indexOf('twitter') > -1) {
       filterTwitter();
       setInterval(filterTwitter, 4000);
+    }
+    if (document.URL.indexOf('espn') > -1) {
+      filterEspn();
+      setInterval(filterEspn, 4000);
     }
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
