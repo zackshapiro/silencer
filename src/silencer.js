@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterEspn, filterFacebook, filterTwitter, first, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
+    var User, addTerm, current_user, filterFacebook, filterTwitter, first, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
     supportedSites = function() {
       return ["twitter", "espn.go", "instapaper"];
     };
@@ -27,7 +27,7 @@
     storeTerms = function(terms) {
       return localStorage.setItem("myFilteredTerms", JSON.stringify(terms));
     };
-    getTerms = function(myFilteredTerms) {
+    getTerms = function() {
       var item, myList, myNewList, terms, _i, _len;
       myList = localStorage.getItem("myFilteredTerms");
       myNewList = JSON.parse(myList);
@@ -78,18 +78,18 @@
       return child.slideUp();
     };
     genericFilter = function(parentNode) {
-      var child, children, parent, term, termList, _i, _len, _results;
-      termList = getTerms();
+      var child, children, parent, term, _i, _len, _results;
       parent = parentNode;
       children = parentNode.children();
       _results = [];
       for (_i = 0, _len = children.length; _i < _len; _i++) {
         child = children[_i];
         _results.push((function() {
-          var _j, _len1, _results1;
+          var _j, _len1, _ref, _results1;
+          _ref = current_user.terms;
           _results1 = [];
-          for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
-            term = termList[_j];
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            term = _ref[_j];
             if ($(child).is(":visible")) {
               if ($($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
                 _results1.push(hideChild($(child)));
@@ -105,8 +105,27 @@
       }
       return _results;
     };
+    User = (function() {
+
+      function User() {}
+
+      User.prototype.terms = getTerms();
+
+      User.prototype.termCount = getTerms().length;
+
+      User.prototype.email = null;
+
+      User.prototype.sessionId = null;
+
+      User.prototype.name = null;
+
+      return User;
+
+    })();
     filterTwitter = function() {
-      return genericFilter($('.stream-items'));
+      if ($(".route-home").length) {
+        return genericFilter($('.stream-items'));
+      }
     };
     filterFacebook = function() {
       var child, children, stream, term, termList, _i, _len, _results;
@@ -132,9 +151,7 @@
       }
       return _results;
     };
-    filterEspn = function() {
-      return genericFilter($('.headlines'));
-    };
+    current_user = new User;
     if (!localStorage['myFilteredTerms']) {
       first = {
         "term": "please enter a term to filter"
@@ -149,10 +166,6 @@
     if (document.URL.indexOf('twitter') > -1) {
       filterTwitter();
       setInterval(filterTwitter, 4000);
-    }
-    if (document.URL.indexOf('espn') > -1) {
-      filterEspn();
-      setInterval(filterEspn, 4000);
     }
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;

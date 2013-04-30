@@ -21,7 +21,7 @@ $ ->
     # stores terms in LS
     localStorage.setItem("myFilteredTerms", JSON.stringify(terms))
 
-  getTerms = (myFilteredTerms) ->
+  getTerms = ->
     myList = localStorage.getItem("myFilteredTerms")
     myNewList = JSON.parse(myList)
     terms = []
@@ -64,17 +64,28 @@ $ ->
     child.slideUp()
 
   genericFilter = (parentNode) ->
-    termList = getTerms()
     parent = parentNode
     children = parentNode.children()
 
     for child in children
-      for term in termList
+      for term in current_user.terms
         if $(child).is(":visible")
           hideChild($(child)) if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
+  ################## Classes ############################
+
+  class User
+    terms: getTerms()
+    termCount: getTerms().length
+    email: null
+    sessionId: null
+    name: null
+
+  ################## Filters ############################
+
   filterTwitter = ->
-    genericFilter($('.stream-items'))
+    # If you're on the main Twitter timeline
+    genericFilter($('.stream-items')) if $(".route-home").length
 
   filterFacebook = ->
     termList = getTerms()
@@ -85,17 +96,20 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
-  filterEspn = ->
-    genericFilter($('.headlines'))
+  # filterEspn = ->
+  #   genericFilter($('.headlines'))
+
+  #######################################################
 
 
  ## Init code stars here ##
+
+  current_user = new User
 
   # grabs what's in localStorage, assigns a varible for use
   unless localStorage['myFilteredTerms']
     first = { "term": "please enter a term to filter" }
     localStorage.setItem('myFilteredTerms', JSON.stringify(first))
-
 
   if document.URL.indexOf('facebook') > -1
     injectJquery()
@@ -106,9 +120,9 @@ $ ->
     filterTwitter()
     setInterval(filterTwitter, 4000)
 
-  if document.URL.indexOf('espn') > -1
-    filterEspn()
-    setInterval(filterEspn, 4000)
+  # if document.URL.indexOf('espn') > -1
+  #   filterEspn()
+  #   setInterval(filterEspn, 4000)
 
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
@@ -127,4 +141,3 @@ $ ->
     else
       # gets the freshest terms
       sendResponse(getTerms())
-
