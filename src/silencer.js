@@ -2,10 +2,7 @@
 (function() {
 
   $(function() {
-    var User, addTerm, current_user, filterFacebook, filterTwitter, first, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms, supportedSites;
-    supportedSites = function() {
-      return ["twitter", "espn.go", "instapaper"];
-    };
+    var User, addTerm, current_user, filterEspn, filterFacebook, filterTwitter, first, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms;
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -151,6 +148,9 @@
       }
       return _results;
     };
+    filterEspn = function() {
+      return genericFilter($('.headlines'));
+    };
     current_user = new User;
     if (!localStorage['myFilteredTerms']) {
       first = {
@@ -166,6 +166,10 @@
     if (document.URL.indexOf('twitter') > -1) {
       filterTwitter();
       setInterval(filterTwitter, 4000);
+    }
+    if (document.URL.indexOf('espn') > -1) {
+      filterEspn();
+      setInterval(filterEspn, 4000);
     }
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;

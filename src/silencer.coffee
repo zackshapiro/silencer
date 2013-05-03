@@ -1,8 +1,5 @@
 $ ->
 
-  supportedSites = ->
-    ["twitter", "espn.go", "instapaper"]
-
   Array.prototype.remove = ->
     while (arguments.length && this.length)
       what = arguments[--arguments.length]
@@ -74,6 +71,7 @@ $ ->
 
   ################## Classes ############################
 
+  # WIP
   class User
     terms: getTerms()
     termCount: getTerms().length
@@ -96,8 +94,8 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
-  # filterEspn = ->
-  #   genericFilter($('.headlines'))
+  filterEspn = ->
+    genericFilter($('.headlines'))
 
   #######################################################
 
@@ -120,9 +118,9 @@ $ ->
     filterTwitter()
     setInterval(filterTwitter, 4000)
 
-  # if document.URL.indexOf('espn') > -1
-  #   filterEspn()
-  #   setInterval(filterEspn, 4000)
+  if document.URL.indexOf('espn') > -1
+    filterEspn()
+    setInterval(filterEspn, 4000)
 
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->

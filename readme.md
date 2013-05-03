@@ -1,22 +1,10 @@
 ## Silencer - turn down the internet
 
-### An extension for Google Chrome to define terms to be filtered from select websites
+Silencer is an extension for Google Chrome that allows you to mute terms, phrases, hashtags or people on Twitter, Facebook and ESPN.
 
-(this only serves as a place to sketch ideas as I have them)
-(see Trello for the official backlog)
-
-* User accounts and NUX
-* User tracking (know how many I have) (mixpanel)
-
-* Build on pocket (code should be in Evernote)
-* Make it work for other websites (and 1-3 next)
-* Sync terms across multiple browsers (via terms stored in a db somewhere)
-* Refactor popup.coffee
-
-* Annoying URLs pack (4sq, vine, instagram, nike, path, fb)
-* Reserved words pack (including single vowels)
+It is currently in its early stages and is always rapidly evolving.
 
 #### crafted with love by [Zack Shapiro](http://twitter.com/zackshapiro)
 
 
-(this can be anything you want it to be)
+(This can be anything you want it to be)
