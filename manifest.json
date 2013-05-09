@@ -4,11 +4,9 @@
   "name": "Silencer",
   "description": "Turn down the Internet",
   "version": "0.6",
-  
+
   "content_scripts": [
     {
-      // http://developer.chrome.com/extensions/match_patterns.html
-      // Consider changing this to matches: * (everything), so terms show up on all page
       "matches": ["https://twitter.com/*", "https://www.facebook.com/*"],
       "js": ["/lib/jquery-1.9.1.min.js", "/lib/mixpanel.js", "/src/silencer.js"],
       "all_frames": true
