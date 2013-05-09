@@ -19,7 +19,13 @@ $ ->
     localStorage.setItem("myFilteredTerms", JSON.stringify(terms))
 
   getTerms = ->
-    myList = localStorage.getItem("myFilteredTerms")
+    # grabs what's in localStorage, assigns a varible for use
+    unless localStorage['myFilteredTerms']
+      first = { "term": "sample muted term" }
+      localStorage.setItem('myFilteredTerms', JSON.stringify(first))
+
+    myList = localStorage.getItem("myFilteredTerms") 
+
     myNewList = JSON.parse(myList)
     terms = []
     # put all the terms in an array
@@ -28,11 +34,6 @@ $ ->
     terms
 
   addTerm = (newTerm, termArray) ->
-    # for term in termArray
-      # if filteredTerm['term'].indexOf(newTerm)
-    #     alert "You're already filtering that term" 
-    #     break
-
     # adds an item to the array above
     termArray.push({ "term": newTerm })
     # stores that array in LS
@@ -57,27 +58,17 @@ $ ->
       termArray.push({ "term": "#{term}"})
     termArray    
 
-  hideChild = (child) ->
-    child.slideUp()
+  hideChild = (child) -> child.slideUp()
 
-  genericFilter = (parentNode) ->
-    parent = parentNode
-    children = parentNode.children()
+  genericFilter = (parentDiv) ->
+    terms = getTerms()
+    parent = parentDiv
+    children = parentDiv.children()
 
     for child in children
-      for term in current_user.terms
+      for term in terms
         if $(child).is(":visible")
           hideChild($(child)) if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-
-  ################## Classes ############################
-
-  # WIP
-  class User
-    terms: getTerms()
-    termCount: getTerms().length
-    email: null
-    sessionId: null
-    name: null
 
   ################## Filters ############################
 
@@ -94,20 +85,10 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
-  filterEspn = ->
-    genericFilter($('.headlines'))
-
   #######################################################
 
 
  ## Init code stars here ##
-
-  current_user = new User
-
-  # grabs what's in localStorage, assigns a varible for use
-  unless localStorage['myFilteredTerms']
-    first = { "term": "please enter a term to filter" }
-    localStorage.setItem('myFilteredTerms', JSON.stringify(first))
 
   if document.URL.indexOf('facebook') > -1
     injectJquery()
@@ -117,11 +98,6 @@ $ ->
   if document.URL.indexOf('twitter') > -1
     filterTwitter()
     setInterval(filterTwitter, 4000)
-
-  if document.URL.indexOf('espn') > -1
-    filterEspn()
-    setInterval(filterEspn, 4000)
-
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
