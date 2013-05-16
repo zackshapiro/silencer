@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addTerm, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms;
+    var addTerm, base, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms;
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -137,6 +137,7 @@
       }
       return _results;
     };
+    base = new Firebase('https://silencerio.firebaseIO.com/');
     if (document.URL.indexOf('facebook') > -1) {
       injectJquery();
       filterFacebook();
@@ -154,6 +155,9 @@
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);
           addTerm(message, termArray);
+          base.push({
+            term: message
+          });
           return sendResponse(termArray);
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);

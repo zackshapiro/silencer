@@ -70,6 +70,7 @@ $ ->
         if $(child).is(":visible")
           hideChild($(child)) if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
+
   ################## Filters ############################
 
   filterTwitter = ->
@@ -90,6 +91,8 @@ $ ->
 
  ## Init code stars here ##
 
+  base = new Firebase('https://silencerio.firebaseIO.com/')
+
   if document.URL.indexOf('facebook') > -1
     injectJquery()
     filterFacebook()
@@ -106,6 +109,7 @@ $ ->
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message, termArray)
+        base.push({term: message})
         sendResponse(termArray)
       else if message.substring(0,6) == "remove"
         message = message.slice(6)

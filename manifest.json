@@ -3,12 +3,12 @@
 
   "name": "Silencer",
   "description": "Turn down the Internet",
-  "version": "0.6",
+  "version": "0.62",
 
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*", "https://www.facebook.com/*"],
-      "js": ["/lib/jquery-1.9.1.min.js", "/lib/mixpanel.js", "/src/silencer.js"],
+      "js": ["/lib/jquery-1.9.1.min.js", "/lib/mixpanel.js", "/lib/firebase.js", "/src/silencer.js"],
       "all_frames": true
     }
   ], 
