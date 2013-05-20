@@ -30,7 +30,7 @@ input {
 
 .my-form { margin-bottom: 4px; }
 
-.add-term { padding: 16px 0; }
+.add-term { padding: 2px 0; }
 
 .button {
   padding: 4px 8px;
@@ -76,5 +76,19 @@ input {
   float: right;  
   color: #8db6fa;
   margin-right: 28px; 
+}
+
+.filter-packs {
+  list-style: none;
+  text-align: left;
+  margin-left: -14px;
+}
+
+.add-got {
+  margin-left: 6px;
+}
+
+.add-mm {
+  margin-left: 60px;
 }
 

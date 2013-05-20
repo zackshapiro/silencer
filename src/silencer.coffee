@@ -1,4 +1,6 @@
 $ ->
+  thronesFilter = [ "gameofthronesfilter", "game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey" ]
+  madMenFilter = [ "madmenfilter", "#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp"]
 
   Array.prototype.remove = ->
     while (arguments.length && this.length)
@@ -16,15 +18,15 @@ $ ->
 
   storeTerms = (terms) ->
     # stores terms in LS
-    localStorage.setItem("myFilteredTerms", JSON.stringify(terms))
+    localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
     # grabs what's in localStorage, assigns a varible for use
-    unless localStorage['myFilteredTerms']
+    unless localStorage['silencer']
       first = { "term": "sample muted term" }
-      localStorage.setItem('myFilteredTerms', JSON.stringify(first))
+      localStorage.setItem('silencer', JSON.stringify(first))
 
-    myList = localStorage.getItem("myFilteredTerms") 
+    myList = localStorage.getItem("silencer") 
 
     myNewList = JSON.parse(myList)
     terms = []
@@ -32,6 +34,19 @@ $ ->
     terms.push(item['term'].toLowerCase()) for item in myNewList
     # returns an array of terms
     terms
+
+  addGoTFilter = ->
+    addTerm(item, makeTermArray()) for item in thronesFilter
+
+  removeGoTFilter = ->
+    removeTerm(item) for item in thronesFilter
+
+  addMmFilter = ->
+    addTerm(item, makeTermArray()) for item in madMenFilter
+
+  removeMmFilter = ->
+    removeTerm(item) for item in madMenFilter
+
 
   addTerm = (newTerm, termArray) ->
     # adds an item to the array above
@@ -104,18 +119,38 @@ $ ->
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
-    console.log message
+    # console.log message
+
     if message != "showTerms"
+
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message, termArray)
         base.push({term: message})
         sendResponse(termArray)
+
       else if message.substring(0,6) == "remove"
         message = message.slice(6)
-        if confirm "are you sure you want to remove this filter?"
+        if confirm "are you sure you want to remove this mute?"
           removeTerm(message)
           sendResponse(termArray)
+
+      else if message.substring(0,6) == "filter"
+        message = message.slice(6)
+        # TODO: refactor this:
+
+        if message == "got-add"
+          addGoTFilter()
+
+        if message == "got-remove"
+          removeGoTFilter()
+
+        if message == "mm-add"
+          addMmFilter()
+
+        if message == "mm-remove"
+          removeMmFilter()
+
     else
       # gets the freshest terms
       sendResponse(getTerms())

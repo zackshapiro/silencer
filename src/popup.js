@@ -25,7 +25,7 @@
         });
       }
     });
-    $('.submit').click(function() {
+    $('.term.submit').click(function() {
       if (newTerm() !== "") {
         mixpanel.track('Term Added (button)', {
           "id": newTerm()
@@ -78,7 +78,7 @@
         return mixpanel.track('Silencer Opened');
       });
     });
-    return $(".terms").on('click', 'li a', (function(e) {
+    $(".terms").on('click', 'li a', (function(e) {
       var term, termToBeRemoved;
       e.preventDefault();
       term = $(e.currentTarget).parent().data("term");
@@ -95,6 +95,58 @@
         });
       });
     }));
+    $('.add-got').click(function(e) {
+      debugger;      e.preventDefault();
+      if ($('.add-got').text() === "Add") {
+        mixpanel.track("GoT Filter Added");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filtergot-add", function(response) {
+            return console.log("");
+          });
+        });
+        return $(".add-got").text("Remove");
+      } else {
+        mixpanel.track("GoT Filter Removed");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filtergot-remove", function(response) {
+            return console.log("");
+          });
+        });
+        return $(".add-got").text("Add");
+      }
+    });
+    return $('.add-mm').click(function(e) {
+      e.preventDefault();
+      if ($('.add-mm').text() === "Add") {
+        mixpanel.track("Man Men Filter Added");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filtermm-add", function(response) {
+            return console.log("");
+          });
+        });
+        return $(".add-mm").text("Remove");
+      } else {
+        mixpanel.track("Mad Men Filter Removed");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filtermm-remove", function(response) {
+            return console.log("");
+          });
+        });
+        return $(".add-mm").text("Add");
+      }
+    });
   });
 
 }).call(this);

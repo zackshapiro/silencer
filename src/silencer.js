@@ -2,7 +2,9 @@
 (function() {
 
   $(function() {
-    var addTerm, base, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeTerm, storeTerms;
+    var addGoTFilter, addMmFilter, addTerm, base, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, removeGoTFilter, removeMmFilter, removeTerm, storeTerms, thronesFilter;
+    thronesFilter = ["gameofthronesfilter", "game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey"];
+    madMenFilter = ["madmenfilter", "#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp"];
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -22,17 +24,17 @@
       return body.appendChild(script);
     };
     storeTerms = function(terms) {
-      return localStorage.setItem("myFilteredTerms", JSON.stringify(terms));
+      return localStorage.setItem("silencer", JSON.stringify(terms));
     };
     getTerms = function() {
       var first, item, myList, myNewList, terms, _i, _len;
-      if (!localStorage['myFilteredTerms']) {
+      if (!localStorage['silencer']) {
         first = {
           "term": "sample muted term"
         };
-        localStorage.setItem('myFilteredTerms', JSON.stringify(first));
+        localStorage.setItem('silencer', JSON.stringify(first));
       }
-      myList = localStorage.getItem("myFilteredTerms");
+      myList = localStorage.getItem("silencer");
       myNewList = JSON.parse(myList);
       terms = [];
       for (_i = 0, _len = myNewList.length; _i < _len; _i++) {
@@ -40,6 +42,42 @@
         terms.push(item['term'].toLowerCase());
       }
       return terms;
+    };
+    addGoTFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = thronesFilter.length; _i < _len; _i++) {
+        item = thronesFilter[_i];
+        _results.push(addTerm(item, makeTermArray()));
+      }
+      return _results;
+    };
+    removeGoTFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = thronesFilter.length; _i < _len; _i++) {
+        item = thronesFilter[_i];
+        _results.push(removeTerm(item));
+      }
+      return _results;
+    };
+    addMmFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = madMenFilter.length; _i < _len; _i++) {
+        item = madMenFilter[_i];
+        _results.push(addTerm(item, makeTermArray()));
+      }
+      return _results;
+    };
+    removeMmFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = madMenFilter.length; _i < _len; _i++) {
+        item = madMenFilter[_i];
+        _results.push(removeTerm(item));
+      }
+      return _results;
     };
     addTerm = function(newTerm, termArray) {
       termArray.push({
@@ -150,7 +188,6 @@
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
       termArray = makeTermArray();
-      console.log(message);
       if (message !== "showTerms") {
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);
@@ -161,9 +198,23 @@
           return sendResponse(termArray);
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);
-          if (confirm("are you sure you want to remove this filter?")) {
+          if (confirm("are you sure you want to remove this mute?")) {
             removeTerm(message);
             return sendResponse(termArray);
+          }
+        } else if (message.substring(0, 6) === "filter") {
+          message = message.slice(6);
+          if (message === "got-add") {
+            addGoTFilter();
+          }
+          if (message === "got-remove") {
+            removeGoTFilter();
+          }
+          if (message === "mm-add") {
+            addMmFilter();
+          }
+          if (message === "mm-remove") {
+            return removeMmFilter();
           }
         }
       } else {
