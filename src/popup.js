@@ -36,15 +36,10 @@
         }, function(tab) {
           return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(), function(response) {
             console.log(JSON.stringify(response));
-            $(".terms").append($('<li></li>', {
+            return $(".terms").append($('<li></li>', {
               "class": "term",
               "data-term": "" + (newTerm()),
               "text": "" + (newTerm())
-            }));
-            return $(".terms").children().last().append($('<a></a>', {
-              "href": "#",
-              "class": "remove-term",
-              "text": "x"
             }));
           });
         });
@@ -68,11 +63,7 @@
         _ref = $(".terms").children();
         for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
           child = _ref[_j];
-          $(child).append($('<a></a>', {
-            "href": "#",
-            "class": "remove-term",
-            "text": "x"
-          }));
+          $(child).wrapInner("<a href='#' class='remove-term'></a>");
         }
         return mixpanel.track('Silencer Opened');
       });

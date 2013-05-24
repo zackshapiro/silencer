@@ -51,6 +51,7 @@ input {
 .term-holder { margin-bottom: -12px; }
 
 .terms {
+  margin-left: -12px;
   padding-bottom: 12px;
   border-bottom: 1px solid #ddd;
 }
@@ -72,10 +73,14 @@ input {
   margin-top: -3px;
 }
 
-.remove-term { 
-  float: right;  
-  color: #8db6fa;
-  margin-right: 28px; 
+a.remove-term, a.remove-term:hover { color: black; }
+
+a.remove-term {
+  text-decoration: none;
+}
+
+a.remove-term:hover {
+  text-decoration: underline;
 }
 
 .filter-packs {

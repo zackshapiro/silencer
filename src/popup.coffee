@@ -8,7 +8,7 @@ $ ->
   # Handles both forms of form submit. Enter or button click.
   $('.my-form').submit ->
     unless newTerm() == ""
-      mixpanel.track('Term Added (enter pressed)', {"id": newTerm()}) # This isn't working, get it working
+      mixpanel.track('Term Added (enter pressed)', {"id": newTerm()}) # TODO: This isn't working, get it working
 
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
@@ -27,7 +27,6 @@ $ ->
             (response) ->
               console.log (JSON.stringify(response))
               $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm()}", "text": "#{newTerm()}"} ))
-              $(".terms").children().last().append($('<a></a>', {"href": "#", "class": "remove-term", "text": "x"} ))
           )
       )
 
@@ -43,7 +42,7 @@ $ ->
           $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
 
         for child in $(".terms").children()
-          $(child).append($('<a></a>', {"href": "#", "class": "remove-term", "text": "x"} ))
+          $(child).wrapInner("<a href='#' class='remove-term'></a>")
 
         mixpanel.track('Silencer Opened')
     )
