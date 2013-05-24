@@ -3,11 +3,12 @@ body {
   overflow-x: hidden;
   font-family: "Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
   text-align: center;
+  color: #222;
 }
 
 img {
   margin: 5px;
-  border: 2px solid black;
+  border: 2px solid #222;
   vertical-align: middle;
   width: 75px;
   height: 75px;
@@ -73,13 +74,14 @@ input {
   margin-top: -3px;
 }
 
-a.remove-term, a.remove-term:hover { color: black; }
+a.remove-term, a.remove-term:hover { color: #222; }
 
 a.remove-term {
   text-decoration: none;
 }
 
 a.remove-term:hover {
+  background: #ddd;
   text-decoration: underline;
 }
 
