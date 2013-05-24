@@ -25,7 +25,7 @@
         });
       }
     });
-    $('.term.submit').click(function() {
+    $('.mute.submit').click(function() {
       if (newTerm() !== "") {
         mixpanel.track('Term Added (button)', {
           "id": newTerm()
@@ -56,7 +56,6 @@
     }, function(tab) {
       return chrome.tabs.sendMessage(tab[0].id, "showTerms", function(response) {
         var child, term, terms, _i, _j, _len, _len1, _ref;
-        console.log(JSON.stringify(response));
         terms = response;
         for (_i = 0, _len = terms.length; _i < _len; _i++) {
           term = terms[_i];

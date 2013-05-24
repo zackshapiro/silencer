@@ -13,12 +13,11 @@ $ ->
       chrome.tabs.query("active": true, "currentWindow": true,
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(),
-            (response) ->
-              console.log response
+            (response) -> console.log response
           )
       )
 
-  $('.term.submit').click -> 
+  $('.mute.submit').click ->
     unless newTerm() == ""
       mixpanel.track('Term Added (button)', {"id": newTerm()})
 
@@ -36,9 +35,9 @@ $ ->
   (tab) -> 
     chrome.tabs.sendMessage(tab[0].id, "showTerms", 
       (response) ->
-        console.log (JSON.stringify(response))
-        terms = response
+        # console.log (JSON.stringify(response))
         # here I have the terms, maybe put them in localStorage? They should at least be stored in a public variable
+        terms = response
 
         for term in terms
           $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -59,8 +58,7 @@ $ ->
     chrome.tabs.query("active": true, "currentWindow": true, 
       (tab) -> 
         chrome.tabs.sendMessage(tab[0].id, termToBeRemoved,
-          (response) ->
-            console.log response
+          (response) -> console.log response
         )
     )
   ))
@@ -75,8 +73,7 @@ $ ->
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-add",
-            (response) ->
-              console.log ""
+            (response) -> console.log ""
           )
       )
 
@@ -87,8 +84,7 @@ $ ->
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-remove",
-            (response) ->
-              console.log ""
+            (response) -> console.log ""
           )
       )
 
@@ -105,8 +101,7 @@ $ ->
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-add",
-            (response) ->
-              console.log ""
+            (response) -> console.log ""
           )
       )
 
@@ -117,8 +112,7 @@ $ ->
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-remove",
-            (response) ->
-              console.log ""
+            (response) -> console.log ""
           )
       )
 

@@ -188,7 +188,9 @@
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       var termArray;
       termArray = makeTermArray();
-      if (message !== "showTerms") {
+      if (message === "showTerms") {
+        return sendResponse(getTerms());
+      } else {
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);
           addTerm(message, termArray);
@@ -217,8 +219,6 @@
             return removeMmFilter();
           }
         }
-      } else {
-        return sendResponse(getTerms());
       }
     });
   });

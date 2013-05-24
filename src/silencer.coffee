@@ -119,10 +119,11 @@ $ ->
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
-    # console.log message
 
-    if message != "showTerms"
-
+    if message == "showTerms"
+      # gets the freshest terms
+      sendResponse(getTerms())
+    else
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message, termArray)
@@ -150,7 +151,3 @@ $ ->
 
         if message == "mm-remove"
           removeMmFilter()
-
-    else
-      # gets the freshest terms
-      sendResponse(getTerms())
