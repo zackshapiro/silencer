@@ -89,8 +89,9 @@ $ ->
   ################## Filters ############################
 
   filterTwitter = ->
-    # If you're on the main Twitter timeline
-    genericFilter($('.stream-items')) if $(".route-home").length
+    # If you're on the main Twitter timeline or doing a search
+    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1
+      genericFilter($('.stream-items')) 
 
   filterFacebook = ->
     termList = getTerms()

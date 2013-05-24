@@ -147,7 +147,7 @@
       return _results;
     };
     filterTwitter = function() {
-      if ($(".route-home").length) {
+      if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1) {
         return genericFilter($('.stream-items'));
       }
     };
