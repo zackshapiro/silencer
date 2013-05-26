@@ -7,7 +7,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*", "https://www.facebook.com/*", "http://linkedin.com/*"],
+      "matches": ["https://twitter.com/*", "https://www.facebook.com/*"],
       "js": ["/lib/jquery-1.9.1.min.js", "/lib/mixpanel.js", "/src/silencer.js"],
       "all_frames": true
     }
@@ -16,6 +16,6 @@
     "default_icon": "/icons/icon-mini.png",
     "default_popup": "/src/popup.html"
   },
-  "permissions": ["https://*.twitter.com/*", "https://www.facebook.com/*", "http://linkedin.com/*"],
+  "permissions": ["https://*.twitter.com/*", "https://www.facebook.com/*"],
   "content_security_policy": "script-src 'self' https://cdn.mxpnl.com; object-src 'self'"
 }

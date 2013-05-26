@@ -34,10 +34,6 @@ $ ->
       filterTwitter()
       setInterval(filterTwitter, 4000)
 
-    if document.URL.indexOf('linkedin') > -1
-      filterLinkedIn()
-      setInterval(filterLinkedIn, 4000)
-
   storeTerms = (terms) ->
     # stores terms in LS
     localStorage.setItem("silencer", JSON.stringify(terms))
@@ -137,16 +133,6 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
-  filterLinkedIn = ->
-    termList = getTerms()
-
-    stream = $('#my-feed-post')
-    children = $(stream).children(".feed-item")
-
-    for child in children
-      for term in termList
-        $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-
   #######################################################
 
 
@@ -154,12 +140,12 @@ $ ->
 
   # base = new Firebase('https://silencerio.firebaseIO.com/')
 
-  # grabs what's in localStorage, assigns a varible for use
+  # adds a term if localStorage is empty 
   unless localStorage['silencer']
     first = { "term": "sample muted term" }
     localStorage.setItem('silencer', JSON.stringify(first))
 
-  # detects what URL you're on
+  # detects what URL the user is on
   detectSite()
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
