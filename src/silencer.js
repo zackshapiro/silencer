@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addTerm, arrestedDevelopmentFilter, base, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, removeAdFilter, removeGoTFilter, removeMmFilter, removeTerm, storeTerms, thronesFilter;
+    var addAdFilter, addGoTFilter, addMmFilter, addTerm, arrestedDevelopmentFilter, base, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, removeAdFilter, removeGoTFilter, removeMmFilter, removeTerm, storeTerms, thronesFilter, toggleMutePack;
     thronesFilter = ["game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "gameofthronesfilter"];
     madMenFilter = ["#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter"];
     arrestedDevelopmentFilter = ["#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "arresteddevelopmentfilter"];
@@ -44,12 +44,32 @@
       }
       return terms;
     };
+    toggleMutePack = function(action) {
+      if (action === "got-add") {
+        addsGoTFilter();
+      }
+      if (action === "got-remove") {
+        removeGoTFilter();
+      }
+      if (action === "mm-add") {
+        addMmFilter();
+      }
+      if (action === "mm-remove") {
+        removeMmFilter();
+      }
+      if (action === "ad-add") {
+        addAdFilter();
+      }
+      if (action === "ad-remove") {
+        return removeAdFilter();
+      }
+    };
     addGoTFilter = function() {
       var item, _i, _len, _results;
       _results = [];
       for (_i = 0, _len = thronesFilter.length; _i < _len; _i++) {
         item = thronesFilter[_i];
-        _results.push(addTerm(item, makeTermArray()));
+        _results.push(addTerm(item));
       }
       return _results;
     };
@@ -67,7 +87,7 @@
       _results = [];
       for (_i = 0, _len = madMenFilter.length; _i < _len; _i++) {
         item = madMenFilter[_i];
-        _results.push(addTerm(item, makeTermArray()));
+        _results.push(addTerm(item));
       }
       return _results;
     };
@@ -85,7 +105,7 @@
       _results = [];
       for (_i = 0, _len = arrestedDevelopmentFilter.length; _i < _len; _i++) {
         item = arrestedDevelopmentFilter[_i];
-        _results.push(addTerm(item, makeTermArray()));
+        _results.push(addTerm(item));
       }
       return _results;
     };
@@ -98,7 +118,9 @@
       }
       return _results;
     };
-    addTerm = function(newTerm, termArray) {
+    addTerm = function(newTerm) {
+      var termArray;
+      termArray = makeTermArray();
       termArray.push({
         "term": newTerm
       });
@@ -208,42 +230,26 @@
       var termArray;
       termArray = makeTermArray();
       if (message === "showTerms") {
-        return sendResponse(getTerms());
+        sendResponse(getTerms());
       } else {
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);
-          addTerm(message, termArray);
+          addTerm(message);
           base.push({
             term: message
           });
-          return sendResponse(termArray);
+          sendResponse(termArray);
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);
           if (confirm("are you sure you want to remove this mute?")) {
             removeTerm(message);
-            return sendResponse(termArray);
-          }
-        } else if (message.substring(0, 6) === "filter") {
-          message = message.slice(6);
-          if (message === "got-add") {
-            addGoTFilter();
-          }
-          if (message === "got-remove") {
-            removeGoTFilter();
-          }
-          if (message === "mm-add") {
-            addMmFilter();
-          }
-          if (message === "mm-remove") {
-            removeMmFilter();
-          }
-          if (message === "ad-add") {
-            addAdFilter();
-          }
-          if (message === "ad-remove") {
-            return removeAdFilter();
+            sendResponse(termArray);
           }
         }
+      }
+      if (message.substring(0, 6) === "filter") {
+        message = message.slice(6);
+        return toggleMutePack(message);
       }
     });
   });

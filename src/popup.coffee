@@ -69,7 +69,6 @@ $ ->
   ))
 
   $('.add-got').click (e) ->
-    debugger
     e.preventDefault()
 
     if $('.add-got').text() == "Add"

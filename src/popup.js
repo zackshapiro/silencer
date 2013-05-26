@@ -101,7 +101,7 @@
       });
     }));
     $('.add-got').click(function(e) {
-      debugger;      e.preventDefault();
+      e.preventDefault();
       if ($('.add-got').text() === "Add") {
         mixpanel.track("GoT Filter Added");
         chrome.tabs.query({

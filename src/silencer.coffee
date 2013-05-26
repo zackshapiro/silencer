@@ -43,26 +43,38 @@ $ ->
     # returns an array of terms
     terms
 
+  toggleMutePack = (action) ->
+    addsGoTFilter() if action == "got-add"
+    removeGoTFilter() if action == "got-remove"
+
+    addMmFilter() if action == "mm-add"
+    removeMmFilter() if action == "mm-remove"
+
+    addAdFilter() if action == "ad-add"
+    removeAdFilter() if action == "ad-remove"
+
+
   addGoTFilter = ->
-    addTerm(item, makeTermArray()) for item in thronesFilter
+    addTerm(item) for item in thronesFilter
 
   removeGoTFilter = ->
     removeTerm(item) for item in thronesFilter
 
   addMmFilter = ->
-    addTerm(item, makeTermArray()) for item in madMenFilter
+    addTerm(item) for item in madMenFilter
 
   removeMmFilter = ->
     removeTerm(item) for item in madMenFilter
 
   addAdFilter = ->
-    addTerm(item, makeTermArray()) for item in arrestedDevelopmentFilter
+    addTerm(item) for item in arrestedDevelopmentFilter
 
   removeAdFilter = ->
     removeTerm(item) for item in arrestedDevelopmentFilter
 
 
-  addTerm = (newTerm, termArray) ->
+  addTerm = (newTerm) ->
+    termArray = makeTermArray()
     # adds an item to the array above
     termArray.push({ "term": newTerm })
     # stores that array in LS
@@ -141,7 +153,7 @@ $ ->
     else
       if message.substring(0,3) == "add"
         message = message.slice(3)
-        addTerm(message, termArray)
+        addTerm(message)
         base.push({term: message})
         sendResponse(termArray)
 
@@ -151,24 +163,6 @@ $ ->
           removeTerm(message)
           sendResponse(termArray)
 
-      else if message.substring(0,6) == "filter"
-        message = message.slice(6)
-        # TODO: refactor this:
-
-        if message == "got-add"
-          addGoTFilter()
-
-        if message == "got-remove"
-          removeGoTFilter()
-
-        if message == "mm-add"
-          addMmFilter()
-
-        if message == "mm-remove"
-          removeMmFilter()
-
-        if message == "ad-add"
-          addAdFilter()
-
-        if message == "ad-remove"
-          removeAdFilter()
+    if message.substring(0,6) == "filter"
+      message = message.slice(6)
+      toggleMutePack(message)
