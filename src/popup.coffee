@@ -37,20 +37,21 @@ $ ->
       (response) ->
         # console.log (JSON.stringify(response))
         # here I have the terms, maybe put them in localStorage? They should at least be stored in a public variable
-        terms = response
+        if response
+          terms = response
 
-        for term in terms
-          $(".add-got").text("Remove") if term == "gameofthronesfilter"
-          $(".add-mm").text("Remove") if term == "madmenfilter"
-          $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
+          for term in terms
+            $(".add-got").text("Remove") if term == "gameofthronesfilter"
+            $(".add-mm").text("Remove") if term == "madmenfilter"
+            $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
 
-        for term in terms
-          $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
+          for term in terms
+            $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
 
-        for child in $(".terms").children()
-          $(child).wrapInner("<a href='#' class='remove-term'></a>")
+          for child in $(".terms").children()
+            $(child).wrapInner("<a href='#' class='remove-term'></a>")
 
-        mixpanel.track('Silencer Opened')
+          mixpanel.track('Silencer Opened')
     )
   )
 
@@ -76,9 +77,7 @@ $ ->
     
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtergot-add",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filtergot-add")
       )
 
       $(".add-got").text("Remove")
@@ -87,9 +86,7 @@ $ ->
 
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtergot-remove",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filtergot-remove")
       )
 
       $(".add-got").text("Add")
@@ -104,9 +101,7 @@ $ ->
     
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtermm-add",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filtermm-add")
       )
 
       $(".add-mm").text("Remove")
@@ -115,9 +110,7 @@ $ ->
 
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtermm-remove",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filtermm-remove")
       )
 
       $(".add-mm").text("Add")
@@ -133,9 +126,7 @@ $ ->
     
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterad-add",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filterad-add")
       )
 
       $(".add-ad").text("Remove")
@@ -144,9 +135,7 @@ $ ->
 
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterad-remove",
-            (response) -> console.log ""
-          )
+          chrome.tabs.sendMessage(tab[0].id, "filterad-remove")
       )
 
       $(".add-ad").text("Add")

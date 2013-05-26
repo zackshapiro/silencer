@@ -24,16 +24,25 @@ $ ->
     body = document.getElementsByTagName("body")[0]
     body.appendChild(script)
 
+  detectSite = ->
+    if document.URL.indexOf('facebook') > -1
+      injectJquery()
+      filterFacebook()
+      setInterval(filterFacebook, 4000)
+
+    if document.URL.indexOf('twitter') > -1
+      filterTwitter()
+      setInterval(filterTwitter, 4000)
+
+    if document.URL.indexOf('linkedin') > -1
+      filterLinkedIn()
+      setInterval(filterLinkedIn, 4000)
+
   storeTerms = (terms) ->
     # stores terms in LS
     localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
-    # grabs what's in localStorage, assigns a varible for use
-    unless localStorage['silencer']
-      first = { "term": "sample muted term" }
-      localStorage.setItem('silencer', JSON.stringify(first))
-
     myList = localStorage.getItem("silencer") 
 
     myNewList = JSON.parse(myList)
@@ -128,21 +137,30 @@ $ ->
       for term in termList
         $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
 
+  filterLinkedIn = ->
+    termList = getTerms()
+
+    stream = $('#my-feed-post')
+    children = $(stream).children(".feed-item")
+
+    for child in children
+      for term in termList
+        $(child).slideUp() if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+
   #######################################################
 
 
- ## Init code stars here ##
+  ## Init code stars here ##
 
-  base = new Firebase('https://silencerio.firebaseIO.com/')
+  # base = new Firebase('https://silencerio.firebaseIO.com/')
 
-  if document.URL.indexOf('facebook') > -1
-    injectJquery()
-    filterFacebook()
-    setInterval(filterFacebook, 4000)
+  # grabs what's in localStorage, assigns a varible for use
+  unless localStorage['silencer']
+    first = { "term": "sample muted term" }
+    localStorage.setItem('silencer', JSON.stringify(first))
 
-  if document.URL.indexOf('twitter') > -1
-    filterTwitter()
-    setInterval(filterTwitter, 4000)
+  # detects what URL you're on
+  detectSite()
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
     termArray = makeTermArray()
@@ -154,7 +172,7 @@ $ ->
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message)
-        base.push({term: message})
+        # base.push({term: message})
         sendResponse(termArray)
 
       else if message.substring(0,6) == "remove"
