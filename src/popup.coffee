@@ -151,27 +151,3 @@ $ ->
       )
 
       $(".add-ad").text("Add")
-
-
-
-
-
-
-
-
-
-  # $('.login.submit').click ->
-  #   email = $('#username-to-submit').val()
-  #   password = $('#password-to-submit').val()
-
-  #   chrome.tabs.query("active": true, "currentWindow": true, 
-  #     (tab) ->
-  #       chrome.tabs.sendMessage(tab[0].id, email,
-  #         (response) ->
-  #           console.log response
-  #       )
-  #       chrome.tabs.sendMessage(tab[0].id, password,
-  #         (response) ->
-  #           console.log response
-  #       )
-  #   )
