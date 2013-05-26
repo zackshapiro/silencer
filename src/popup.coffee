@@ -1,6 +1,7 @@
 $ ->
 
   newTerm = -> $('.term-to-submit').val()
+  focus = -> $('.term-to-submit').focus()
 
   $('.term-to-submit').keyup (event) ->
     $('.primary.button.submit').text("Mute #{newTerm()}")
@@ -37,6 +38,11 @@ $ ->
         # console.log (JSON.stringify(response))
         # here I have the terms, maybe put them in localStorage? They should at least be stored in a public variable
         terms = response
+
+        for term in terms
+          $(".add-got").text("Remove") if term == "gameofthronesfilter"
+          $(".add-mm").text("Remove") if term == "madmenfilter"
+          $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
 
         for term in terms
           $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -117,6 +123,34 @@ $ ->
 
       $(".add-mm").text("Add")
 
+
+
+
+  $('.add-ad').click (e) ->
+    e.preventDefault()
+
+    if $('.add-ad').text() == "Add"
+      mixpanel.track("Arrested Development Filter Added")
+    
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filterad-add",
+            (response) -> console.log ""
+          )
+      )
+
+      $(".add-ad").text("Remove")
+    else
+      mixpanel.track("Arrested Development Filter Removed")
+
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filterad-remove",
+            (response) -> console.log ""
+          )
+      )
+
+      $(".add-ad").text("Add")
 
 
 
