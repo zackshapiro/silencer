@@ -1,6 +1,7 @@
 $ ->
 
   newTerm = -> $('.term-to-submit').val()
+
   focus = -> $('.term-to-submit').focus()
 
   $('.term-to-submit').keyup (event) ->
@@ -69,73 +70,58 @@ $ ->
     )
   ))
 
+  ### Adding filters ### 
+
   $('.add-got').click (e) ->
     e.preventDefault()
-
     if $('.add-got').text() == "Add"
       mixpanel.track("GoT Filter Added")
-    
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-add")
       )
-
       $(".add-got").text("Remove")
     else
       mixpanel.track("GoT Filter Removed")
-
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-remove")
       )
-
       $(".add-got").text("Add")
 
 
 
   $('.add-mm').click (e) ->
     e.preventDefault()
-
     if $('.add-mm').text() == "Add"
       mixpanel.track("Man Men Filter Added")
-    
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-add")
       )
-
       $(".add-mm").text("Remove")
     else
       mixpanel.track("Mad Men Filter Removed")
-
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-remove")
       )
-
       $(".add-mm").text("Add")
-
-
 
 
   $('.add-ad').click (e) ->
     e.preventDefault()
-
     if $('.add-ad').text() == "Add"
       mixpanel.track("Arrested Development Filter Added")
-    
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterad-add")
       )
-
       $(".add-ad").text("Remove")
     else
       mixpanel.track("Arrested Development Filter Removed")
-
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterad-remove")
       )
-
       $(".add-ad").text("Add")

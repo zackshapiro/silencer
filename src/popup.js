@@ -102,6 +102,9 @@
         });
       });
     }));
+    /* Adding filters
+    */
+
     $('.add-got').click(function(e) {
       e.preventDefault();
       if ($('.add-got').text() === "Add") {

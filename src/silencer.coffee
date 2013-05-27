@@ -39,6 +39,11 @@ $ ->
     localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
+    # adds a term if localStorage is empty 
+    unless localStorage["silencer"]
+      first = { "term": "sample muted term" }
+      localStorage.setItem('silencer', JSON.stringify(first))
+    
     myList = localStorage.getItem("silencer") 
 
     myNewList = JSON.parse(myList)
@@ -138,13 +143,6 @@ $ ->
 
   ## Init code stars here ##
 
-  # base = new Firebase('https://silencerio.firebaseIO.com/')
-
-  # adds a term if localStorage is empty 
-  unless localStorage['silencer']
-    first = { "term": "sample muted term" }
-    localStorage.setItem('silencer', JSON.stringify(first))
-
   # detects what URL the user is on
   detectSite()
 
@@ -158,7 +156,6 @@ $ ->
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message)
-        # base.push({term: message})
         sendResponse(termArray)
 
       else if message.substring(0,6) == "remove"
