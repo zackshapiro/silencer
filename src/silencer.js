@@ -130,8 +130,14 @@
       return _results;
     };
     addTerm = function(newTerm) {
-      var termArray;
+      var term, termArray, _i, _len;
       termArray = makeTermArray();
+      for (_i = 0, _len = termArray.length; _i < _len; _i++) {
+        term = termArray[_i];
+        if (newTerm.toLowerCase() === term.term) {
+          return;
+        }
+      }
       termArray.push({
         "term": newTerm
       });
@@ -229,20 +235,18 @@
     };
     detectSite();
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
-      var termArray;
-      termArray = makeTermArray();
       if (message === "showTerms") {
         sendResponse(getTerms());
       } else {
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);
           addTerm(message);
-          sendResponse(termArray);
+          sendResponse(makeTermArray());
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);
           if (confirm("are you sure you want to remove this mute?")) {
             removeTerm(message);
-            sendResponse(termArray);
+            sendResponse(makeTermArray());
           }
         }
       }

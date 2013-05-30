@@ -85,6 +85,10 @@ $ ->
 
   addTerm = (newTerm) ->
     termArray = makeTermArray()
+
+    for term in termArray
+      return if newTerm.toLowerCase() == term.term # because format is {term: "#sxsw"}
+
     # adds an item to the array above
     termArray.push({ "term": newTerm })
     # stores that array in LS
@@ -147,8 +151,6 @@ $ ->
   detectSite()
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
-    termArray = makeTermArray()
-
     if message == "showTerms"
       # gets the freshest terms
       sendResponse(getTerms())
@@ -156,13 +158,13 @@ $ ->
       if message.substring(0,3) == "add"
         message = message.slice(3)
         addTerm(message)
-        sendResponse(termArray)
+        sendResponse(makeTermArray())
 
       else if message.substring(0,6) == "remove"
         message = message.slice(6)
         if confirm "are you sure you want to remove this mute?"
           removeTerm(message)
-          sendResponse(termArray)
+          sendResponse(makeTermArray())
 
     if message.substring(0,6) == "filter"
       message = message.slice(6)
