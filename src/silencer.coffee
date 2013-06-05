@@ -54,7 +54,7 @@ $ ->
     terms
 
   toggleMutePack = (action) ->
-    addsGoTFilter() if action == "got-add"
+    addGoTFilter() if action == "got-add"
     removeGoTFilter() if action == "got-remove"
 
     addMmFilter() if action == "mm-add"

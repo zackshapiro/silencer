@@ -4,7 +4,6 @@
   "name": "Silencer",
   "description": "Silencer is the easiest way to mute spoilers, people, hashtags, terms and phrases on Twitter and Facebook.",
   "version": "0.66",
-
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*", "https://www.facebook.com/*"],

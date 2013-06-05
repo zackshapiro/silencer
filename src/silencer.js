@@ -57,7 +57,7 @@
     };
     toggleMutePack = function(action) {
       if (action === "got-add") {
-        addsGoTFilter();
+        addGoTFilter();
       }
       if (action === "got-remove") {
         removeGoTFilter();
