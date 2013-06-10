@@ -58,6 +58,9 @@
           terms = response;
           for (_i = 0, _len = terms.length; _i < _len; _i++) {
             term = terms[_i];
+            if (term === "nbafinalsfilter") {
+              $(".add-nba").text("Remove");
+            }
             if (term === "gameofthronesfilter") {
               $(".add-got").text("Remove");
             }
@@ -149,7 +152,7 @@
         return $(".add-mm").text("Add");
       }
     });
-    return $('.add-ad').click(function(e) {
+    $('.add-ad').click(function(e) {
       e.preventDefault();
       if ($('.add-ad').text() === "Add") {
         mixpanel.track("Arrested Development Filter Added");
@@ -169,6 +172,28 @@
           return chrome.tabs.sendMessage(tab[0].id, "filterad-remove");
         });
         return $(".add-ad").text("Add");
+      }
+    });
+    return $('.add-nba').click(function(e) {
+      e.preventDefault();
+      if ($('.add-nba').text() === "Add") {
+        mixpanel.track("NBA Finals Filter Added");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filternba-add");
+        });
+        return $(".add-nba").text("Remove");
+      } else {
+        mixpanel.track("NBA Finals Filter Removed");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filternba-remove");
+        });
+        return $(".add-nba").text("Add");
       }
     });
   });

@@ -7,6 +7,8 @@ $ ->
   madMenFilter = [ "#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter" ]
 
   arrestedDevelopmentFilter = [ "#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter" ]
+
+  nbaFinalsFilter = [ "nba finals", "heat", "spurs", "miami", "nba", "san antonio", "lebron", "le bron", "wade", "coach pop", "bosh", "el heat", "#nbafinals", "game one", "game two", "game three", "game four", "game five", "game six", "game seven", "game 1", "game 2", "game 3", "game 4", "game 5", "game 6", "game 7", "chalmers", "@kingjames", "n.b.a finals", "duncan", "popovich", "spoelstra", "baynes", "blair", "bonner", "de colo", "diaw", "ginobili", "ginóbili", "danny green", "cory joseph", "kawhi", "mcgrady", "mills", "neal", "parker", "splitter", "allen", "ray allen", "andersen", "birdman", "anthony", "battier", "cole", "haslem", "juwan howard", "king james", "queen james", "james jones", "rashard lewis", "mike miller", "jarvis varnado", "nbafinalsfilter"]
   
   ##############################################
 
@@ -63,6 +65,9 @@ $ ->
     addAdFilter() if action == "ad-add"
     removeAdFilter() if action == "ad-remove"
 
+    addNbaFilter() if action == "nba-add"
+    removeNbaFilter() if action == "nba-remove"
+
 
   addGoTFilter = ->
     addTerm(item) for item in thronesFilter
@@ -81,6 +86,12 @@ $ ->
 
   removeAdFilter = ->
     removeTerm(item) for item in arrestedDevelopmentFilter
+
+  addNbaFilter = ->
+    addTerm(item) for item in nbaFinalsFilter
+
+  removeNbaFilter = ->
+    removeTerm(item) for item in nbaFinalsFilter
 
 
   addTerm = (newTerm) ->
@@ -124,6 +135,7 @@ $ ->
       for term in terms
         if $(child).is(":visible")
           if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+            # mixpanel.track("term hidden")
             hideChild($(child)) 
 
 

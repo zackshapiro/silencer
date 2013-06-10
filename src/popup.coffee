@@ -42,6 +42,7 @@ $ ->
           terms = response
 
           for term in terms
+            $(".add-nba").text("Remove") if term == "nbafinalsfilter"
             $(".add-got").text("Remove") if term == "gameofthronesfilter"
             $(".add-mm").text("Remove") if term == "madmenfilter"
             $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
@@ -69,6 +70,8 @@ $ ->
         )
     )
   ))
+
+
 
   ### Adding filters ### 
 
@@ -125,3 +128,22 @@ $ ->
           chrome.tabs.sendMessage(tab[0].id, "filterad-remove")
       )
       $(".add-ad").text("Add")
+
+
+  $('.add-nba').click (e) ->
+    e.preventDefault()
+    if $('.add-nba').text() == "Add"
+      mixpanel.track("NBA Finals Filter Added")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filternba-add")
+      )
+      $(".add-nba").text("Remove")
+    else
+      mixpanel.track("NBA Finals Filter Removed")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filternba-remove")
+      )
+      $(".add-nba").text("Add")
+
