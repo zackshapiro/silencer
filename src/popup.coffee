@@ -37,7 +37,6 @@ $ ->
     chrome.tabs.sendMessage(tab[0].id, "showTerms", 
       (response) ->
         # console.log (JSON.stringify(response))
-        # here I have the terms, maybe put them in localStorage? They should at least be stored in a public variable
         if response
           terms = response
 
