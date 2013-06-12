@@ -2,12 +2,13 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addNbaFilter, addPllFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, nbaFinalsFilter, prettyLittleLiarsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removeNbaFilter, removePllFilter, removeTerm, storeTerms, thronesFilter, toggleMutePack;
+    var addAdFilter, addGoTFilter, addMmFilter, addNbaFilter, addPllFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, nbaFinalsFilter, prettyLittleLiarsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removeNbaFilter, removePllFilter, removeTerm, reservedWords, storeTerms, thronesFilter, toggleMutePack;
     thronesFilter = ["game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "red wedding", "redwedding", "gameofthronesfilter"];
     madMenFilter = ["#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter"];
     arrestedDevelopmentFilter = ["#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter"];
     nbaFinalsFilter = ["nba finals", "heat", "spurs", "miami", "nba", "san antonio", "lebron", "le bron", "wade", "coach pop", "bosh", "el heat", "#nbafinals", "game one", "game two", "game three", "game four", "game five", "game six", "game seven", "game 1", "game 2", "game 3", "game 4", "game 5", "game 6", "game 7", "chalmers", "@kingjames", "n.b.a finals", "duncan", "popovich", "spoelstra", "baynes", "blair", "bonner", "de colo", "diaw", "ginobili", "ginóbili", "danny green", "cory joseph", "kawhi", "mcgrady", "mills", "neal", "parker", "splitter", "allen", "ray allen", "andersen", "birdman", "anthony", "battier", "cole", "haslem", "juwan howard", "king james", "queen james", "james jones", "rashard lewis", "mike miller", "jarvis varnado", "nbafinalsfilter"];
     prettyLittleLiarsFilter = ["@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'A'", "prettylittleliarsfilter"];
+    reservedWords = ["reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"];
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -180,11 +181,17 @@
       return _results;
     };
     addTerm = function(newTerm) {
-      var term, termArray, _i, _len;
+      var term, termArray, _i, _j, _len, _len1;
       termArray = makeTermArray();
       for (_i = 0, _len = termArray.length; _i < _len; _i++) {
         term = termArray[_i];
         if (newTerm.toLowerCase() === term.term) {
+          return;
+        }
+      }
+      for (_j = 0, _len1 = reservedWords.length; _j < _len1; _j++) {
+        term = reservedWords[_j];
+        if (newTerm.toLowerCase() === term) {
           return;
         }
       }

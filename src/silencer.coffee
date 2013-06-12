@@ -12,6 +12,8 @@ $ ->
   
   prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'A'", "prettylittleliarsfilter"]
 
+  reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
+
   ##############################################
 
   Array.prototype.remove = ->
@@ -110,6 +112,9 @@ $ ->
 
     for term in termArray
       return if newTerm.toLowerCase() == term.term # because format is {term: "#sxsw"}
+
+    for term in reservedWords
+      return if newTerm.toLowerCase() == term
 
     # adds an item to the array above
     termArray.push({ "term": newTerm })
