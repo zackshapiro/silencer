@@ -74,16 +74,9 @@ input {
   margin-top: -3px;
 }
 
-a.remove-term, a.remove-term:hover { color: #222; }
+a.remove-term { color: #222; text-decoration: none; }
 
-a.remove-term {
-  text-decoration: none;
-}
-
-a.remove-term:hover {
-  background: #ddd;
-  text-decoration: underline;
-}
+a.remove-term:hover { opacity: 0.7; }
 
 .filter-packs {
   list-style: none;

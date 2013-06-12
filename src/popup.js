@@ -70,6 +70,9 @@
             if (term === "arresteddevelopmentfilter") {
               $(".add-ad").text("Remove");
             }
+            if (term === "prettylittleliarsfilter") {
+              $(".add-pll").text("Remove");
+            }
           }
           for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
             term = terms[_j];
@@ -96,6 +99,7 @@
         "id": term
       });
       termToBeRemoved = "remove" + term;
+      $(e.currentTarget).parent().slideUp();
       return chrome.tabs.query({
         "active": true,
         "currentWindow": true
@@ -174,7 +178,7 @@
         return $(".add-ad").text("Add");
       }
     });
-    return $('.add-nba').click(function(e) {
+    $('.add-nba').click(function(e) {
       e.preventDefault();
       if ($('.add-nba').text() === "Add") {
         mixpanel.track("NBA Finals Filter Added");
@@ -194,6 +198,28 @@
           return chrome.tabs.sendMessage(tab[0].id, "filternba-remove");
         });
         return $(".add-nba").text("Add");
+      }
+    });
+    return $('.add-pll').click(function(e) {
+      e.preventDefault();
+      if ($('.add-pll').text() === "Add") {
+        mixpanel.track("Pretty Little Liars Filter Added");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filterpll-add");
+        });
+        return $(".add-pll").text("Remove");
+      } else {
+        mixpanel.track("Pretty Little Liars Filter Removed");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filterpll-remove");
+        });
+        return $(".add-pll").text("Add");
       }
     });
   });

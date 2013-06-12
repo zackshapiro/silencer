@@ -10,6 +10,8 @@ $ ->
 
   nbaFinalsFilter = [ "nba finals", "heat", "spurs", "miami", "nba", "san antonio", "lebron", "le bron", "wade", "coach pop", "bosh", "el heat", "#nbafinals", "game one", "game two", "game three", "game four", "game five", "game six", "game seven", "game 1", "game 2", "game 3", "game 4", "game 5", "game 6", "game 7", "chalmers", "@kingjames", "n.b.a finals", "duncan", "popovich", "spoelstra", "baynes", "blair", "bonner", "de colo", "diaw", "ginobili", "ginóbili", "danny green", "cory joseph", "kawhi", "mcgrady", "mills", "neal", "parker", "splitter", "allen", "ray allen", "andersen", "birdman", "anthony", "battier", "cole", "haslem", "juwan howard", "king james", "queen james", "james jones", "rashard lewis", "mike miller", "jarvis varnado", "nbafinalsfilter"]
   
+  prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'A'", "prettylittleliarsfilter"]
+
   ##############################################
 
   Array.prototype.remove = ->
@@ -68,6 +70,9 @@ $ ->
     addNbaFilter() if action == "nba-add"
     removeNbaFilter() if action == "nba-remove"
 
+    addPllFilter() if action == "pll-add"
+    removePllFilter() if action == "pll-remove"
+
 
   addGoTFilter = ->
     addTerm(item) for item in thronesFilter
@@ -92,6 +97,12 @@ $ ->
 
   removeNbaFilter = ->
     removeTerm(item) for item in nbaFinalsFilter
+
+  addPllFilter = ->
+    addTerm(item) for item in prettyLittleLiarsFilter
+
+  removePllFilter = ->
+    removeTerm(item) for item in prettyLittleLiarsFilter
 
 
   addTerm = (newTerm) ->
@@ -176,9 +187,8 @@ $ ->
 
       else if message.substring(0,6) == "remove"
         message = message.slice(6)
-        if confirm "are you sure you want to remove this mute?"
-          removeTerm(message)
-          sendResponse(makeTermArray())
+        removeTerm(message)
+        sendResponse(makeTermArray())
 
     if message.substring(0,6) == "filter"
       message = message.slice(6)

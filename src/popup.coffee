@@ -45,6 +45,7 @@ $ ->
             $(".add-got").text("Remove") if term == "gameofthronesfilter"
             $(".add-mm").text("Remove") if term == "madmenfilter"
             $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
+            $(".add-pll").text("Remove") if term == "prettylittleliarsfilter"
 
           for term in terms
             $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -61,6 +62,7 @@ $ ->
     term = $(e.currentTarget).parent().data("term")
     mixpanel.track("Term Removed", {"id": term})
     termToBeRemoved = "remove" + term
+    $(e.currentTarget).parent().slideUp()
     
     chrome.tabs.query("active": true, "currentWindow": true, 
       (tab) -> 
@@ -145,4 +147,24 @@ $ ->
           chrome.tabs.sendMessage(tab[0].id, "filternba-remove")
       )
       $(".add-nba").text("Add")
+
+
+  $('.add-pll').click (e) ->
+    e.preventDefault()
+    if $('.add-pll').text() == "Add"
+      mixpanel.track("Pretty Little Liars Filter Added")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filterpll-add")
+      )
+      $(".add-pll").text("Remove")
+    else
+      mixpanel.track("Pretty Little Liars Filter Removed")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filterpll-remove")
+      )
+      $(".add-pll").text("Add")
+
+
 

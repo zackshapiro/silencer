@@ -2,11 +2,12 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addNbaFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, nbaFinalsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removeNbaFilter, removeTerm, storeTerms, thronesFilter, toggleMutePack;
+    var addAdFilter, addGoTFilter, addMmFilter, addNbaFilter, addPllFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, nbaFinalsFilter, prettyLittleLiarsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removeNbaFilter, removePllFilter, removeTerm, storeTerms, thronesFilter, toggleMutePack;
     thronesFilter = ["game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "red wedding", "redwedding", "gameofthronesfilter"];
     madMenFilter = ["#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter"];
     arrestedDevelopmentFilter = ["#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter"];
     nbaFinalsFilter = ["nba finals", "heat", "spurs", "miami", "nba", "san antonio", "lebron", "le bron", "wade", "coach pop", "bosh", "el heat", "#nbafinals", "game one", "game two", "game three", "game four", "game five", "game six", "game seven", "game 1", "game 2", "game 3", "game 4", "game 5", "game 6", "game 7", "chalmers", "@kingjames", "n.b.a finals", "duncan", "popovich", "spoelstra", "baynes", "blair", "bonner", "de colo", "diaw", "ginobili", "ginóbili", "danny green", "cory joseph", "kawhi", "mcgrady", "mills", "neal", "parker", "splitter", "allen", "ray allen", "andersen", "birdman", "anthony", "battier", "cole", "haslem", "juwan howard", "king james", "queen james", "james jones", "rashard lewis", "mike miller", "jarvis varnado", "nbafinalsfilter"];
+    prettyLittleLiarsFilter = ["@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'A'", "prettylittleliarsfilter"];
     Array.prototype.remove = function() {
       var ax, what;
       while (arguments.length && this.length) {
@@ -79,7 +80,13 @@
         addNbaFilter();
       }
       if (action === "nba-remove") {
-        return removeNbaFilter();
+        removeNbaFilter();
+      }
+      if (action === "pll-add") {
+        addPllFilter();
+      }
+      if (action === "pll-remove") {
+        return removePllFilter();
       }
     };
     addGoTFilter = function() {
@@ -150,6 +157,24 @@
       _results = [];
       for (_i = 0, _len = nbaFinalsFilter.length; _i < _len; _i++) {
         item = nbaFinalsFilter[_i];
+        _results.push(removeTerm(item));
+      }
+      return _results;
+    };
+    addPllFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = prettyLittleLiarsFilter.length; _i < _len; _i++) {
+        item = prettyLittleLiarsFilter[_i];
+        _results.push(addTerm(item));
+      }
+      return _results;
+    };
+    removePllFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = prettyLittleLiarsFilter.length; _i < _len; _i++) {
+        item = prettyLittleLiarsFilter[_i];
         _results.push(removeTerm(item));
       }
       return _results;
@@ -269,10 +294,8 @@
           sendResponse(makeTermArray());
         } else if (message.substring(0, 6) === "remove") {
           message = message.slice(6);
-          if (confirm("are you sure you want to remove this mute?")) {
-            removeTerm(message);
-            sendResponse(makeTermArray());
-          }
+          removeTerm(message);
+          sendResponse(makeTermArray());
         }
       }
       if (message.substring(0, 6) === "filter") {
