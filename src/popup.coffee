@@ -2,11 +2,6 @@ $ ->
 
   newTerm = -> $('.term-to-submit').val()
 
-  focus = -> $('.term-to-submit').focus()
-
-  $('.term-to-submit').keyup (event) ->
-    $('.primary.button.submit').text("Mute #{newTerm()}")
-
   # Handles both forms of form submit. Enter or button click.
   $('.my-form').submit ->
     unless newTerm() == ""

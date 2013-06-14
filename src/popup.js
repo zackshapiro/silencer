@@ -2,17 +2,11 @@
 (function() {
 
   $(function() {
-    var focus, newTerm,
+    var newTerm,
       _this = this;
     newTerm = function() {
       return $('.term-to-submit').val();
     };
-    focus = function() {
-      return $('.term-to-submit').focus();
-    };
-    $('.term-to-submit').keyup(function(event) {
-      return $('.primary.button.submit').text("Mute " + (newTerm()));
-    });
     $('.my-form').submit(function() {
       if (newTerm() !== "") {
         mixpanel.track('Term Added (enter pressed)', {

@@ -21,22 +21,32 @@ input {
   border-radius: 6px;
   font-size: 15px;
   padding-left: 4px;
+  float: left;
 }
 
 .welcome { text-decoration: underline; font-size: 17px; }
 
 .tag-line { color: #999; font-size: 12px; margin-top: -12px; }
 
-.examples { font-size: 11px; color: #999; }
+.examples {
+  font-size: 11px;
+  color: #999;
+  float: left;
+  margin: 4px 0 0 30px;
+}
 
-.my-form { margin-bottom: 4px; }
+.my-form {
+  overflow: hidden;
+  margin-left: 10px;
+  margin-bottom: 4px;
+}
 
 .add-term { padding: 2px 0; }
 
 .button {
   padding: 4px 8px;
-  width: 65%;
-  height: 21px;
+  width: 38px;
+  height: 22px;
   font-size: 12px;
   display: inline-block;
   border-radius: 6px;
@@ -45,7 +55,9 @@ input {
   letter-spacing: .1em;
   color: white;
   text-decoration: none;
-  margin-top: 8px !important;
+  margin-top: 0px !important;
+  margin-left: 8px;
+  float: left;
 }
 .button:hover {}
 
@@ -88,6 +100,7 @@ a.remove-term:hover { opacity: 0.7; }
   text-align: left;
   margin-left: -30px;
   font-size: 15px;
+  clear: both;
 }
 
 .add-got {
