@@ -76,35 +76,20 @@ $ ->
     removePllFilter() if action == "pll-remove"
 
 
-  addGoTFilter = ->
-    addTerm(item) for item in thronesFilter
+  addGoTFilter = -> addTerm(item) for item in thronesFilter
+  removeGoTFilter = -> removeTerm(item) for item in thronesFilter
 
-  removeGoTFilter = ->
-    removeTerm(item) for item in thronesFilter
+  addMmFilter = -> addTerm(item) for item in madMenFilter
+  removeMmFilter = -> removeTerm(item) for item in madMenFilter
 
-  addMmFilter = ->
-    addTerm(item) for item in madMenFilter
+  addAdFilter = -> addTerm(item) for item in arrestedDevelopmentFilter
+  removeAdFilter = -> removeTerm(item) for item in arrestedDevelopmentFilter
 
-  removeMmFilter = ->
-    removeTerm(item) for item in madMenFilter
+  addNbaFilter = -> addTerm(item) for item in nbaFinalsFilter
+  removeNbaFilter = -> removeTerm(item) for item in nbaFinalsFilter
 
-  addAdFilter = ->
-    addTerm(item) for item in arrestedDevelopmentFilter
-
-  removeAdFilter = ->
-    removeTerm(item) for item in arrestedDevelopmentFilter
-
-  addNbaFilter = ->
-    addTerm(item) for item in nbaFinalsFilter
-
-  removeNbaFilter = ->
-    removeTerm(item) for item in nbaFinalsFilter
-
-  addPllFilter = ->
-    addTerm(item) for item in prettyLittleLiarsFilter
-
-  removePllFilter = ->
-    removeTerm(item) for item in prettyLittleLiarsFilter
+  addPllFilter = -> addTerm(item) for item in prettyLittleLiarsFilter
+  removePllFilter = -> removeTerm(item) for item in prettyLittleLiarsFilter
 
 
   addTerm = (newTerm) ->
@@ -151,8 +136,9 @@ $ ->
       for term in terms
         if $(child).is(":visible")
           if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-            # mixpanel.track("term hidden")
             hideChild($(child)) 
+            chrome.runtime.sendMessage({term: "#{term}", site: "twitter"})
+
 
 
   ################## Filters ############################
@@ -163,14 +149,16 @@ $ ->
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->
-    termList = getTerms()
-
+    terms = getTerms()
     stream = $(".uiStream")
     children = $(stream).children(".genericStreamStory")
+
     for child in children
-      for term in termList
-        if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-          hideChild($(child))
+      for term in terms
+        if $(child).is(":visible")
+          if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+            hideChild($(child))
+            chrome.runtime.sendMessage({term: "#{term}", site: "facebook"})
 
   #######################################################
 
@@ -198,3 +186,7 @@ $ ->
     if message.substring(0,6) == "filter"
       message = message.slice(6)
       toggleMutePack(message)
+
+# chrome.runtime.sendMessage({greeting: "hello"}, (response) ->
+#   console.log(response.farewell)
+# )

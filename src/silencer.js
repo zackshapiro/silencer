@@ -248,7 +248,11 @@
             term = terms[_j];
             if ($(child).is(":visible")) {
               if ($($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                _results1.push(hideChild($(child)));
+                hideChild($(child));
+                _results1.push(chrome.runtime.sendMessage({
+                  term: "" + term,
+                  site: "twitter"
+                }));
               } else {
                 _results1.push(void 0);
               }
@@ -267,8 +271,8 @@
       }
     };
     filterFacebook = function() {
-      var child, children, stream, term, termList, _i, _len, _results;
-      termList = getTerms();
+      var child, children, stream, term, terms, _i, _len, _results;
+      terms = getTerms();
       stream = $(".uiStream");
       children = $(stream).children(".genericStreamStory");
       _results = [];
@@ -277,10 +281,18 @@
         _results.push((function() {
           var _j, _len1, _results1;
           _results1 = [];
-          for (_j = 0, _len1 = termList.length; _j < _len1; _j++) {
-            term = termList[_j];
-            if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-              _results1.push(hideChild($(child)));
+          for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
+            term = terms[_j];
+            if ($(child).is(":visible")) {
+              if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                hideChild($(child));
+                _results1.push(chrome.runtime.sendMessage({
+                  term: "" + term,
+                  site: "facebook"
+                }));
+              } else {
+                _results1.push(void 0);
+              }
             } else {
               _results1.push(void 0);
             }

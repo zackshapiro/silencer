@@ -51,6 +51,11 @@ input {
 
 .term-holder { margin-bottom: -12px; }
 
+.youre-muting {
+  text-align: left;
+  margin-left: 10px;
+}
+
 .terms {
   margin-left: -12px;
   padding-bottom: 12px;
@@ -81,7 +86,8 @@ a.remove-term:hover { opacity: 0.7; }
 .filter-packs {
   list-style: none;
   text-align: left;
-  margin-left: -14px;
+  margin-left: -30px;
+  font-size: 15px;
 }
 
 .add-got {

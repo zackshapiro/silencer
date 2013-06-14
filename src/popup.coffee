@@ -41,11 +41,11 @@ $ ->
           terms = response
 
           for term in terms
-            $(".add-nba").text("Remove") if term == "nbafinalsfilter"
-            $(".add-got").text("Remove") if term == "gameofthronesfilter"
-            $(".add-mm").text("Remove") if term == "madmenfilter"
-            $(".add-ad").text("Remove") if term == "arresteddevelopmentfilter"
-            $(".add-pll").text("Remove") if term == "prettylittleliarsfilter"
+            $(".add-nba").text("Unmute") if term == "nbafinalsfilter"
+            $(".add-got").text("Unmute") if term == "gameofthronesfilter"
+            $(".add-mm").text("Unmute") if term == "madmenfilter"
+            $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
+            $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
 
           for term in terms
             $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -78,93 +78,93 @@ $ ->
 
   $('.add-got').click (e) ->
     e.preventDefault()
-    if $('.add-got').text() == "Add"
+    if $('.add-got').text() == "Mute"
       mixpanel.track("GoT Filter Added")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-add")
       )
-      $(".add-got").text("Remove")
+      $(".add-got").text("Unmute")
     else
       mixpanel.track("GoT Filter Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtergot-remove")
       )
-      $(".add-got").text("Add")
+      $(".add-got").text("Mute")
 
 
 
   $('.add-mm').click (e) ->
     e.preventDefault()
-    if $('.add-mm').text() == "Add"
+    if $('.add-mm').text() == "Mute"
       mixpanel.track("Man Men Filter Added")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-add")
       )
-      $(".add-mm").text("Remove")
+      $(".add-mm").text("Unmute")
     else
       mixpanel.track("Mad Men Filter Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filtermm-remove")
       )
-      $(".add-mm").text("Add")
+      $(".add-mm").text("Mute")
 
 
   $('.add-ad').click (e) ->
     e.preventDefault()
-    if $('.add-ad').text() == "Add"
+    if $('.add-ad').text() == "Mute"
       mixpanel.track("Arrested Development Filter Added")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterad-add")
       )
-      $(".add-ad").text("Remove")
+      $(".add-ad").text("Unmute")
     else
       mixpanel.track("Arrested Development Filter Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterad-remove")
       )
-      $(".add-ad").text("Add")
+      $(".add-ad").text("Mute")
 
 
   $('.add-nba').click (e) ->
     e.preventDefault()
-    if $('.add-nba').text() == "Add"
+    if $('.add-nba').text() == "Mute"
       mixpanel.track("NBA Finals Filter Added")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filternba-add")
       )
-      $(".add-nba").text("Remove")
+      $(".add-nba").text("Unmute")
     else
       mixpanel.track("NBA Finals Filter Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filternba-remove")
       )
-      $(".add-nba").text("Add")
+      $(".add-nba").text("Mute")
 
 
   $('.add-pll').click (e) ->
     e.preventDefault()
-    if $('.add-pll').text() == "Add"
+    if $('.add-pll').text() == "Mute"
       mixpanel.track("Pretty Little Liars Filter Added")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterpll-add")
       )
-      $(".add-pll").text("Remove")
+      $(".add-pll").text("Unmute")
     else
       mixpanel.track("Pretty Little Liars Filter Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filterpll-remove")
       )
-      $(".add-pll").text("Add")
+      $(".add-pll").text("Mute")
 
 
 
