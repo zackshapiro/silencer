@@ -2,6 +2,41 @@ $ ->
 
   newTerm = -> $('.term-to-submit').val()
 
+  setMuteValue = (terms) ->
+    for term in terms
+      $(".add-nba").text("Unmute") if term == "nbafinalsfilter"
+      $(".add-got").text("Unmute") if term == "gameofthronesfilter"
+      $(".add-mm").text("Unmute") if term == "madmenfilter"
+      $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
+      $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
+      $(".add-ig").text("Unmute") if term == "instagram.com"
+      $(".add-vine").text("Unmute") if term == "vine.co"
+      $(".add-4sq").text("Unmute") if term == "4sq.com"
+      $(".add-path").text("Unmute") if term == "path.com"
+      $(".add-th").text("Unmute") if term == "t.imehop.com"
+      $(".add-medium").text("Unmute") if term == "medium.com"
+      $(".add-nike").text("Unmute") if term == "go.nike.com"
+      $(".add-circa").text("Unmute") if term == "cir.ca"
+      $(".add-paper").text("Unmute") if term == "paper.li"
+
+  handleCategory = (event, selector, message, filterName) ->
+    event.preventDefault()
+    if $(selector).text() == "Mute"
+      mixpanel.track("#{message} Added")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filter#{filterName}-add")
+      )
+      $(selector).text("Unmute")
+    else
+      mixpanel.track("Instagram Mute Removed")
+      chrome.tabs.query("active": true, "currentWindow": true, 
+        (tab) ->
+          chrome.tabs.sendMessage(tab[0].id, "filter#{filterName}-remove")
+      )
+      $(selector).text("Mute")
+
+
   # Handles both forms of form submit. Enter or button click.
   $('.my-form').submit ->
     unless newTerm() == ""
@@ -35,12 +70,7 @@ $ ->
         if response
           terms = response
 
-          for term in terms
-            $(".add-nba").text("Unmute") if term == "nbafinalsfilter"
-            $(".add-got").text("Unmute") if term == "gameofthronesfilter"
-            $(".add-mm").text("Unmute") if term == "madmenfilter"
-            $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
-            $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
+          setMuteValue(terms)
 
           for term in terms
             $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -68,98 +98,46 @@ $ ->
   ))
 
 
-
   ### Adding filters ### 
 
   $('.add-got').click (e) ->
-    e.preventDefault()
-    if $('.add-got').text() == "Mute"
-      mixpanel.track("GoT Filter Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtergot-add")
-      )
-      $(".add-got").text("Unmute")
-    else
-      mixpanel.track("GoT Filter Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtergot-remove")
-      )
-      $(".add-got").text("Mute")
-
-
+    handleCategory(e, '.add-got', "GoT Filter", "got")
 
   $('.add-mm').click (e) ->
-    e.preventDefault()
-    if $('.add-mm').text() == "Mute"
-      mixpanel.track("Man Men Filter Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtermm-add")
-      )
-      $(".add-mm").text("Unmute")
-    else
-      mixpanel.track("Mad Men Filter Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filtermm-remove")
-      )
-      $(".add-mm").text("Mute")
-
+    handleCategory(e, '.add-mm', "Mad Men Filter", "mm")
 
   $('.add-ad').click (e) ->
-    e.preventDefault()
-    if $('.add-ad').text() == "Mute"
-      mixpanel.track("Arrested Development Filter Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterad-add")
-      )
-      $(".add-ad").text("Unmute")
-    else
-      mixpanel.track("Arrested Development Filter Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterad-remove")
-      )
-      $(".add-ad").text("Mute")
-
+    handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
 
   $('.add-nba').click (e) ->
-    e.preventDefault()
-    if $('.add-nba').text() == "Mute"
-      mixpanel.track("NBA Finals Filter Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filternba-add")
-      )
-      $(".add-nba").text("Unmute")
-    else
-      mixpanel.track("NBA Finals Filter Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filternba-remove")
-      )
-      $(".add-nba").text("Mute")
-
+    handleCategory(e, '.add-nba', "NBA Finals Filter", "nba")
 
   $('.add-pll').click (e) ->
-    e.preventDefault()
-    if $('.add-pll').text() == "Mute"
-      mixpanel.track("Pretty Little Liars Filter Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterpll-add")
-      )
-      $(".add-pll").text("Unmute")
-    else
-      mixpanel.track("Pretty Little Liars Filter Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filterpll-remove")
-      )
-      $(".add-pll").text("Mute")
+    handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
 
+  $('.add-ig').click (e) ->
+    handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
 
+  $('.add-vine').click (e) ->
+    handleCategory(e, '.add-vine', "Vine Mute", "vine")
 
+  $('.add-4sq').click (e) ->
+    handleCategory(e, '.add-4sq', "Foursquare Mute", "4sq")
+
+  $('.add-path').click (e) ->
+    handleCategory(e, '.add-path', "Path Mute", "path")
+
+  $('.add-th').click (e) ->
+    handleCategory(e, '.add-th', "Timehop Mute", "timehop")
+
+  $('.add-medium').click (e) ->
+    handleCategory(e, '.add-medium', "Medium Mute", "medium")
+
+  $('.add-nike').click (e) ->
+    handleCategory(e, '.add-nike', "Nike+ Mute", "nike")
+
+  $('.add-circa').click (e) ->
+    handleCategory(e, '.add-circa', "Circa Mute", "circa")
+
+  $('.add-paper').click (e) ->
+    handleCategory(e, '.add-paper', "Paper.li Mute", "paper")

@@ -75,6 +75,33 @@ $ ->
     addPllFilter() if action == "pll-add"
     removePllFilter() if action == "pll-remove"
 
+    addTerm("instagram.com") if action == "instagram-add"
+    removeTerm("instagram.com") if action == "instagram-remove"
+
+    addTerm("vine.co") if action == "vine-add"
+    removeTerm("vine.co") if action == "vine-remove"
+
+    addTerm("4sq.com") if action == "4sq-add"
+    removeTerm("4sq.com") if action == "4sq-remove"
+
+    addTerm("path.com") if action == "path-add"
+    removeTerm("path.com") if action == "path-remove"
+
+    addTerm("t.imehop.com") if action == "timehop-add"
+    removeTerm("t.imehop.com") if action == "timehop-remove"
+
+    addTerm("medium.com") if action == "medium-add"
+    removeTerm("medium.com") if action == "medium-remove"
+
+    addTerm("go.nike.com") if action == "nike-add"
+    removeTerm("go.nike.com") if action == "nike-remove"
+
+    addTerm("cir.ca") if action == "circa-add"
+    removeTerm("cir.ca") if action == "circa-remove"
+
+    addTerm("paper.li") if action == "paper-add"
+    removeTerm("paper.li") if action == "paper-remove"
+
 
   addGoTFilter = -> addTerm(item) for item in thronesFilter
   removeGoTFilter = -> removeTerm(item) for item in thronesFilter
@@ -103,12 +130,11 @@ $ ->
 
     # adds an item to the array above
     termArray.push({ "term": newTerm })
-    # stores that array in LS
     storeTerms(termArray)
 
   removeTerm = (termToBeRemoved) ->
     terms = getTerms()
-    # removes term
+
     for term in terms
       terms.remove(term) if term == termToBeRemoved
 
@@ -120,7 +146,7 @@ $ ->
 
   makeTermArray = ->
     termArray = []
-    terms = getTerms() # ["4sq", "vine.co" ...]
+    terms = getTerms()
     for term in terms
       termArray.push({ "term": "#{term}"})
     termArray    
@@ -187,6 +213,11 @@ $ ->
       message = message.slice(6)
       toggleMutePack(message)
 
-# chrome.runtime.sendMessage({greeting: "hello"}, (response) ->
-#   console.log(response.farewell)
+# chrome.runtime.sendMessage({token: "1837179a7h1"}, (response) ->
+#   # console.log(response.token)
 # )
+
+# chrome.runtime.sendMessage({tokenNeeded: true}, (response) ->
+#   console.log response.token
+# )
+

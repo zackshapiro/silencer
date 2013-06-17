@@ -2,10 +2,84 @@
 (function() {
 
   $(function() {
-    var newTerm,
+    var handleCategory, newTerm, setMuteValue,
       _this = this;
     newTerm = function() {
       return $('.term-to-submit').val();
+    };
+    setMuteValue = function(terms) {
+      var term, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = terms.length; _i < _len; _i++) {
+        term = terms[_i];
+        if (term === "nbafinalsfilter") {
+          $(".add-nba").text("Unmute");
+        }
+        if (term === "gameofthronesfilter") {
+          $(".add-got").text("Unmute");
+        }
+        if (term === "madmenfilter") {
+          $(".add-mm").text("Unmute");
+        }
+        if (term === "arresteddevelopmentfilter") {
+          $(".add-ad").text("Unmute");
+        }
+        if (term === "prettylittleliarsfilter") {
+          $(".add-pll").text("Unmute");
+        }
+        if (term === "instagram.com") {
+          $(".add-ig").text("Unmute");
+        }
+        if (term === "vine.co") {
+          $(".add-vine").text("Unmute");
+        }
+        if (term === "4sq.com") {
+          $(".add-4sq").text("Unmute");
+        }
+        if (term === "path.com") {
+          $(".add-path").text("Unmute");
+        }
+        if (term === "t.imehop.com") {
+          $(".add-th").text("Unmute");
+        }
+        if (term === "medium.com") {
+          $(".add-medium").text("Unmute");
+        }
+        if (term === "go.nike.com") {
+          $(".add-nike").text("Unmute");
+        }
+        if (term === "cir.ca") {
+          $(".add-circa").text("Unmute");
+        }
+        if (term === "paper.li") {
+          _results.push($(".add-paper").text("Unmute"));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+    handleCategory = function(event, selector, message, filterName) {
+      event.preventDefault();
+      if ($(selector).text() === "Mute") {
+        mixpanel.track("" + message + " Added");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filter" + filterName + "-add");
+        });
+        return $(selector).text("Unmute");
+      } else {
+        mixpanel.track("Instagram Mute Removed");
+        chrome.tabs.query({
+          "active": true,
+          "currentWindow": true
+        }, function(tab) {
+          return chrome.tabs.sendMessage(tab[0].id, "filter" + filterName + "-remove");
+        });
+        return $(selector).text("Mute");
+      }
     };
     $('.my-form').submit(function() {
       if (newTerm() !== "") {
@@ -47,29 +121,12 @@
       "currentWindow": true
     }, function(tab) {
       return chrome.tabs.sendMessage(tab[0].id, "showTerms", function(response) {
-        var child, term, terms, _i, _j, _k, _len, _len1, _len2, _ref;
+        var child, term, terms, _i, _j, _len, _len1, _ref;
         if (response) {
           terms = response;
+          setMuteValue(terms);
           for (_i = 0, _len = terms.length; _i < _len; _i++) {
             term = terms[_i];
-            if (term === "nbafinalsfilter") {
-              $(".add-nba").text("Unmute");
-            }
-            if (term === "gameofthronesfilter") {
-              $(".add-got").text("Unmute");
-            }
-            if (term === "madmenfilter") {
-              $(".add-mm").text("Unmute");
-            }
-            if (term === "arresteddevelopmentfilter") {
-              $(".add-ad").text("Unmute");
-            }
-            if (term === "prettylittleliarsfilter") {
-              $(".add-pll").text("Unmute");
-            }
-          }
-          for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
-            term = terms[_j];
             $(".terms").append($('<li></li>', {
               "class": "term",
               "data-term": "" + term,
@@ -77,8 +134,8 @@
             }));
           }
           _ref = $(".terms").children();
-          for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
-            child = _ref[_k];
+          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+            child = _ref[_j];
             $(child).wrapInner("<a href='#' class='remove-term'></a>");
           }
           return mixpanel.track('Silencer Opened');
@@ -107,114 +164,46 @@
     */
 
     $('.add-got').click(function(e) {
-      e.preventDefault();
-      if ($('.add-got').text() === "Mute") {
-        mixpanel.track("GoT Filter Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filtergot-add");
-        });
-        return $(".add-got").text("Unmute");
-      } else {
-        mixpanel.track("GoT Filter Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filtergot-remove");
-        });
-        return $(".add-got").text("Mute");
-      }
+      return handleCategory(e, '.add-got', "GoT Filter", "got");
     });
     $('.add-mm').click(function(e) {
-      e.preventDefault();
-      if ($('.add-mm').text() === "Mute") {
-        mixpanel.track("Man Men Filter Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filtermm-add");
-        });
-        return $(".add-mm").text("Unmute");
-      } else {
-        mixpanel.track("Mad Men Filter Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filtermm-remove");
-        });
-        return $(".add-mm").text("Mute");
-      }
+      return handleCategory(e, '.add-mm', "Mad Men Filter", "mm");
     });
     $('.add-ad').click(function(e) {
-      e.preventDefault();
-      if ($('.add-ad').text() === "Mute") {
-        mixpanel.track("Arrested Development Filter Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filterad-add");
-        });
-        return $(".add-ad").text("Unmute");
-      } else {
-        mixpanel.track("Arrested Development Filter Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filterad-remove");
-        });
-        return $(".add-ad").text("Mute");
-      }
+      return handleCategory(e, '.add-ad', "Arrested Development Filter", "ad");
     });
     $('.add-nba').click(function(e) {
-      e.preventDefault();
-      if ($('.add-nba').text() === "Mute") {
-        mixpanel.track("NBA Finals Filter Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filternba-add");
-        });
-        return $(".add-nba").text("Unmute");
-      } else {
-        mixpanel.track("NBA Finals Filter Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filternba-remove");
-        });
-        return $(".add-nba").text("Mute");
-      }
+      return handleCategory(e, '.add-nba', "NBA Finals Filter", "nba");
     });
-    return $('.add-pll').click(function(e) {
-      e.preventDefault();
-      if ($('.add-pll').text() === "Mute") {
-        mixpanel.track("Pretty Little Liars Filter Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filterpll-add");
-        });
-        return $(".add-pll").text("Unmute");
-      } else {
-        mixpanel.track("Pretty Little Liars Filter Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filterpll-remove");
-        });
-        return $(".add-pll").text("Mute");
-      }
+    $('.add-pll').click(function(e) {
+      return handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll");
+    });
+    $('.add-ig').click(function(e) {
+      return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");
+    });
+    $('.add-vine').click(function(e) {
+      return handleCategory(e, '.add-vine', "Vine Mute", "vine");
+    });
+    $('.add-4sq').click(function(e) {
+      return handleCategory(e, '.add-4sq', "Foursquare Mute", "4sq");
+    });
+    $('.add-path').click(function(e) {
+      return handleCategory(e, '.add-path', "Path Mute", "path");
+    });
+    $('.add-th').click(function(e) {
+      return handleCategory(e, '.add-th', "Timehop Mute", "timehop");
+    });
+    $('.add-medium').click(function(e) {
+      return handleCategory(e, '.add-medium', "Medium Mute", "medium");
+    });
+    $('.add-nike').click(function(e) {
+      return handleCategory(e, '.add-nike', "Nike+ Mute", "nike");
+    });
+    $('.add-circa').click(function(e) {
+      return handleCategory(e, '.add-circa', "Circa Mute", "circa");
+    });
+    return $('.add-paper').click(function(e) {
+      return handleCategory(e, '.add-paper', "Paper.li Mute", "paper");
     });
   });
 

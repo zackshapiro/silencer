@@ -87,7 +87,61 @@
         addPllFilter();
       }
       if (action === "pll-remove") {
-        return removePllFilter();
+        removePllFilter();
+      }
+      if (action === "instagram-add") {
+        addTerm("instagram.com");
+      }
+      if (action === "instagram-remove") {
+        removeTerm("instagram.com");
+      }
+      if (action === "vine-add") {
+        addTerm("vine.co");
+      }
+      if (action === "vine-remove") {
+        removeTerm("vine.co");
+      }
+      if (action === "4sq-add") {
+        addTerm("4sq.com");
+      }
+      if (action === "4sq-remove") {
+        removeTerm("4sq.com");
+      }
+      if (action === "path-add") {
+        addTerm("path.com");
+      }
+      if (action === "path-remove") {
+        removeTerm("path.com");
+      }
+      if (action === "timehop-add") {
+        addTerm("t.imehop.com");
+      }
+      if (action === "timehop-remove") {
+        removeTerm("t.imehop.com");
+      }
+      if (action === "medium-add") {
+        addTerm("medium.com");
+      }
+      if (action === "medium-remove") {
+        removeTerm("medium.com");
+      }
+      if (action === "nike-add") {
+        addTerm("go.nike.com");
+      }
+      if (action === "nike-remove") {
+        removeTerm("go.nike.com");
+      }
+      if (action === "circa-add") {
+        addTerm("cir.ca");
+      }
+      if (action === "circa-remove") {
+        removeTerm("cir.ca");
+      }
+      if (action === "paper-add") {
+        addTerm("paper.li");
+      }
+      if (action === "paper-remove") {
+        return removeTerm("paper.li");
       }
     };
     addGoTFilter = function() {

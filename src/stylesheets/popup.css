@@ -32,13 +32,12 @@ input {
   font-size: 11px;
   color: #999;
   float: left;
-  margin: 4px 0 0 30px;
+  margin: 4px 0 0 14px;
 }
 
 .my-form {
   overflow: hidden;
-  margin-left: 10px;
-  margin-bottom: 4px;
+  margin: 0 0 4px 24px;
 }
 
 .add-term { padding: 2px 0; }
@@ -103,11 +102,15 @@ a.remove-term:hover { opacity: 0.7; }
   clear: both;
 }
 
-.add-got {
-  margin-left: 6px;
+.services-title {
+  padding: 0;
+  margin: 0 0 4px -40px;
+  text-decoration: underline;
 }
 
-.add-mm {
-  margin-left: 60px;
-}
+ul.services { list-style: none; }
+
+.service { margin-left: -32px; }
+
+.cta { float: right; font-size: 13px; margin-right: 4px; }
 
