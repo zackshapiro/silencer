@@ -10,7 +10,7 @@ $ ->
 
   nbaFinalsFilter = [ "nba finals", "heat", "spurs", "miami", "nba", "san antonio", "lebron", "le bron", "wade", "coach pop", "bosh", "el heat", "#nbafinals", "game one", "game two", "game three", "game four", "game five", "game six", "game seven", "game 1", "game 2", "game 3", "game 4", "game 5", "game 6", "game 7", "chalmers", "@kingjames", "n.b.a finals", "duncan", "popovich", "spoelstra", "baynes", "blair", "bonner", "de colo", "diaw", "ginobili", "ginóbili", "danny green", "cory joseph", "kawhi", "mcgrady", "mills", "neal", "parker", "splitter", "allen", "ray allen", "andersen", "birdman", "anthony", "battier", "cole", "haslem", "juwan howard", "king james", "queen james", "james jones", "rashard lewis", "mike miller", "jarvis varnado", "nbafinalsfilter"]
   
-  prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'A'", "prettylittleliarsfilter"]
+  prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'a'", "prettylittleliarsfilter"]
 
   reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
