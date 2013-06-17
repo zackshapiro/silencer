@@ -42,15 +42,15 @@ $ ->
 
   storeTerms = (terms) ->
     # stores terms in LS
-    localStorage.setItem("silencer", JSON.stringify(terms))
+    window.localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
     # adds a term if localStorage is empty 
-    unless localStorage["silencer"]
+    unless window.localStorage["silencer"]
       first = { "term": "sample muted term" }
-      localStorage.setItem('silencer', JSON.stringify(first))
+      window.localStorage.setItem('silencer', JSON.stringify(first))
     
-    myList = localStorage.getItem("silencer") 
+    myList = window.localStorage.getItem("silencer") 
 
     myNewList = JSON.parse(myList)
     terms = []

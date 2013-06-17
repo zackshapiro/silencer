@@ -39,17 +39,17 @@
       }
     };
     storeTerms = function(terms) {
-      return localStorage.setItem("silencer", JSON.stringify(terms));
+      return window.localStorage.setItem("silencer", JSON.stringify(terms));
     };
     getTerms = function() {
       var first, item, myList, myNewList, terms, _i, _len;
-      if (!localStorage["silencer"]) {
+      if (!window.localStorage["silencer"]) {
         first = {
           "term": "sample muted term"
         };
-        localStorage.setItem('silencer', JSON.stringify(first));
+        window.localStorage.setItem('silencer', JSON.stringify(first));
       }
-      myList = localStorage.getItem("silencer");
+      myList = window.localStorage.getItem("silencer");
       myNewList = JSON.parse(myList);
       terms = [];
       for (_i = 0, _len = myNewList.length; _i < _len; _i++) {
