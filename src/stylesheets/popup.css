@@ -100,8 +100,18 @@ a.remove-term:hover { opacity: 0.7; }
 
 .pack-expander {
   cursor: pointer;
-  border: 1px solid black;
+  background: #e5e5e5;
+  padding: 4px 8px;
   border-radius: 3px;
+  border-bottom: 2px solid #bbb;
+}
+
+.pack-expander:hover {
+  border-bottom: 1px solid #bbb;
+}
+
+.pack-expander:active {
+  border-bottom: none;
 }
 
 .filter-packs {
