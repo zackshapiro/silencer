@@ -7,11 +7,3 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
 apiToken = "myApiToken1851u71081"
 
 fakeToken = ""
-
-# chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
-#   if message.token
-#     window.token = message.token
-#     # sendResponse({token: fakeToken})
-#   if message.tokenNeeded == true
-#     sendResponse({token: window.token})
-# )

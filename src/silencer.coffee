@@ -212,12 +212,3 @@ $ ->
     if message.substring(0,6) == "filter"
       message = message.slice(6)
       toggleMutePack(message)
-
-# chrome.runtime.sendMessage({token: "1837179a7h1"}, (response) ->
-#   # console.log(response.token)
-# )
-
-# chrome.runtime.sendMessage({tokenNeeded: true}, (response) ->
-#   console.log response.token
-# )
-
