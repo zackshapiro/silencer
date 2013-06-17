@@ -36,6 +36,12 @@ $ ->
       )
       $(selector).text("Mute")
 
+  $('.pack-expander').click (e) ->
+    e.preventDefault()
+    if $('.filter-packs').is(":visible")
+      $('.filter-packs').slideUp()
+    else
+      $('.filter-packs').slideDown()
 
   # Handles both forms of form submit. Enter or button click.
   $('.my-form').submit ->

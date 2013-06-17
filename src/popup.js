@@ -81,6 +81,14 @@
         return $(selector).text("Mute");
       }
     };
+    $('.pack-expander').click(function(e) {
+      e.preventDefault();
+      if ($('.filter-packs').is(":visible")) {
+        return $('.filter-packs').slideUp();
+      } else {
+        return $('.filter-packs').slideDown();
+      }
+    });
     $('.my-form').submit(function() {
       if (newTerm() !== "") {
         mixpanel.track('Term Added (enter pressed)', {
