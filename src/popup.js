@@ -12,9 +12,6 @@
       _results = [];
       for (_i = 0, _len = terms.length; _i < _len; _i++) {
         term = terms[_i];
-        if (term === "nbafinalsfilter") {
-          $(".add-nba").text("Unmute");
-        }
         if (term === "gameofthronesfilter") {
           $(".add-got").text("Unmute");
         }
@@ -179,9 +176,6 @@
     });
     $('.add-ad').click(function(e) {
       return handleCategory(e, '.add-ad', "Arrested Development Filter", "ad");
-    });
-    $('.add-nba').click(function(e) {
-      return handleCategory(e, '.add-nba', "NBA Finals Filter", "nba");
     });
     $('.add-pll').click(function(e) {
       return handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll");

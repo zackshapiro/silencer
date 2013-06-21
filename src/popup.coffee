@@ -4,7 +4,6 @@ $ ->
 
   setMuteValue = (terms) ->
     for term in terms
-      $(".add-nba").text("Unmute") if term == "nbafinalsfilter"
       $(".add-got").text("Unmute") if term == "gameofthronesfilter"
       $(".add-mm").text("Unmute") if term == "madmenfilter"
       $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
@@ -114,9 +113,6 @@ $ ->
 
   $('.add-ad').click (e) ->
     handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
-
-  $('.add-nba').click (e) ->
-    handleCategory(e, '.add-nba', "NBA Finals Filter", "nba")
 
   $('.add-pll').click (e) ->
     handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
