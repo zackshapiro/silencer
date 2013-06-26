@@ -24,6 +24,9 @@
         if (term === "prettylittleliarsfilter") {
           $(".add-pll").text("Unmute");
         }
+        if (term === "truebloodfilter") {
+          $(".add-tb").text("Unmute");
+        }
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
@@ -179,6 +182,9 @@
     });
     $('.add-pll').click(function(e) {
       return handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll");
+    });
+    $('.add-tb').click(function(e) {
+      return handleCategory(e, '.add-tb', "True Blood Filter", "tb");
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");

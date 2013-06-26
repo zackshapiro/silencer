@@ -10,6 +10,8 @@ $ ->
   
   prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'a'", "prettylittleliarsfilter"]
 
+  trueBloodFilter = [ "true blood", "#trueblood", "@truebloodhbo", "trueblood", "sookie", "sookie stackhouse", "bill compton", "northman", "tara thornton", "merlotte", "stackhouse", "lafayette", "arlene", "arlene fowler", "bellefleur", "hoyt", "lettie mae", "lettie mae thornton", "rene", "bud", "bud dearborne", "dawn", "amy", "amy burley", "adele", "eddie", "bellefleur", "jessica hamby", "reverend newlin", "reverend steve", "de beaufort", "pam swynford", "russell", "alcide", "holly", "luna", "nora", "niall", "nial", "nile", "truman", "rikki", "ricky", "herveaux", "ben flynn", "nicole wright", "truebloodfilter" ]
+
   reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
   ##############################################
@@ -70,6 +72,10 @@ $ ->
     addPllFilter() if action == "pll-add"
     removePllFilter() if action == "pll-remove"
 
+    addTbFilter() if action == "tb-add"
+    removeTbFilter() if action == "tb-remove"
+
+
     addTerm("instagram.com") if action == "instagram-add"
     removeTerm("instagram.com") if action == "instagram-remove"
 
@@ -109,6 +115,9 @@ $ ->
 
   addPllFilter = -> addTerm(item) for item in prettyLittleLiarsFilter
   removePllFilter = -> removeTerm(item) for item in prettyLittleLiarsFilter
+
+  addTbFilter = -> addTerm(item) for item in trueBloodFilter
+  removeTbFilter = -> removeTerm(item) for item in trueBloodFilter
 
 
   addTerm = (newTerm) ->

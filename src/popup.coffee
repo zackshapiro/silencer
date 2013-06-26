@@ -8,6 +8,7 @@ $ ->
       $(".add-mm").text("Unmute") if term == "madmenfilter"
       $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
       $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
+      $(".add-tb").text("Unmute") if term == "truebloodfilter"
       $(".add-ig").text("Unmute") if term == "instagram.com"
       $(".add-vine").text("Unmute") if term == "vine.co"
       $(".add-4sq").text("Unmute") if term == "4sq.com"
@@ -116,6 +117,10 @@ $ ->
 
   $('.add-pll').click (e) ->
     handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
+
+  $('.add-tb').click (e) ->
+    handleCategory(e, '.add-tb', "True Blood Filter", "tb")
+
 
   $('.add-ig').click (e) ->
     handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
