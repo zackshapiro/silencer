@@ -5,13 +5,7 @@ body {
   color: #222;
 }
 
-img {
-  margin: 5px;
-  border: 2px solid #222;
-  vertical-align: middle;
-  width: 75px;
-  height: 75px;
-}
+.email-img { margin: 5px; vertical-align: middle; }
 
 input {
   height: 30px;
@@ -135,3 +129,6 @@ ul.services { list-style: none; }
 
 .cta { float: right; font-size: 13px; margin-right: 4px; }
 
+.twitter-login-button {
+  margin: 0 0 16px 72px;
+}
