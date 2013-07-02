@@ -4,6 +4,15 @@
   $(function() {
     var handleCategory, newTerm, setMuteValue,
       _this = this;
+    $(".twitter-login-button").click(function(e) {
+      e.preventDefault();
+      return chrome.tabs.query({
+        "active": true,
+        "currentWindow": true
+      }, function(tab) {
+        return chrome.tabs.sendMessage(tab[0].id, "auth");
+      });
+    });
     newTerm = function() {
       return $('.term-to-submit').val();
     };

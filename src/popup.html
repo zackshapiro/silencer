@@ -5,6 +5,10 @@
 
     <script src="/lib/mixpanel.js"></script>
     <script src="/lib/jquery-1.9.1.min.js"></script>
+
+    <script src='/lib/firebase-auth-client.js'></script>
+    <script src="/lib/firebase.js"></script>
+
     <script src="popup.js"></script>
   </head>
 
@@ -12,12 +16,9 @@
     <p class="welcome">Silencer</p>
     <p class="tag-line">turn down the internet</p>
 
-    <a href="#"><img src="/icons/twitter-login-button.png" class="twitter-login-button"></a>
-
     <div class="add-term">
       <form class="my-form">
-        <input class="term-to-submit" type="text" placeholder="Enter a term">
-        </input>
+        <input class="term-to-submit" type="text" placeholder="Enter a term"></input>
         <a href="#" class="primary button mute submit">Mute</a>
         <p class="examples">(ex. Yankees, 4sq.com, country music, #sxsw)</p>
       </form>
@@ -85,14 +86,12 @@
     </ul>
 
     <div class="term-holder">
-      <p class="youre-muting">
-        You're muting:
-      </p>
+      <p class="youre-muting">You're muting:</p>
 
       <ul class="terms"></ul>
     </div>
 
-    <a href="mailto:zack@zackshapiro.com?subject=Support/Feedback for Silencer" class="feedback-link" target="_blank"><img src="/icons/email_me.png" class="email-img">contact us</a>
+    <a href="#"><img src="/icons/twitter-login-button.png" class="twitter-login-button"></a>
 
   </body>
 </html>
