@@ -360,10 +360,6 @@
     return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
       if (message === "showTerms") {
         sendResponse(getTerms());
-      } else if (message === "auth") {
-        chrome.runtime.sendMessage({
-          auth: true
-        });
       } else {
         if (message.substring(0, 3) === "add") {
           message = message.slice(3);

@@ -167,7 +167,6 @@ $ ->
             chrome.runtime.sendMessage({term: "#{term}", site: "twitter"})
 
 
-
   ################## Filters ############################
 
   filterTwitter = ->
@@ -187,7 +186,6 @@ $ ->
             hideChild($(child))
             chrome.runtime.sendMessage({term: "#{term}", site: "facebook"})
 
-
   #######################################################
 
 
@@ -197,11 +195,10 @@ $ ->
   detectSite()
 
   chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
+
     if message == "showTerms"
       # gets the freshest terms
       sendResponse(getTerms())
-    else if message == "auth"
-      chrome.runtime.sendMessage({auth: true})
     else
       if message.substring(0,3) == "add"
         message = message.slice(3)

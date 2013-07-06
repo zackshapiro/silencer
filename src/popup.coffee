@@ -2,10 +2,7 @@ $ ->
 
   $(".twitter-login-button").click (e) ->
     e.preventDefault()
-    chrome.tabs.query("active": true, "currentWindow": true, 
-      (tab) ->
-        chrome.tabs.sendMessage(tab[0].id, "auth")
-    )
+    chrome.runtime.sendMessage({auth: true})
 
   newTerm = -> $('.term-to-submit').val()
 
