@@ -3,13 +3,13 @@
 
   "name": "Silencer",
   "description": "Silencer is the easiest way to mute spoilers, people, hashtags, terms and phrases on Twitter and Facebook.",
-  "version": "0.71.2",
+  "version": "0.71.3",
   "background": {
-    "scripts": ["/lib/firebase.js", "/lib/firebase-auth-client.js", "/src/background.js", "/lib/mixpanel.js"]
+    "scripts": ["/lib/firebase.js", "/src/background.js", "/lib/mixpanel.js"]
   },
   "content_scripts": [
     {
-      "matches": ["https://twitter.com/*", "https://www.facebook.com/*"],
+      "matches": ["https://twitter.com/*", "https://www.facebook.com/*", "http://silencer.io/*", "http://localhost:3000/*"],
       "js": ["/lib/jquery-1.9.1.min.js", "/src/silencer.js"],
       "all_frames": true
     }
@@ -18,6 +18,6 @@
     "default_icon": "/icons/icon-mini.png",
     "default_popup": "/src/popup.html"
   },
-  "permissions": ["https://*.twitter.com/*", "https://www.facebook.com/*"],
+  "permissions": ["https://*.twitter.com/*", "https://www.facebook.com/*", "http://*.silencer.io/*", "http://localhost:3000/*"],
   "content_security_policy": "script-src 'self' https://silencerio.firebaseio.com https://s-dal5-nss-4.firebaseio.com https://cdn.mxpnl.com; object-src 'self'"
 }

@@ -40,6 +40,13 @@ $ ->
       filterTwitter()
       setInterval(filterTwitter, 4000)
 
+    if document.URL.indexOf("http://localhost:3000/auth") > -1
+      if localStorage['silencerAuth']
+        user = JSON.parse(localStorage['silencerAuth'])
+        chrome.runtime.sendMessage({beach: "yes please"})
+        # need time delay to capture when the user comes here
+        # for the first time and
+
   storeTerms = (terms) ->
     # stores terms in LS
     localStorage.setItem("silencer", JSON.stringify(terms))

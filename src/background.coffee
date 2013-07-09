@@ -1,13 +1,4 @@
-base = new Firebase('https://silencerio.firebaseIO.com/')
-
-authClient = new FirebaseAuthClient(base, (error, user) ->
-  if error
-    alert(error)
-  else if user
-    alert('User ID: ' + user.id + ', Provider: ' + user.provider)
-  else
-    # user is logged out
-)
+# base = new Firebase('https://silencerio.firebaseIO.com/')
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.term
@@ -15,5 +6,10 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     sendResponse({note: "term tracked"})
 
   if message.auth
-    authClient.login('twitter', { rememberMe: true })
+    chrome.tabs.create({ url: "http://silencer.io/auth" })
+
+  if message.beach
+    console.log message.beach
+    # console.log(userDetails)
+    # localStorage.setItem('silencer', userDetails)
 )
