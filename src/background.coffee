@@ -1,15 +1,13 @@
-# base = new Firebase('https://silencerio.firebaseIO.com/')
+base = new Firebase('https://silencerio.firebaseIO.com/')
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.term
     mixpanel.track("Content Removed From View", { id: "#{message.term}", site: "#{message.site}" })
     sendResponse({note: "term tracked"})
 
-  if message.auth
+  if message.auth 
     chrome.tabs.create({ url: "http://silencer.io/auth" })
 
-  if message.beach
-    console.log message.beach
-    # console.log(userDetails)
-    # localStorage.setItem('silencer', userDetails)
+  if message.userInfo
+    localStorage.setItem('silencer', "#{message.user}")
 )

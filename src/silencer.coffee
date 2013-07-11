@@ -42,8 +42,8 @@ $ ->
 
     if document.URL.indexOf("http://localhost:3000/auth") > -1
       if localStorage['silencerAuth']
-        user = JSON.parse(localStorage['silencerAuth'])
-        chrome.runtime.sendMessage({beach: "yes please"})
+        chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+
         # need time delay to capture when the user comes here
         # for the first time and
 

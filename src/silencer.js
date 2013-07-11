@@ -28,7 +28,6 @@
       return body.appendChild(script);
     };
     detectSite = function() {
-      var user;
       if (document.URL.indexOf('facebook') > -1) {
         injectJquery();
         filterFacebook();
@@ -40,9 +39,9 @@
       }
       if (document.URL.indexOf("http://localhost:3000/auth") > -1) {
         if (localStorage['silencerAuth']) {
-          user = JSON.parse(localStorage['silencerAuth']);
           return chrome.runtime.sendMessage({
-            beach: "yes please"
+            userInfo: true,
+            user: localStorage['silencerAuth']
           });
         }
       }
