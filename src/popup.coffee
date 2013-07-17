@@ -1,5 +1,10 @@
 $ ->
 
+  # Init here
+
+  # focuses on the input box after user presses enter
+  $('.term-to-submit').focus()
+
   $(".twitter-login-button").click (e) ->
     e.preventDefault()
     chrome.runtime.sendMessage({auth: true})
@@ -60,6 +65,8 @@ $ ->
       )
 
   $('.mute.submit').click ->
+    $('.term-to-submit').focus()
+
     unless newTerm() == ""
       mixpanel.track('Term Added (button)', {"id": newTerm()})
 

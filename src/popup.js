@@ -4,6 +4,7 @@
   $(function() {
     var handleCategory, newTerm, setMuteValue,
       _this = this;
+    $('.term-to-submit').focus();
     $(".twitter-login-button").click(function(e) {
       e.preventDefault();
       return chrome.runtime.sendMessage({
@@ -111,6 +112,7 @@
       }
     });
     $('.mute.submit').click(function() {
+      $('.term-to-submit').focus();
       if (newTerm() !== "") {
         mixpanel.track('Term Added (button)', {
           "id": newTerm()
