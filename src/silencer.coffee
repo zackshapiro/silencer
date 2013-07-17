@@ -26,7 +26,7 @@ $ ->
   injectJquery = ->
     script = document.createElement("script")
     script.type = "text/javascript"
-    script.src = "/lib/jquery-1.9.1.min.js";
+    script.src = "/lib/jquery-1.9.1.min.js"
     body = document.getElementsByTagName("body")[0]
     body.appendChild(script)
 
@@ -178,7 +178,7 @@ $ ->
 
   filterTwitter = ->
     # If you're on the main Twitter timeline or doing a search
-    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1
+    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream')
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->
