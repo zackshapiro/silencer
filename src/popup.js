@@ -34,6 +34,9 @@
         if (term === "truebloodfilter") {
           $(".add-tb").text("Unmute");
         }
+        if (term === "royalbabyfilter") {
+          $(".add-rb").text("Unmute");
+        }
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
@@ -193,6 +196,9 @@
     });
     $('.add-tb').click(function(e) {
       return handleCategory(e, '.add-tb', "True Blood Filter", "tb");
+    });
+    $('.add-rb').click(function(e) {
+      return handleCategory(e, '.add-rb', "Royal Baby Filter", "rb");
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");

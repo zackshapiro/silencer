@@ -2,12 +2,13 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addTbFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, prettyLittleLiarsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeTbFilter, removeTerm, reservedWords, storeTerms, thronesFilter, toggleMutePack, trueBloodFilter;
+    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addRoyalBabyFilter, addTbFilter, addTerm, arrestedDevelopmentFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, madMenFilter, makeTermArray, prettyLittleLiarsFilter, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeRoyalBabyFilter, removeTbFilter, removeTerm, reservedWords, royalBabyFilter, storeTerms, thronesFilter, toggleMutePack, trueBloodFilter;
     thronesFilter = ["game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "red wedding", "redwedding", "gameofthronesfilter"];
     madMenFilter = ["#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter"];
     arrestedDevelopmentFilter = ["#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter"];
     prettyLittleLiarsFilter = ["@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'a'", "prettylittleliarsfilter"];
     trueBloodFilter = ["true blood", "#trueblood", "@truebloodhbo", "trueblood", "sookie", "sookie stackhouse", "bill compton", "northman", "tara thornton", "merlotte", "stackhouse", "lafayette", "arlene", "arlene fowler", "bellefleur", "hoyt", "lettie mae", "lettie mae thornton", "rene", "bud", "bud dearborne", "dawn", "amy", "amy burley", "adele", "eddie", "bellefleur", "jessica hamby", "reverend newlin", "reverend steve", "de beaufort", "pam swynford", "russell", "alcide", "holly", "luna", "nora", "niall", "nial", "nile", "truman", "rikki", "ricky", "herveaux", "ben flynn", "nicole wright", "truebloodfilter"];
+    royalBabyFilter = ["catherine", "the queen", "queen elizabeth", "duchess of cambridge", "#royalbaby", "william", "duke of cambridge", "middleton", "carole", "buckingham palace", "highness", "throne", "duke", "duchess", "#royalbabynames", "labor", "royalbabyfilter"];
     reservedWords = ["reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"];
     Array.prototype.remove = function() {
       var ax, what;
@@ -35,15 +36,7 @@
       }
       if (document.URL.indexOf('twitter') > -1) {
         filterTwitter();
-        setInterval(filterTwitter, 4000);
-      }
-      if (document.URL.indexOf("http://localhost:3000/auth") > -1) {
-        if (localStorage['silencerAuth']) {
-          return chrome.runtime.sendMessage({
-            userInfo: true,
-            user: localStorage['silencerAuth']
-          });
-        }
+        return setInterval(filterTwitter, 4000);
       }
     };
     storeTerms = function(terms) {
@@ -96,6 +89,12 @@
       }
       if (action === "tb-remove") {
         removeTbFilter();
+      }
+      if (action === "rb-add") {
+        addRoyalBabyFilter();
+      }
+      if (action === "rb-remove") {
+        removeRoyalBabyFilter();
       }
       if (action === "instagram-add") {
         addTerm("instagram.com");
@@ -242,6 +241,24 @@
       }
       return _results;
     };
+    addRoyalBabyFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = royalBabyFilter.length; _i < _len; _i++) {
+        item = royalBabyFilter[_i];
+        _results.push(addTerm(item));
+      }
+      return _results;
+    };
+    removeRoyalBabyFilter = function() {
+      var item, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = royalBabyFilter.length; _i < _len; _i++) {
+        item = royalBabyFilter[_i];
+        _results.push(removeTerm(item));
+      }
+      return _results;
+    };
     addTerm = function(newTerm) {
       var term, termArray, _i, _j, _len, _len1;
       termArray = makeTermArray();
@@ -328,7 +345,7 @@
       return _results;
     };
     filterTwitter = function() {
-      if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream')) {
+      if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1) {
         return genericFilter($('.stream-items'));
       }
     };

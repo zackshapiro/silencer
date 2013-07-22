@@ -12,6 +12,8 @@ $ ->
 
   trueBloodFilter = [ "true blood", "#trueblood", "@truebloodhbo", "trueblood", "sookie", "sookie stackhouse", "bill compton", "northman", "tara thornton", "merlotte", "stackhouse", "lafayette", "arlene", "arlene fowler", "bellefleur", "hoyt", "lettie mae", "lettie mae thornton", "rene", "bud", "bud dearborne", "dawn", "amy", "amy burley", "adele", "eddie", "bellefleur", "jessica hamby", "reverend newlin", "reverend steve", "de beaufort", "pam swynford", "russell", "alcide", "holly", "luna", "nora", "niall", "nial", "nile", "truman", "rikki", "ricky", "herveaux", "ben flynn", "nicole wright", "truebloodfilter" ]
 
+  royalBabyFilter = [ "catherine", "the queen", "queen elizabeth", "duchess of cambridge", "#royalbaby", "william", "duke of cambridge", "middleton", "carole", "buckingham palace", "highness", "throne", "duke", "duchess", "#royalbabynames", "labor", "royalbabyfilter"]
+
   reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
   ##############################################
@@ -40,9 +42,9 @@ $ ->
       filterTwitter()
       setInterval(filterTwitter, 4000)
 
-    if document.URL.indexOf("http://localhost:3000/auth") > -1
-      if localStorage['silencerAuth']
-        chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+    # if document.URL.indexOf("http://localhost:3000/auth") > -1
+    #   if localStorage['silencerAuth']
+    #     chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
 
         # need time delay to capture when the user comes here
         # for the first time and
@@ -81,6 +83,9 @@ $ ->
 
     addTbFilter() if action == "tb-add"
     removeTbFilter() if action == "tb-remove"
+
+    addRoyalBabyFilter() if action == "rb-add"
+    removeRoyalBabyFilter() if action == "rb-remove"
 
 
     addTerm("instagram.com") if action == "instagram-add"
@@ -125,6 +130,9 @@ $ ->
 
   addTbFilter = -> addTerm(item) for item in trueBloodFilter
   removeTbFilter = -> removeTerm(item) for item in trueBloodFilter
+
+  addRoyalBabyFilter = -> addTerm(item) for item in royalBabyFilter
+  removeRoyalBabyFilter = -> removeTerm(item) for item in royalBabyFilter
 
 
   addTerm = (newTerm) ->
@@ -178,7 +186,7 @@ $ ->
 
   filterTwitter = ->
     # If you're on the main Twitter timeline or doing a search
-    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream')
+    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->

@@ -18,6 +18,8 @@ $ ->
       $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
       $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
       $(".add-tb").text("Unmute") if term == "truebloodfilter"
+      $(".add-rb").text("Unmute") if term == "royalbabyfilter"
+
       $(".add-ig").text("Unmute") if term == "instagram.com"
       $(".add-vine").text("Unmute") if term == "vine.co"
       $(".add-4sq").text("Unmute") if term == "4sq.com"
@@ -131,6 +133,9 @@ $ ->
 
   $('.add-tb').click (e) ->
     handleCategory(e, '.add-tb', "True Blood Filter", "tb")
+
+  $('.add-rb').click (e) ->
+    handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
 
 
   $('.add-ig').click (e) ->

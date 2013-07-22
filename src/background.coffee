@@ -1,4 +1,4 @@
-base = new Firebase('https://silencerio.firebaseIO.com/')
+# base = new Firebase('https://silencerio.firebaseIO.com/')
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.term
