@@ -186,7 +186,7 @@ $ ->
 
   filterTwitter = ->
     # If you're on the main Twitter timeline or doing a search
-    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1
+    if $(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream').length
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->

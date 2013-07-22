@@ -345,7 +345,7 @@
       return _results;
     };
     filterTwitter = function() {
-      if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1) {
+      if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream').length) {
         return genericFilter($('.stream-items'));
       }
     };
