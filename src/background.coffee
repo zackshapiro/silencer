@@ -12,4 +12,4 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     localStorage.setItem('silencer', "#{message.user}")
 )
 
-base.push(JSON.parse(localStorage['silencer']))
+# base.push(JSON.parse(localStorage['silencer']))

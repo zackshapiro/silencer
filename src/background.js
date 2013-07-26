@@ -24,6 +24,4 @@
     }
   });
 
-  base.push(JSON.parse(localStorage['silencer']));
-
 }).call(this);
