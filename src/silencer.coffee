@@ -32,6 +32,10 @@ $ ->
     body = document.getElementsByTagName("body")[0]
     body.appendChild(script)
 
+  sendUserInfo = ->
+    if localStorage['silencerAuth']
+      chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+
   detectSite = ->
     if document.URL.indexOf('facebook') > -1
       injectJquery()
@@ -42,15 +46,10 @@ $ ->
       filterTwitter()
       setInterval(filterTwitter, 4000)
 
-    # if document.URL.indexOf("http://localhost:3000/auth") > -1
-    #   if localStorage['silencerAuth']
-    #     chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
-
-        # need time delay to capture when the user comes here
-        # for the first time and
+    if document.URL.indexOf("localhost:3000/auth") > -1
+      setInterval(sendUserInfo, 1500)
 
   storeTerms = (terms) ->
-    # stores terms in LS
     localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
