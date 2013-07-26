@@ -1,4 +1,4 @@
-# base = new Firebase('https://silencerio.firebaseIO.com/')
+base = new Firebase('https://silencerio.firebaseIO.com/')
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.term
@@ -11,3 +11,5 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.userInfo
     localStorage.setItem('silencer', "#{message.user}")
 )
+
+base.push(JSON.parse(localStorage['silencer']))
