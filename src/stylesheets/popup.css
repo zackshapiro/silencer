@@ -127,6 +127,8 @@ ul.services { list-style: none; }
 
 .cta { float: right; font-size: 13px; margin-right: 4px; }
 
-.twitter-login-button {
-  margin: 0 0 16px 72px;
+.log-in {
+  float: right;
+  margin: -112px -4px 0 0;
+  font-size: 13px;
 }

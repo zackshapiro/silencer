@@ -5,7 +5,7 @@
     var handleCategory, newTerm, setMuteValue,
       _this = this;
     $('.term-to-submit').focus();
-    $(".twitter-login-button").click(function(e) {
+    $(".log-in").click(function(e) {
       e.preventDefault();
       return chrome.runtime.sendMessage({
         auth: true

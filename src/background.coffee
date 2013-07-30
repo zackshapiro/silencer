@@ -1,4 +1,10 @@
-base = new Firebase('https://silencerio.firebaseIO.com/')
+base = new Firebase('https://silencerio.firebaseIO.com/users')
+
+currentUser = ->
+  if localStorage['silencer']
+    return JSON.parse(localStorage['silencer'])
+  else
+    return false
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.term
@@ -12,4 +18,8 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     localStorage.setItem('silencer', "#{message.user}")
 )
 
-# base.push(JSON.parse(localStorage['silencer']))
+if currentUser()
+  id = parseInt(currentUser().id)
+
+  userBase = base.child("/#{id}")
+  userBase.set(currentUser())

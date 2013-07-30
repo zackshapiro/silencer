@@ -5,7 +5,7 @@ $ ->
   # focuses on the input box after user presses enter
   $('.term-to-submit').focus()
 
-  $(".twitter-login-button").click (e) ->
+  $(".log-in").click (e) ->
     e.preventDefault()
     chrome.runtime.sendMessage({auth: true})
 
