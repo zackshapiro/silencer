@@ -2,28 +2,21 @@ $ ->
 
   ################## Filter Packs  ############################  
   # no capital letters
-  thronesFilter = [ "game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "red wedding", "redwedding", "gameofthronesfilter"]
+  # thronesFilter = [ "game of thrones", "of thrones", "#got", "little finger", "song of fire and ice", "sofai", "sofi", "lannister", "stark", "baratheon", "shae", "bronn", "cersei", "tyrion", "kingslayer", "king slayer", "margaery", "robb stark", "king of the north", "stannis", "daenerys", "khaleesi", "theon", "greyjoy", "grey joy", "gray joy", "grayjoy", "tyrell", "sansa", "arya", "jon snow", "brienne", "bran", "ygritte", "renly", "joffrey", "melisandre", "lord of light", "@gameofthrones", "#asoiaf", "dragon", "gotfans", "gameofthrones", "westeros", "joffrey", "red wedding", "redwedding", "gameofthronesfilter"]
   
-  madMenFilter = [ "#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter" ]
+  # madMenFilter = [ "#madmen", "don draper", "betty draper", "january jones", "jon hamm", "john hamm", "roger sterling", "joan", "joan harris", "peggy olsen", "peggy", "pete cambpell", "ken cosgrove", "harry crane", "henry francis", "betty francis", "megan draper", "jessica par", "sally draper", "dick whitman", "#madmenspoilers", "bobby draper", "michael ginsberg", "jane sterling", "john slattery", "bert cooper", "bertram cooper", "robert morse", "trudy cambpell", "megan", "don", "sterling", "campbell", "sterling cooper", "sterling cooper draper price", "scdp", "madmenfilter" ]
 
-  arrestedDevelopmentFilter = [ "#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter" ]
+  # arrestedDevelopmentFilter = [ "#arresteddevelopment", "bluth", "banana stand", "lucille", "gob", "george michael", "maebe", "maybe funke", "george sr", "george senior", "oscar bluth", "oscar", "buster", "baby buster", "boy fights", "tobias", "funke", "fünke", "bluth company", "mister f", "mrf", "ad2013", "mitch hurwitz", "mitch", "@mitchhurwitz", "stair car", "lucille two", "lucille 2", "lucille austero", "@arresteddev", "arrested development season 4", "magic", "illusion", "anustart", "a new start", "fake block", "fakeblock", "george maharis", "george maharris", "arresteddevelopmentfilter" ]
   
-  prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'a'", "prettylittleliarsfilter"]
+  # prettyLittleLiarsFilter = [ "@abcfpll", "pll", "pretty little liars", "#prettylittleliars", "alison", "#pllfamily", "spencer hastings", "spencer", "hanna marin", "hanna", "hannah", "emily fields", "aria", "aria montgomery", "mona", "vanderwaal", "vanderwall", "sara shepard", "marline king", "rosewood", "'a'", "prettylittleliarsfilter"]
 
-  trueBloodFilter = [ "true blood", "#trueblood", "@truebloodhbo", "trueblood", "sookie", "sookie stackhouse", "bill compton", "northman", "tara thornton", "merlotte", "stackhouse", "lafayette", "arlene", "arlene fowler", "bellefleur", "hoyt", "lettie mae", "lettie mae thornton", "rene", "bud", "bud dearborne", "dawn", "amy", "amy burley", "adele", "eddie", "bellefleur", "jessica hamby", "reverend newlin", "reverend steve", "de beaufort", "pam swynford", "russell", "alcide", "holly", "luna", "nora", "niall", "nial", "nile", "truman", "rikki", "ricky", "herveaux", "ben flynn", "nicole wright", "truebloodfilter" ]
+  # trueBloodFilter = [ "true blood", "#trueblood", "@truebloodhbo", "trueblood", "sookie", "sookie stackhouse", "bill compton", "northman", "tara thornton", "merlotte", "stackhouse", "lafayette", "arlene", "arlene fowler", "bellefleur", "hoyt", "lettie mae", "lettie mae thornton", "rene", "bud", "bud dearborne", "dawn", "amy", "amy burley", "adele", "eddie", "bellefleur", "jessica hamby", "reverend newlin", "reverend steve", "de beaufort", "pam swynford", "russell", "alcide", "holly", "luna", "nora", "niall", "nial", "nile", "truman", "rikki", "ricky", "herveaux", "ben flynn", "nicole wright", "truebloodfilter" ]
 
-  royalBabyFilter = [ "catherine", "the queen", "queen elizabeth", "duchess of cambridge", "#royalbaby", "william", "duke of cambridge", "middleton", "carole", "buckingham palace", "highness", "throne", "duke", "duchess", "#royalbabynames", "labor", "royalbabyfilter"]
+  # royalBabyFilter = [ "catherine", "the queen", "queen elizabeth", "duchess of cambridge", "#royalbaby", "william", "duke of cambridge", "middleton", "carole", "buckingham palace", "highness", "throne", "duke", "duchess", "#royalbabynames", "labor", "royalbabyfilter"]
 
-  reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
+  # reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
   ##############################################
-
-  Array.prototype.remove = ->
-    while (arguments.length && this.length)
-      what = arguments[--arguments.length]
-      while ((ax = @.indexOf(what)) != -1 )
-        this.splice(ax, 1)
-    return this
 
   injectJquery = ->
     script = document.createElement("script")
@@ -49,18 +42,13 @@ $ ->
     if document.URL.indexOf("localhost:3000/auth") > -1
       setInterval(sendUserInfo, 1500)
 
-    # if document.URL.indexOf("silencer.io/auth") > -1
-      # setInterval(sendUserInfo, 1500)
+    if document.URL.indexOf("silencer.io/auth") > -1
+      setInterval(sendUserInfo, 1500)
 
   storeTerms = (terms) ->
     localStorage.setItem("silencer", JSON.stringify(terms))
 
   getTerms = ->
-    # adds a term if localStorage is empty 
-    unless localStorage["silencer"]
-      first = { "term": "sample muted term" }
-      localStorage.setItem('silencer', JSON.stringify(first))
-    
     myList = localStorage.getItem("silencer") 
 
     myNewList = JSON.parse(myList)
@@ -137,30 +125,31 @@ $ ->
   removeRoyalBabyFilter = -> removeTerm(item) for item in royalBabyFilter
 
 
-  addTerm = (newTerm) ->
-    termArray = makeTermArray()
+  # addTerm = (newTerm) ->
+  #   termArray = makeTermArray()
 
-    for term in termArray
-      return if newTerm.toLowerCase() == term.term # because format is {term: "#sxsw"}
+  #   for term in termArray
+  #     return if newTerm.toLowerCase() == term.term # because format is {term: "#sxsw"}
 
-    for term in reservedWords
-      return if newTerm.toLowerCase() == term
+  #   for term in reservedWords
+  #     return if newTerm.toLowerCase() == term
 
-    # adds an item to the array above
-    termArray.push({ "term": newTerm })
-    storeTerms(termArray)
+  #   # adds an item to the array above
+  #   termArray.push({ "term": newTerm })
+  #   storeTerms(termArray)
 
-  removeTerm = (termToBeRemoved) ->
-    terms = getTerms()
+  # removeTerm = (termToBeRemoved) ->
+  #   terms = getTerms()
 
-    for term in terms
-      terms.remove(term) if term == termToBeRemoved
+  #   for term in terms
+  #     terms.remove(term) if term == termToBeRemoved
 
-    # creates a new term array and stores it
-    newTermList = []
-    for term in terms
-      newTermList.push({ "term": term})
-    storeTerms(newTermList)
+  #   # creates a new term array and stores it
+  #   newTermList = []
+  #   for term in terms
+  #     newTermList.push({ "term": term})
+  #   storeTerms(newTermList)
+
 
   makeTermArray = ->
     termArray = []
