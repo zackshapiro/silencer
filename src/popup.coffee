@@ -9,6 +9,10 @@ $ ->
     e.preventDefault()
     chrome.runtime.sendMessage({auth: true})
 
+  chrome.runtime.sendMessage({checkingForUser: true}, (response) ->
+    $(".log-in").hide() unless response == false
+  )
+
   newTerm = -> $('.term-to-submit').val()
 
   setMuteValue = (terms) ->

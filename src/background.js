@@ -28,7 +28,10 @@
       });
     }
     if (message.userInfo) {
-      return localStorage.setItem('silencer', "" + message.user);
+      localStorage.setItem('silencer', "" + message.user);
+    }
+    if (message.checkingForUser) {
+      return sendResponse(currentUser());
     }
   });
 

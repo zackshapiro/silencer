@@ -11,6 +11,13 @@
         auth: true
       });
     });
+    chrome.runtime.sendMessage({
+      checkingForUser: true
+    }, function(response) {
+      if (response !== false) {
+        return $(".log-in").hide();
+      }
+    });
     newTerm = function() {
       return $('.term-to-submit').val();
     };

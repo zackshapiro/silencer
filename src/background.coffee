@@ -16,6 +16,9 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
 
   if message.userInfo
     localStorage.setItem('silencer', "#{message.user}")
+
+  if message.checkingForUser
+    sendResponse(currentUser())
 )
 
 if currentUser()
