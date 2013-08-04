@@ -61,10 +61,9 @@ removeMute = (muteToBeRemoved) ->
   mutes = getMutes()
 
   for mute in mutes
-    if mute == muteToBeRemoved
-      mutes.remove(mute)
-      mixpanel.track("Term Removed", {id: term})
+    mutes.remove(mute) if mute == muteToBeRemoved
 
+  mixpanel.track("Term Removed", {id: muteToBeRemoved})
   user.mutes = mutes
   storeMutes(user)
 

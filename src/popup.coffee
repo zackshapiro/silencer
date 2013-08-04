@@ -102,7 +102,7 @@ $ ->
     e.preventDefault()
     term = $(e.currentTarget).parent().data("term")
     $(e.currentTarget).parent().slideUp()
-
+    
     chrome.runtime.sendMessage({removeMute: true, term: term})
   ))
 

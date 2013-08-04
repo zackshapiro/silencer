@@ -81,11 +81,11 @@
       mute = mutes[_i];
       if (mute === muteToBeRemoved) {
         mutes.remove(mute);
-        mixpanel.track("Term Removed", {
-          id: term
-        });
       }
     }
+    mixpanel.track("Term Removed", {
+      id: muteToBeRemoved
+    });
     user.mutes = mutes;
     return storeMutes(user);
   };
