@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addRoyalBabyFilter, addTbFilter, detectSite, filterFacebook, filterTwitter, genericFilter, hideChild, injectJquery, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeRoyalBabyFilter, removeTbFilter, sendUserInfo, storeTerms, toggleMutePack;
+    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addRoyalBabyFilter, addTbFilter, detectSite, filterFacebook, filterTwitter, genericFilter, hideChild, injectJquery, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeRoyalBabyFilter, removeTbFilter, sendUserInfo, toggleMutePack;
     injectJquery = function() {
       var body, script;
       script = document.createElement("script");
@@ -35,9 +35,6 @@
       if (document.URL.indexOf("silencer.io/auth") > -1) {
         return setInterval(sendUserInfo, 1500);
       }
-    };
-    storeTerms = function(terms) {
-      return localStorage.setItem("silencer", JSON.stringify(terms));
     };
     toggleMutePack = function(action) {
       if (action === "got-add") {
