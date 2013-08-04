@@ -44,7 +44,7 @@ $ ->
       )
       $(selector).text("Unmute")
     else
-      mixpanel.track("Instagram Mute Removed")
+      mixpanel.track("#{message} Removed")
       chrome.tabs.query("active": true, "currentWindow": true, 
         (tab) ->
           chrome.tabs.sendMessage(tab[0].id, "filter#{filterName}-remove")
@@ -58,66 +58,52 @@ $ ->
     else
       $('.filter-packs').slideDown()
 
-  # Handles both forms of form submit. Enter or button click.
+
+
+
+
+
+  # Add term (enter pressed)
   $('.my-form').submit ->
-    unless newTerm() == ""
-      mixpanel.track('Term Added (enter pressed)', {"id": newTerm()}) # TODO: This isn't working, get it working
+    newTerm = newTerm().toLowerCase()
 
-      chrome.tabs.query("active": true, "currentWindow": true,
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(),
-            (response) -> console.log response
-          )
-      )
+    unless newTerm == ""
+      chrome.runtime.sendMessage({addMute: true, term: newTerm})
+      $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm}", "text": "#{newTerm}"}))
 
+  # Add term (button clicked)
   $('.mute.submit').click ->
     $('.term-to-submit').focus()
+    newTerm = newTerm().toLowerCase()
 
-    unless newTerm() == ""
-      mixpanel.track('Term Added (button)', {"id": newTerm()})
+    unless newTerm == ""
+      chrome.runtime.sendMessage({addMute: true, term: newTerm})
+      $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm}", "text": "#{newTerm}"}))
 
-      chrome.tabs.query("active": true, "currentWindow": true,
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(),
-            (response) ->
-              console.log (JSON.stringify(response))
-              $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm()}", "text": "#{newTerm()}"} ))
-          )
-      )
 
+  # Show terms
   chrome.tabs.query("active": true, "currentWindow": true,
   (tab) -> 
-    chrome.tabs.sendMessage(tab[0].id, "showTerms", 
-      (response) ->
-        # console.log (JSON.stringify(response))
-        if response
-          terms = response
+    chrome.runtime.sendMessage({mutesRequest: true}, (response) ->
 
-          setMuteValue(terms)
+      for term in response.mutes
+        $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
 
-          for term in terms
-            $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
+      for child in $(".terms").children()
+        $(child).wrapInner("<a href='#' class='remove-term'></a>")
 
-          for child in $(".terms").children()
-            $(child).wrapInner("<a href='#' class='remove-term'></a>")
-
-          mixpanel.track('Silencer Opened')
+      mixpanel.track('Silencer Opened')
     )
   )
 
+
+  # Remove term
   $(".terms").on('click', 'li a', ( (e) => 
     e.preventDefault()
     term = $(e.currentTarget).parent().data("term")
-    mixpanel.track("Term Removed", {"id": term})
-    termToBeRemoved = "remove" + term
     $(e.currentTarget).parent().slideUp()
-    
-    chrome.tabs.query("active": true, "currentWindow": true, 
-      (tab) -> 
-        chrome.tabs.sendMessage(tab[0].id, termToBeRemoved,
-          (response) -> console.log response
-        )
-    )
+
+    chrome.runtime.sendMessage({removeMute: true, term: term})
   ))
 
 

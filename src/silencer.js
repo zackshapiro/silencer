@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addRoyalBabyFilter, addTbFilter, detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, makeTermArray, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeRoyalBabyFilter, removeTbFilter, sendUserInfo, storeTerms, toggleMutePack;
+    var addAdFilter, addGoTFilter, addMmFilter, addPllFilter, addRoyalBabyFilter, addTbFilter, detectSite, filterFacebook, filterTwitter, genericFilter, hideChild, injectJquery, removeAdFilter, removeGoTFilter, removeMmFilter, removePllFilter, removeRoyalBabyFilter, removeTbFilter, sendUserInfo, storeTerms, toggleMutePack;
     injectJquery = function() {
       var body, script;
       script = document.createElement("script");
@@ -38,17 +38,6 @@
     };
     storeTerms = function(terms) {
       return localStorage.setItem("silencer", JSON.stringify(terms));
-    };
-    getTerms = function() {
-      var item, myList, myNewList, terms, _i, _len;
-      myList = localStorage.getItem("silencer");
-      myNewList = JSON.parse(myList);
-      terms = [];
-      for (_i = 0, _len = myNewList.length; _i < _len; _i++) {
-        item = myNewList[_i];
-        terms.push(item['term'].toLowerCase());
-      }
-      return terms;
     };
     toggleMutePack = function(action) {
       if (action === "got-add") {
@@ -250,24 +239,12 @@
       }
       return _results;
     };
-    makeTermArray = function() {
-      var term, termArray, terms, _i, _len;
-      termArray = [];
-      terms = getTerms();
-      for (_i = 0, _len = terms.length; _i < _len; _i++) {
-        term = terms[_i];
-        termArray.push({
-          "term": "" + term
-        });
-      }
-      return termArray;
-    };
     hideChild = function(child) {
       return child.slideUp();
     };
     genericFilter = function(parentDiv) {
       var child, children, parent, term, terms, _i, _len, _results;
-      terms = getTerms();
+      terms = ["gaogahgahoga", "agoaghaohao"];
       parent = parentDiv;
       children = parentDiv.children();
       _results = [];
@@ -304,7 +281,7 @@
     };
     filterFacebook = function() {
       var child, children, stream, term, terms, _i, _len, _results;
-      terms = getTerms();
+      terms = ["gaogahgahoga", "agoaghaohao"];
       stream = $(".uiStream");
       children = $(stream).children(".genericStreamStory");
       _results = [];
@@ -334,26 +311,7 @@
       }
       return _results;
     };
-    detectSite();
-    return chrome.extension.onMessage.addListener(function(message, sender, sendResponse) {
-      if (message === "showTerms") {
-        sendResponse(getTerms());
-      } else {
-        if (message.substring(0, 3) === "add") {
-          message = message.slice(3);
-          addTerm(message);
-          sendResponse(makeTermArray());
-        } else if (message.substring(0, 6) === "remove") {
-          message = message.slice(6);
-          removeTerm(message);
-          sendResponse(makeTermArray());
-        }
-      }
-      if (message.substring(0, 6) === "filter") {
-        message = message.slice(6);
-        return toggleMutePack(message);
-      }
-    });
+    return detectSite();
   });
 
 }).call(this);

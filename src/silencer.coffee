@@ -48,15 +48,15 @@ $ ->
   storeTerms = (terms) ->
     localStorage.setItem("silencer", JSON.stringify(terms))
 
-  getTerms = ->
-    myList = localStorage.getItem("silencer") 
+  # getTerms = ->
+    # myList = localStorage.getItem("silencer") 
 
-    myNewList = JSON.parse(myList)
-    terms = []
+    # myNewList = JSON.parse(myList)
+    # terms = []
     # put all the terms in an array
-    terms.push(item['term'].toLowerCase()) for item in myNewList
+    # terms.push(item['term'].toLowerCase()) for item in myNewList
     # returns an array of terms
-    terms
+    # terms
 
   toggleMutePack = (action) ->
     addGoTFilter() if action == "got-add"
@@ -151,17 +151,18 @@ $ ->
   #   storeTerms(newTermList)
 
 
-  makeTermArray = ->
-    termArray = []
-    terms = getTerms()
-    for term in terms
-      termArray.push({ "term": "#{term}"})
-    termArray    
+  # makeTermArray = ->
+  #   termArray = []
+  #   terms = getTerms()
+  #   for term in terms
+  #     termArray.push({ "term": "#{term}"})
+  #   termArray    
 
   hideChild = (child) -> child.slideUp()
 
   genericFilter = (parentDiv) ->
-    terms = getTerms()
+    # terms = getTerms()
+    terms = ["gaogahgahoga", "agoaghaohao"] # REMEMBER TO REMOVE
     parent = parentDiv
     children = parentDiv.children()
 
@@ -181,7 +182,8 @@ $ ->
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->
-    terms = getTerms()
+    # terms = getTerms()
+    terms = ["gaogahgahoga", "agoaghaohao"]
     stream = $(".uiStream")
     children = $(stream).children(".genericStreamStory")
 
@@ -200,22 +202,21 @@ $ ->
   # detects what URL the user is on
   detectSite()
 
-  chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
+  # chrome.extension.onMessage.addListener (message, sender, sendResponse) ->
 
-    if message == "showTerms"
-      # gets the freshest terms
-      sendResponse(getTerms())
-    else
-      if message.substring(0,3) == "add"
-        message = message.slice(3)
-        addTerm(message)
-        sendResponse(makeTermArray())
+    # if message == "showTerms"
+      # something, remove this
+    # else
+      # if message.substring(0,3) == "add"
+      #   message = message.slice(3)
+      #   addTerm(message)
+      #   sendResponse(makeTermArray())
 
-      else if message.substring(0,6) == "remove"
-        message = message.slice(6)
-        removeTerm(message)
-        sendResponse(makeTermArray())
+      # if message.substring(0,6) == "remove"
+      #   message = message.slice(6)
+      #   removeTerm(message)
+      #   sendResponse(makeTermArray())
 
-    if message.substring(0,6) == "filter"
-      message = message.slice(6)
-      toggleMutePack(message)
+    # if message.substring(0,6) == "filter"
+    #   message = message.slice(6)
+    #   toggleMutePack(message)

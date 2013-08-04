@@ -26,12 +26,12 @@ currentUser = ->
 
 getMutes = -> currentUser().mutes
 
-storeMutes = ->
-  localStorage.setItem('silencer', JSON.stringify(currentUser()))
+storeMutes = (user) ->
+  localStorage.setItem('silencer', JSON.stringify(user))
 
-  id = parseInt(currentUser().id)
+  id = parseInt(user.id)
   userBase = base.child("/#{id}/mutes")
-  userBase.set(currentUser().mutes)
+  userBase.set(user.mutes)
 
 Array.prototype.remove = ->
   while (arguments.length && this.length)
@@ -41,27 +41,32 @@ Array.prototype.remove = ->
   return this
 
 addMute = (newMute) ->
-  mutes = getMutes() # array
-
-  for mute in mutes
-    return if newMute.toLowerCase() == mute
-
-  for word in reservedWords
-    return if newMute.toLowerCase() == word
-
-  mutes.push(newMute.toLowerCase())
-
-  currentUser().mutes = mutes
-  storeMutes()
-
-removeMute = (muteToBeRemoved) ->
+  user = currentUser()
   mutes = getMutes()
 
   for mute in mutes
-    mutes.remove(mute) if mute == muteToBeRemoved.toLowerCase()
+    return if newMute == mute
 
-  currentUser().mutes = mutes
-  storeMutes()
+  for word in reservedWords
+    return if newMute == word
+
+  mutes.push(newMute)
+  mixpanel.track('Term Added', {id: newMute})
+
+  user.mutes = mutes
+  storeMutes(user)
+
+removeMute = (muteToBeRemoved) ->
+  user = currentUser()
+  mutes = getMutes()
+
+  for mute in mutes
+    if mute == muteToBeRemoved
+      mutes.remove(mute)
+      mixpanel.track("Term Removed", {id: term})
+
+  user.mutes = mutes
+  storeMutes(user)
 
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
@@ -75,11 +80,17 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.userInfo
     localStorage.setItem('silencer', "#{message.user}")
 
-  if message.checkingForUser
+  if message.checkingForUser || message.mutesRequest
     sendResponse(currentUser())
+
+  if message.addMute
+    addMute(message.term)
+
+  if message.removeMute
+    removeMute(message.term)
 )
 
-if currentUser()
+if currentUser() # only fires once. do i need this?
   id = parseInt(currentUser().id)
 
   userBase = base.child("/#{id}")

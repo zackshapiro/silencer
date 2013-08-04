@@ -30,12 +30,12 @@
     return currentUser().mutes;
   };
 
-  storeMutes = function() {
+  storeMutes = function(user) {
     var id, userBase;
-    localStorage.setItem('silencer', JSON.stringify(currentUser()));
-    id = parseInt(currentUser().id);
+    localStorage.setItem('silencer', JSON.stringify(user));
+    id = parseInt(user.id);
     userBase = base.child("/" + id + "/mutes");
-    return userBase.set(currentUser().mutes);
+    return userBase.set(user.mutes);
   };
 
   Array.prototype.remove = function() {
@@ -50,36 +50,44 @@
   };
 
   addMute = function(newMute) {
-    var mute, mutes, word, _i, _j, _len, _len1;
+    var mute, mutes, user, word, _i, _j, _len, _len1;
+    user = currentUser();
     mutes = getMutes();
     for (_i = 0, _len = mutes.length; _i < _len; _i++) {
       mute = mutes[_i];
-      if (newMute.toLowerCase() === mute) {
+      if (newMute === mute) {
         return;
       }
     }
     for (_j = 0, _len1 = reservedWords.length; _j < _len1; _j++) {
       word = reservedWords[_j];
-      if (newMute.toLowerCase() === word) {
+      if (newMute === word) {
         return;
       }
     }
-    mutes.push(newMute.toLowerCase());
-    currentUser().mutes = mutes;
-    return storeMutes();
+    mutes.push(newMute);
+    mixpanel.track('Term Added', {
+      id: newMute
+    });
+    user.mutes = mutes;
+    return storeMutes(user);
   };
 
   removeMute = function(muteToBeRemoved) {
-    var mute, mutes, _i, _len;
+    var mute, mutes, user, _i, _len;
+    user = currentUser();
     mutes = getMutes();
     for (_i = 0, _len = mutes.length; _i < _len; _i++) {
       mute = mutes[_i];
-      if (mute === muteToBeRemoved.toLowerCase()) {
+      if (mute === muteToBeRemoved) {
         mutes.remove(mute);
+        mixpanel.track("Term Removed", {
+          id: term
+        });
       }
     }
-    currentUser().mutes = mutes;
-    return storeMutes();
+    user.mutes = mutes;
+    return storeMutes(user);
   };
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
@@ -100,8 +108,14 @@
     if (message.userInfo) {
       localStorage.setItem('silencer', "" + message.user);
     }
-    if (message.checkingForUser) {
-      return sendResponse(currentUser());
+    if (message.checkingForUser || message.mutesRequest) {
+      sendResponse(currentUser());
+    }
+    if (message.addMute) {
+      addMute(message.term);
+    }
+    if (message.removeMute) {
+      return removeMute(message.term);
     }
   });
 

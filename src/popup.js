@@ -88,7 +88,7 @@
         });
         return $(selector).text("Unmute");
       } else {
-        mixpanel.track("Instagram Mute Removed");
+        mixpanel.track("" + message + " Removed");
         chrome.tabs.query({
           "active": true,
           "currentWindow": true
@@ -107,83 +107,67 @@
       }
     });
     $('.my-form').submit(function() {
-      if (newTerm() !== "") {
-        mixpanel.track('Term Added (enter pressed)', {
-          "id": newTerm()
+      newTerm = newTerm().toLowerCase();
+      if (newTerm !== "") {
+        chrome.runtime.sendMessage({
+          addMute: true,
+          term: newTerm
         });
-        return chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(), function(response) {
-            return console.log(response);
-          });
-        });
+        return $(".terms").append($('<li></li>', {
+          "class": "term",
+          "data-term": "" + newTerm,
+          "text": "" + newTerm
+        }));
       }
     });
     $('.mute.submit').click(function() {
       $('.term-to-submit').focus();
-      if (newTerm() !== "") {
-        mixpanel.track('Term Added (button)', {
-          "id": newTerm()
+      newTerm = newTerm().toLowerCase();
+      if (newTerm !== "") {
+        chrome.runtime.sendMessage({
+          addMute: true,
+          term: newTerm
         });
-        return chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "add" + newTerm(), function(response) {
-            console.log(JSON.stringify(response));
-            return $(".terms").append($('<li></li>', {
-              "class": "term",
-              "data-term": "" + (newTerm()),
-              "text": "" + (newTerm())
-            }));
-          });
-        });
+        return $(".terms").append($('<li></li>', {
+          "class": "term",
+          "data-term": "" + newTerm,
+          "text": "" + newTerm
+        }));
       }
     });
     chrome.tabs.query({
       "active": true,
       "currentWindow": true
     }, function(tab) {
-      return chrome.tabs.sendMessage(tab[0].id, "showTerms", function(response) {
-        var child, term, terms, _i, _j, _len, _len1, _ref;
-        if (response) {
-          terms = response;
-          setMuteValue(terms);
-          for (_i = 0, _len = terms.length; _i < _len; _i++) {
-            term = terms[_i];
-            $(".terms").append($('<li></li>', {
-              "class": "term",
-              "data-term": "" + term,
-              "text": "" + term
-            }));
-          }
-          _ref = $(".terms").children();
-          for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
-            child = _ref[_j];
-            $(child).wrapInner("<a href='#' class='remove-term'></a>");
-          }
-          return mixpanel.track('Silencer Opened');
+      return chrome.runtime.sendMessage({
+        mutesRequest: true
+      }, function(response) {
+        var child, term, _i, _j, _len, _len1, _ref, _ref1;
+        _ref = response.mutes;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          term = _ref[_i];
+          $(".terms").append($('<li></li>', {
+            "class": "term",
+            "data-term": "" + term,
+            "text": "" + term
+          }));
         }
+        _ref1 = $(".terms").children();
+        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+          child = _ref1[_j];
+          $(child).wrapInner("<a href='#' class='remove-term'></a>");
+        }
+        return mixpanel.track('Silencer Opened');
       });
     });
     $(".terms").on('click', 'li a', (function(e) {
-      var term, termToBeRemoved;
+      var term;
       e.preventDefault();
       term = $(e.currentTarget).parent().data("term");
-      mixpanel.track("Term Removed", {
-        "id": term
-      });
-      termToBeRemoved = "remove" + term;
       $(e.currentTarget).parent().slideUp();
-      return chrome.tabs.query({
-        "active": true,
-        "currentWindow": true
-      }, function(tab) {
-        return chrome.tabs.sendMessage(tab[0].id, termToBeRemoved, function(response) {
-          return console.log(response);
-        });
+      return chrome.runtime.sendMessage({
+        removeMute: true,
+        term: term
       });
     }));
     /* Adding filters
