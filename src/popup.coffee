@@ -38,18 +38,15 @@ $ ->
     event.preventDefault()
     if $(selector).text() == "Mute"
       mixpanel.track("#{message} Added")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filter#{filterName}-add")
-      )
+      chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+
       $(selector).text("Unmute")
     else
       mixpanel.track("#{message} Removed")
-      chrome.tabs.query("active": true, "currentWindow": true, 
-        (tab) ->
-          chrome.tabs.sendMessage(tab[0].id, "filter#{filterName}-remove")
-      )
+      chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+
       $(selector).text("Mute")
+
 
   $('.pack-expander').click (e) ->
     e.preventDefault()
@@ -57,10 +54,6 @@ $ ->
       $('.filter-packs').slideUp()
     else
       $('.filter-packs').slideDown()
-
-
-
-
 
 
   # Add term (enter pressed)
@@ -85,6 +78,7 @@ $ ->
   chrome.tabs.query("active": true, "currentWindow": true,
   (tab) -> 
     chrome.runtime.sendMessage({mutesRequest: true}, (response) ->
+      setMuteValue(response.mutes)
 
       for term in response.mutes
         $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
@@ -109,48 +103,19 @@ $ ->
 
   ### Adding filters ### 
 
-  $('.add-got').click (e) ->
-    handleCategory(e, '.add-got', "GoT Filter", "got")
+  $('.add-got').click (e) -> handleCategory(e, '.add-got', "GoT Filter", "got")
+  $('.add-mm').click (e) -> handleCategory(e, '.add-mm', "Mad Men Filter", "mm")
+  $('.add-ad').click (e) -> handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
+  $('.add-pll').click (e) -> handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
+  $('.add-tb').click (e) -> handleCategory(e, '.add-tb', "True Blood Filter", "tb")
+  $('.add-rb').click (e) -> handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
 
-  $('.add-mm').click (e) ->
-    handleCategory(e, '.add-mm', "Mad Men Filter", "mm")
-
-  $('.add-ad').click (e) ->
-    handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
-
-  $('.add-pll').click (e) ->
-    handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
-
-  $('.add-tb').click (e) ->
-    handleCategory(e, '.add-tb', "True Blood Filter", "tb")
-
-  $('.add-rb').click (e) ->
-    handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
-
-
-  $('.add-ig').click (e) ->
-    handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
-
-  $('.add-vine').click (e) ->
-    handleCategory(e, '.add-vine', "Vine Mute", "vine")
-
-  $('.add-4sq').click (e) ->
-    handleCategory(e, '.add-4sq', "Foursquare Mute", "4sq")
-
-  $('.add-path').click (e) ->
-    handleCategory(e, '.add-path', "Path Mute", "path")
-
-  $('.add-th').click (e) ->
-    handleCategory(e, '.add-th', "Timehop Mute", "timehop")
-
-  $('.add-medium').click (e) ->
-    handleCategory(e, '.add-medium', "Medium Mute", "medium")
-
-  $('.add-nike').click (e) ->
-    handleCategory(e, '.add-nike', "Nike+ Mute", "nike")
-
-  $('.add-circa').click (e) ->
-    handleCategory(e, '.add-circa', "Circa Mute", "circa")
-
-  $('.add-paper').click (e) ->
-    handleCategory(e, '.add-paper', "Paper.li Mute", "paper")
+  $('.add-ig').click (e) -> handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
+  $('.add-vine').click (e) -> handleCategory(e, '.add-vine', "Vine Mute", "vine")
+  $('.add-4sq').click (e) -> handleCategory(e, '.add-4sq', "Foursquare Mute", "4sq")
+  $('.add-path').click (e) -> handleCategory(e, '.add-path', "Path Mute", "path")
+  $('.add-th').click (e) -> handleCategory(e, '.add-th', "Timehop Mute", "timehop")
+  $('.add-medium').click (e) -> handleCategory(e, '.add-medium', "Medium Mute", "medium")
+  $('.add-nike').click (e) -> handleCategory(e, '.add-nike', "Nike+ Mute", "nike")
+  $('.add-circa').click (e) -> handleCategory(e, '.add-circa', "Circa Mute", "circa")
+  $('.add-paper').click (e) -> handleCategory(e, '.add-paper', "Paper.li Mute", "paper")

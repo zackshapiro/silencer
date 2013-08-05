@@ -16,6 +16,62 @@ reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "com
 
 ##############################################
 
+addMutePack = (name) ->
+  addGoTFilter() if name == "got"
+  addMmFilter() if name == "mm"
+  addAdFilter() if name == "ad"
+  addPllFilter() if name == "pll"
+  addTbFilter() if name == "tb"
+  addRoyalBabyFilter() if name == "rb"
+
+  addMute("instagram.com") if name == "instagram"
+  addMute("vine.co") if name == "vine"
+  addMute("4sq.com") if name == "4sq"
+  addMute("path.com") if name == "path"
+  addMute("t.imehop.com") if name == "timehop"
+  addMute("medium.com") if name == "medium"
+  addMute("go.nike.com") if name == "nike"
+  addMute("cir.ca") if name == "circa"
+  addMute("paper.li") if name == "paper"
+
+removeMutePack = (name) ->
+  removeGoTFilter() if name == "got"
+  removeMmFilter() if name == "mm"
+  removeAdFilter() if name == "ad"
+  removePllFilter() if name == "pll"
+  removeTbFilter() if name == "tb"
+  removeRoyalBabyFilter() if name == "rb"
+
+  removeMute("instagram.com") if name == "instagram"
+  removeMute("vine.co") if name == "vine"
+  removeMute("4sq.com") if name == "4sq"
+  removeMute("path.com") if name == "path"
+  removeMute("t.imehop.com") if name == "timehop"
+  removeMute("medium.com") if name == "medium"
+  removeMute("go.nike.com") if name == "nike"
+  removeMute("cir.ca") if name == "circa"
+  removeMute("paper.li") if name == "paper"
+
+
+addGoTFilter = -> addMute(item) for item in thronesFilter
+removeGoTFilter = -> removeMute(item) for item in thronesFilter
+
+addMmFilter = -> addMute(item) for item in madMenFilter
+removeMmFilter = -> removeMute(item) for item in madMenFilter
+
+addAdFilter = -> addMute(item) for item in arrestedDevelopmentFilter
+removeAdFilter = -> removeMute(item) for item in arrestedDevelopmentFilter
+
+addPllFilter = -> addMute(item) for item in prettyLittleLiarsFilter
+removePllFilter = -> removeMute(item) for item in prettyLittleLiarsFilter
+
+addTbFilter = -> addMute(item) for item in trueBloodFilter
+removeTbFilter = -> removeMute(item) for item in trueBloodFilter
+
+addRoyalBabyFilter = -> addMute(item) for item in royalBabyFilter
+removeRoyalBabyFilter = -> removeMute(item) for item in royalBabyFilter
+
+
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 
 currentUser = ->
@@ -87,6 +143,12 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
 
   if message.removeMute
     removeMute(message.term)
+
+  if message.mutePackAdd
+    addMutePack(message.mutePackName)
+
+  if message.mutePackRemove
+    removeMutePack(message.mutePackName)
 )
 
 if currentUser() # only fires once. do i need this?

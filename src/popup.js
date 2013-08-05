@@ -80,20 +80,16 @@
       event.preventDefault();
       if ($(selector).text() === "Mute") {
         mixpanel.track("" + message + " Added");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filter" + filterName + "-add");
+        chrome.runtime.sendMessage({
+          mutePackAdd: true,
+          mutePackName: filterName
         });
         return $(selector).text("Unmute");
       } else {
         mixpanel.track("" + message + " Removed");
-        chrome.tabs.query({
-          "active": true,
-          "currentWindow": true
-        }, function(tab) {
-          return chrome.tabs.sendMessage(tab[0].id, "filter" + filterName + "-remove");
+        chrome.runtime.sendMessage({
+          mutePackRemove: true,
+          mutePackName: filterName
         });
         return $(selector).text("Mute");
       }
@@ -143,6 +139,7 @@
         mutesRequest: true
       }, function(response) {
         var child, term, _i, _j, _len, _len1, _ref, _ref1;
+        setMuteValue(response.mutes);
         _ref = response.mutes;
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           term = _ref[_i];
