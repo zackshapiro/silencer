@@ -307,13 +307,10 @@
   };
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    if (message.term) {
+    if (message.termSlidUp) {
       mixpanel.track("Content Removed From View", {
-        id: "" + message.term,
+        id: "" + message.termSlidUp,
         site: "" + message.site
-      });
-      sendResponse({
-        note: "term tracked"
       });
     }
     if (message.auth) {
@@ -326,6 +323,16 @@
     }
     if (message.checkingForUser || message.mutesRequest) {
       sendResponse(currentUser());
+    }
+    if (message.contentScriptMutesRequest) {
+      chrome.tabs.query({
+        "active": true,
+        "currentWindow": true
+      }, function(tab) {
+        return chrome.tabs.sendMessage(tab[0].id, {
+          user: currentUser()
+        });
+      });
     }
     if (message.addMute) {
       addMute(message.term);

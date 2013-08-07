@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var detectSite, filterFacebook, filterTwitter, genericFilter, hideChild, injectJquery, sendUserInfo;
+    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, sendUserInfo;
     injectJquery = function() {
       var body, script;
       script = document.createElement("script");
@@ -29,47 +29,59 @@
         filterTwitter();
         setInterval(filterTwitter, 4000);
       }
-      if (document.URL.indexOf("localhost:3000/auth") > -1) {
+      if (document.URL.indexOf("localhost:3001/auth") > -1) {
         setInterval(sendUserInfo, 1500);
       }
       if (document.URL.indexOf("silencer.io/auth") > -1) {
         return setInterval(sendUserInfo, 1500);
       }
     };
+    getTerms = function(callback) {
+      chrome.runtime.sendMessage({
+        contentScriptMutesRequest: true
+      });
+      return chrome.extension.onMessage.addListener(function(message, sender) {
+        if (message.user) {
+          return callback(message.user.mutes);
+        }
+      });
+    };
     hideChild = function(child) {
       return child.slideUp();
     };
     genericFilter = function(parentDiv) {
-      var child, children, parent, term, terms, _i, _len, _results;
-      terms = ["gaogahgahoga", "agoaghaohao"];
-      parent = parentDiv;
-      children = parentDiv.children();
-      _results = [];
-      for (_i = 0, _len = children.length; _i < _len; _i++) {
-        child = children[_i];
-        _results.push((function() {
-          var _j, _len1, _results1;
-          _results1 = [];
-          for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
-            term = terms[_j];
-            if ($(child).is(":visible")) {
-              if ($($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                hideChild($(child));
-                _results1.push(chrome.runtime.sendMessage({
-                  term: "" + term,
-                  site: "twitter"
-                }));
+      return getTerms(function(terms) {
+        var child, children, parent, term, _i, _len, _results;
+        parent = parentDiv;
+        children = parentDiv.children();
+        console.log(terms);
+        _results = [];
+        for (_i = 0, _len = children.length; _i < _len; _i++) {
+          child = children[_i];
+          _results.push((function() {
+            var _j, _len1, _results1;
+            _results1 = [];
+            for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
+              term = terms[_j];
+              if ($(child).is(":visible")) {
+                if ($($(child)).text().toLowerCase().indexOf(term) > -1) {
+                  hideChild($(child));
+                  _results1.push(chrome.runtime.sendMessage({
+                    termSlidUp: "" + term,
+                    site: "twitter"
+                  }));
+                } else {
+                  _results1.push(void 0);
+                }
               } else {
                 _results1.push(void 0);
               }
-            } else {
-              _results1.push(void 0);
             }
-          }
-          return _results1;
-        })());
-      }
-      return _results;
+            return _results1;
+          })());
+        }
+        return _results;
+      });
     };
     filterTwitter = function() {
       if ($(".route-home").length || document.URL.indexOf("twitter.com/search") > -1 || $('.list-stream').length) {
@@ -77,36 +89,37 @@
       }
     };
     filterFacebook = function() {
-      var child, children, stream, term, terms, _i, _len, _results;
-      terms = ["gaogahgahoga", "agoaghaohao"];
-      stream = $(".uiStream");
-      children = $(stream).children(".genericStreamStory");
-      _results = [];
-      for (_i = 0, _len = children.length; _i < _len; _i++) {
-        child = children[_i];
-        _results.push((function() {
-          var _j, _len1, _results1;
-          _results1 = [];
-          for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
-            term = terms[_j];
-            if ($(child).is(":visible")) {
-              if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                hideChild($(child));
-                _results1.push(chrome.runtime.sendMessage({
-                  term: "" + term,
-                  site: "facebook"
-                }));
+      return getTerms(function(terms) {
+        var child, children, stream, term, _i, _len, _results;
+        stream = $(".uiStream");
+        children = $(stream).children(".genericStreamStory");
+        _results = [];
+        for (_i = 0, _len = children.length; _i < _len; _i++) {
+          child = children[_i];
+          _results.push((function() {
+            var _j, _len1, _results1;
+            _results1 = [];
+            for (_j = 0, _len1 = terms.length; _j < _len1; _j++) {
+              term = terms[_j];
+              if ($(child).is(":visible")) {
+                if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+                  hideChild($(child));
+                  _results1.push(chrome.runtime.sendMessage({
+                    termSlidUp: "" + term,
+                    site: "facebook"
+                  }));
+                } else {
+                  _results1.push(void 0);
+                }
               } else {
                 _results1.push(void 0);
               }
-            } else {
-              _results1.push(void 0);
             }
-          }
-          return _results1;
-        })());
-      }
-      return _results;
+            return _results1;
+          })());
+        }
+        return _results;
+      });
     };
     return detectSite();
   });

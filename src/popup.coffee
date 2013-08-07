@@ -75,7 +75,7 @@ $ ->
 
 
   # Show terms
-  chrome.tabs.query("active": true, "currentWindow": true,
+  chrome.tabs.query(active: true, currentWindow: true,
   (tab) -> 
     chrome.runtime.sendMessage({mutesRequest: true}, (response) ->
       setMuteValue(response.mutes)

@@ -1,6 +1,8 @@
 $ ->
 
   injectJquery = ->
+    # only do this on sites that qualify for Silencer
+
     script = document.createElement("script")
     script.type = "text/javascript"
     script.src = "/lib/jquery-1.9.1.min.js"
@@ -21,29 +23,33 @@ $ ->
       filterTwitter()
       setInterval(filterTwitter, 4000)
 
-    if document.URL.indexOf("localhost:3000/auth") > -1
+    if document.URL.indexOf("localhost:3001/auth") > -1
       setInterval(sendUserInfo, 1500)
 
     if document.URL.indexOf("silencer.io/auth") > -1
       setInterval(sendUserInfo, 1500)
 
-  # getTerms = ->
-  
+  getTerms = (callback) ->
+    chrome.runtime.sendMessage({contentScriptMutesRequest: true})
+
+    chrome.extension.onMessage.addListener (message, sender) ->
+      callback message.user.mutes if message.user
 
   hideChild = (child) -> child.slideUp()
 
   genericFilter = (parentDiv) ->
-    # terms = getTerms() # REMEMBER TO REWRITE
-    terms = ["gaogahgahoga", "agoaghaohao"] # REMEMBER TO REMOVE
-    parent = parentDiv
-    children = parentDiv.children()
+    getTerms( (terms) ->
+      parent = parentDiv
+      children = parentDiv.children()
+      console.log terms # each time this runs, it does it one more time than the last time
 
-    for child in children
-      for term in terms
-        if $(child).is(":visible")
-          if $($(child)).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-            hideChild($(child)) 
-            chrome.runtime.sendMessage({term: "#{term}", site: "twitter"})
+      for child in children
+        for term in terms
+          if $(child).is(":visible")
+            if $($(child)).text().toLowerCase().indexOf(term) > -1
+              hideChild($(child)) 
+              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
+    )
 
 
   ################## Filters ############################
@@ -54,20 +60,19 @@ $ ->
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->
-    # terms = getTerms()
-    terms = ["gaogahgahoga", "agoaghaohao"]
-    stream = $(".uiStream")
-    children = $(stream).children(".genericStreamStory")
+    getTerms( (terms) ->
+      stream = $(".uiStream")
+      children = $(stream).children(".genericStreamStory")
 
-    for child in children
-      for term in terms
-        if $(child).is(":visible")
-          if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-            hideChild($(child))
-            chrome.runtime.sendMessage({term: "#{term}", site: "facebook"})
+      for child in children
+        for term in terms
+          if $(child).is(":visible")
+            if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+              hideChild($(child))
+              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
+    )
 
   #######################################################
-
 
   ## Init code stars here ##
 

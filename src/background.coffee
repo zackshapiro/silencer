@@ -125,9 +125,8 @@ removeMute = (muteToBeRemoved) ->
 
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
-  if message.term
-    mixpanel.track("Content Removed From View", { id: "#{message.term}", site: "#{message.site}" })
-    sendResponse({note: "term tracked"})
+  if message.termSlidUp
+    mixpanel.track("Content Removed From View", { id: "#{message.termSlidUp}", site: "#{message.site}" })
 
   if message.auth 
     chrome.tabs.create({ url: "http://silencer.io/auth" })
@@ -137,6 +136,12 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
 
   if message.checkingForUser || message.mutesRequest
     sendResponse(currentUser())
+
+  if message.contentScriptMutesRequest
+    chrome.tabs.query("active": true, "currentWindow": true,
+    (tab) ->
+      chrome.tabs.sendMessage(tab[0].id, user: currentUser())
+    )
 
   if message.addMute
     addMute(message.term)
@@ -156,3 +161,5 @@ if currentUser() # only fires once. do i need this?
 
   userBase = base.child("/#{id}")
   userBase.set(currentUser())
+
+

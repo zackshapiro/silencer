@@ -132,8 +132,8 @@
       }
     });
     chrome.tabs.query({
-      "active": true,
-      "currentWindow": true
+      active: true,
+      currentWindow: true
     }, function(tab) {
       return chrome.runtime.sendMessage({
         mutesRequest: true
