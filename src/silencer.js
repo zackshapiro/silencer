@@ -23,11 +23,11 @@
       if (document.URL.indexOf('facebook') > -1) {
         injectJquery();
         filterFacebook();
-        setInterval(filterFacebook, 4000);
+        setInterval(filterFacebook, 2500);
       }
       if (document.URL.indexOf('twitter') > -1) {
         filterTwitter();
-        setInterval(filterTwitter, 4000);
+        setInterval(filterTwitter, 2500);
       }
       if (document.URL.indexOf("localhost:3001/auth") > -1) {
         setInterval(sendUserInfo, 1500);
@@ -37,7 +37,7 @@
       }
     };
     getTerms = function(callback) {
-      chrome.runtime.sendMessage({
+      debugger;      chrome.runtime.sendMessage({
         contentScriptMutesRequest: true
       });
       return chrome.extension.onMessage.addListener(function(message, sender) {

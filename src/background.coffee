@@ -25,6 +25,8 @@ addMutePack = (name) ->
   addRoyalBabyFilter() if name == "rb"
 
   addMute("instagram.com") if name == "instagram"
+  addMute("getglue") if name == "glue"
+  addMute("ask.fm") if name == "ask"
   addMute("vine.co") if name == "vine"
   addMute("4sq.com") if name == "4sq"
   addMute("path.com") if name == "path"
@@ -43,6 +45,8 @@ removeMutePack = (name) ->
   removeRoyalBabyFilter() if name == "rb"
 
   removeMute("instagram.com") if name == "instagram"
+  removeMute("getglue") if name == "glue"
+  removeMute("ask.fm") if name == "ask"
   removeMute("vine.co") if name == "vine"
   removeMute("4sq.com") if name == "4sq"
   removeMute("path.com") if name == "path"

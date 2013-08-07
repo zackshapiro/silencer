@@ -25,6 +25,8 @@ $ ->
       $(".add-rb").text("Unmute") if term == "royalbabyfilter"
 
       $(".add-ig").text("Unmute") if term == "instagram.com"
+      $(".add-glue").text("Unmute") if term == "getglue"
+      $(".add-ask").text("Unmute") if term == "ask.fm"
       $(".add-vine").text("Unmute") if term == "vine.co"
       $(".add-4sq").text("Unmute") if term == "4sq.com"
       $(".add-path").text("Unmute") if term == "path.com"
@@ -33,6 +35,8 @@ $ ->
       $(".add-nike").text("Unmute") if term == "go.nike.com"
       $(".add-circa").text("Unmute") if term == "cir.ca"
       $(".add-paper").text("Unmute") if term == "paper.li"
+
+      # don't forget to add filter triggers below
 
   handleCategory = (event, selector, message, filterName) ->
     event.preventDefault()
@@ -111,6 +115,8 @@ $ ->
   $('.add-rb').click (e) -> handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
 
   $('.add-ig').click (e) -> handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
+  $('.add-ask').click (e) -> handleCategory(e, '.add-ask', "Ask.fm Mute", "ask")
+  $('.add-glue').click (e) -> handleCategory(e, '.add-glue', "GetGlue Mute", "glue")
   $('.add-vine').click (e) -> handleCategory(e, '.add-vine', "Vine Mute", "vine")
   $('.add-4sq').click (e) -> handleCategory(e, '.add-4sq', "Foursquare Mute", "4sq")
   $('.add-path').click (e) -> handleCategory(e, '.add-path', "Path Mute", "path")

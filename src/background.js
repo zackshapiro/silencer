@@ -38,6 +38,12 @@
     if (name === "instagram") {
       addMute("instagram.com");
     }
+    if (name === "glue") {
+      addMute("getglue");
+    }
+    if (name === "ask") {
+      addMute("ask.fm");
+    }
     if (name === "vine") {
       addMute("vine.co");
     }
@@ -85,6 +91,12 @@
     }
     if (name === "instagram") {
       removeMute("instagram.com");
+    }
+    if (name === "glue") {
+      removeMute("getglue");
+    }
+    if (name === "ask") {
+      removeMute("ask.fm");
     }
     if (name === "vine") {
       removeMute("vine.co");

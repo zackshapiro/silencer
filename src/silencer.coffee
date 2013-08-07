@@ -17,11 +17,11 @@ $ ->
     if document.URL.indexOf('facebook') > -1
       injectJquery()
       filterFacebook()
-      setInterval(filterFacebook, 4000)
+      setInterval(filterFacebook, 2500)
 
     if document.URL.indexOf('twitter') > -1
       filterTwitter()
-      setInterval(filterTwitter, 4000)
+      setInterval(filterTwitter, 2500)
 
     if document.URL.indexOf("localhost:3001/auth") > -1
       setInterval(sendUserInfo, 1500)
@@ -30,6 +30,7 @@ $ ->
       setInterval(sendUserInfo, 1500)
 
   getTerms = (callback) ->
+    debugger
     chrome.runtime.sendMessage({contentScriptMutesRequest: true})
 
     chrome.extension.onMessage.addListener (message, sender) ->
@@ -41,7 +42,10 @@ $ ->
     getTerms( (terms) ->
       parent = parentDiv
       children = parentDiv.children()
-      console.log terms # each time this runs, it does it one more time than the last time
+      console.log terms # each time this runs, it does it one more time than the last time. bad.
+
+      # The problem is that each time this runs, it logs an additional thing. First time 1 log, 2nd time 3 total logs, 3rd time 6 total logs
+      # I want to store the value of the callback somewhere to reference each time so I don't have to keep doing a callback
 
       for child in children
         for term in terms

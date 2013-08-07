@@ -47,6 +47,12 @@
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
+        if (term === "getglue") {
+          $(".add-glue").text("Unmute");
+        }
+        if (term === "ask.fm") {
+          $(".add-ask").text("Unmute");
+        }
         if (term === "vine.co") {
           $(".add-vine").text("Unmute");
         }
@@ -190,6 +196,12 @@
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");
+    });
+    $('.add-ask').click(function(e) {
+      return handleCategory(e, '.add-ask', "Ask.fm Mute", "ask");
+    });
+    $('.add-glue').click(function(e) {
+      return handleCategory(e, '.add-glue', "GetGlue Mute", "glue");
     });
     $('.add-vine').click(function(e) {
       return handleCategory(e, '.add-vine', "Vine Mute", "vine");
