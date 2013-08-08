@@ -38,10 +38,11 @@
     };
     sendUserInfo = function() {
       if (localStorage['silencerAuth']) {
-        return chrome.runtime.sendMessage({
+        chrome.runtime.sendMessage({
           userInfo: true,
           user: localStorage['silencerAuth']
         });
+        return localStorage.clear();
       }
     };
     getTerms = function() {

@@ -23,6 +23,7 @@ $ ->
   sendUserInfo = ->
     if localStorage['silencerAuth']
       chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+      localStorage.clear()
 
   getTerms = ->
     chrome.runtime.sendMessage({contentScriptMutesRequest: true})
