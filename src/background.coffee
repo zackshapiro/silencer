@@ -16,9 +16,9 @@ breakingBadFilter = ["breaking bad", "walt", "walter white", "hank", "walter", "
 
 orangeNewBlackFilter = ["orange is the new black", "#ointb", "@ointb", "claudette", "sam healy", "sam healey", "larry", "nicky", "sophia", "piper", "tasty", "taystee", "pornstache", "@lavernecox", "susan", "joel", "wanda", "@piper", "daya", "crazy eyes", "aleida", "orangenewblackfilter"]
 
-dexterFilter = [ "dexterfilter" ]
+dexterFilter = [ "dexter", "#dexter", "@sho_dexter", "dexter morgan", "harrison", "astor", "cody", "hannah", "hanna", "rita", "maria", "angel", "harry", "vince", "kill room", "miami", "the code", "code of harry", "dark passenger", "bay harbor", "ice truck", "trinity", "moser", "bennett", "jacob", "elway", "evelyn", "vogel", "doomsday", "james daokes", "sargeant doakes", "sgt doakes", "miami metro", "santa muerte murders", "barrel girls", "dexterfilter" ]
 
-newsroomFilter = [ "newsroomfilter" ]
+newsroomFilter = [ "the newsroom", "acn", "willmcavoyacn", "will", "mcavoy", "#thenewsroom", "#newsroom", "sloan", "@jeff_daniels", "@iamdrunksam", "charlie", "skinner", "neal", "@nealsampatacn", "mackmchaleacn", "mack", "jim", "jim harper", "maggie", "news night", "don keefer", "awm", "atlantis", "aaron sorkin", "oliva munn", "jonas", "leona", "reese", "kendra", "elliot", "nina", "tess", "gary", "martin", "tamara", "wade", "lonny", "lonnie", "hallie", "rebecca", "newsroomfilter" ]
 
 reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
