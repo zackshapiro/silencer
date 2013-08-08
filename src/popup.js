@@ -50,6 +50,12 @@
         if (term === "orangenewblackfilter") {
           $(".add-ointb").text("Unmute");
         }
+        if (term === "dexterfilter") {
+          $(".add-dex").text("Unmute");
+        }
+        if (term === "newsroomfilter") {
+          $(".add-newsroom").text("Unmute");
+        }
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
@@ -207,6 +213,12 @@
     });
     $('.add-ointb').click(function(e) {
       return handleCategory(e, '.add-ointb', "Orange is the New Black Filter", "ointb");
+    });
+    $('.add-dex').click(function(e) {
+      return handleCategory(e, '.add-dex', "Dexter Filter", "dexter");
+    });
+    $('.add-newsroom').click(function(e) {
+      return handleCategory(e, '.add-newsroom', "The Newsroom Filter", "newsroom");
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");

@@ -16,6 +16,10 @@ breakingBadFilter = ["breaking bad", "walt", "walter white", "hank", "walter", "
 
 orangeNewBlackFilter = ["orange is the new black", "#ointb", "@ointb", "claudette", "sam healy", "sam healey", "larry", "nicky", "sophia", "piper", "tasty", "taystee", "pornstache", "@lavernecox", "susan", "joel", "wanda", "@piper", "daya", "crazy eyes", "aleida", "orangenewblackfilter"]
 
+dexterFilter = [ "dexterfilter" ]
+
+newsroomFilter = [ "newsroomfilter" ]
+
 reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
 ##############################################
@@ -29,6 +33,8 @@ addMutePack = (name) ->
   addRoyalBabyFilter() if name == "rb"
   addBreakingBadFilter() if name == "bb"
   addOintbFilter() if name == "ointb"
+  addDexterFilter() if name == "dexter"
+  addNewsroomFilter() if name == "newsroom"
 
   addMute("instagram.com") if name == "instagram"
   addMute("getglue") if name == "glue"
@@ -51,6 +57,8 @@ removeMutePack = (name) ->
   removeRoyalBabyFilter() if name == "rb"
   removeBreakingBadFilter() if name == "bb"
   removeOintbFilter() if name == "ointb"
+  removeDexterFilter() if name == "dexter"
+  removeNewsroomFilter() if name == "newsroom"
 
   removeMute("instagram.com") if name == "instagram"
   removeMute("getglue") if name == "glue"
@@ -88,6 +96,12 @@ removeBreakingBadFilter = -> removeMute(item) for item in breakingBadFilter
 
 addOintbFilter = -> addMute(item) for item in orangeNewBlackFilter
 removeOintbFilter = -> removeMute(item) for item in orangeNewBlackFilter
+
+addDexterFilter = -> addMute(item) for item in dexterFilter
+removeDexterFilter = -> removeMute(item) for item in dexterFilter
+
+addNewsroomFilter = -> addMute(item) for item in newsroomFilter
+removeNewsroomFilter = -> removeMute(item) for item in newsroomFilter
 
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 

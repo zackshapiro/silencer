@@ -25,6 +25,8 @@ $ ->
       $(".add-rb").text("Unmute") if term == "royalbabyfilter"
       $(".add-bb").text("Unmute") if term == "breakingbadfilter"
       $(".add-ointb").text("Unmute") if term == "orangenewblackfilter"
+      $(".add-dex").text("Unmute") if term == "dexterfilter"
+      $(".add-newsroom").text("Unmute") if term == "newsroomfilter"
 
       $(".add-ig").text("Unmute") if term == "instagram.com"
       $(".add-glue").text("Unmute") if term == "getglue"
@@ -118,6 +120,8 @@ $ ->
   $('.add-rb').click (e) -> handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
   $('.add-bb').click (e) -> handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb")
   $('.add-ointb').click (e) -> handleCategory(e, '.add-ointb', "Orange is the New Black Filter", "ointb")
+  $('.add-dex').click (e) -> handleCategory(e, '.add-dex', "Dexter Filter", "dexter")
+  $('.add-newsroom').click (e) -> handleCategory(e, '.add-newsroom', "The Newsroom Filter", "newsroom")
 
   $('.add-ig').click (e) -> handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
   $('.add-ask').click (e) -> handleCategory(e, '.add-ask', "Ask.fm Mute", "ask")
