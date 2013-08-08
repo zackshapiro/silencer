@@ -148,20 +148,22 @@
         mutesRequest: true
       }, function(response) {
         var child, term, _i, _j, _len, _len1, _ref, _ref1;
-        setMuteValue(response.mutes);
-        _ref = response.mutes;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          term = _ref[_i];
-          $(".terms").append($('<li></li>', {
-            "class": "term",
-            "data-term": "" + term,
-            "text": "" + term
-          }));
-        }
-        _ref1 = $(".terms").children();
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          child = _ref1[_j];
-          $(child).wrapInner("<a href='#' class='remove-term'></a>");
+        if (response.mutes) {
+          setMuteValue(response.mutes);
+          _ref = response.mutes;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            term = _ref[_i];
+            $(".terms").append($('<li></li>', {
+              "class": "term",
+              "data-term": "" + term,
+              "text": "" + term
+            }));
+          }
+          _ref1 = $(".terms").children();
+          for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+            child = _ref1[_j];
+            $(child).wrapInner("<a href='#' class='remove-term'></a>");
+          }
         }
         return mixpanel.track('Silencer Opened');
       });

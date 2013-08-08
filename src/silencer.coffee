@@ -12,12 +12,13 @@ namespace 'Silencer', (exports, top) ->
 $ ->
 
   injectJquery = ->
-    # only do this on sites that qualify for Silencer
-    script = document.createElement("script")
-    script.type = "text/javascript"
-    script.src = "/lib/jquery-1.9.1.min.js"
-    body = document.getElementsByTagName("body")[0]
-    body.appendChild(script)
+    # TODO: Only do this for Silencer qualifying sites, can probably detect programatically
+    if document.URL.indexOf('facebook') > -1
+      script = document.createElement("script")
+      script.type = "text/javascript"
+      script.src = "/lib/jquery-1.9.1.min.js"
+      body = document.getElementsByTagName("body")[0]
+      body.appendChild(script)
 
   sendUserInfo = ->
     if localStorage['silencerAuth']

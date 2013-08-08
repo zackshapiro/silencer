@@ -82,7 +82,6 @@ removeRoyalBabyFilter = -> removeMute(item) for item in royalBabyFilter
 addBreakingBadFilter = -> addMute(item) for item in breakingBadFilter
 removeBreakingBadFilter = -> removeMute(item) for item in breakingBadFilter
 
-
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 
 currentUser = ->
@@ -111,17 +110,21 @@ addMute = (newMute) ->
   user = currentUser()
   mutes = getMutes()
 
-  for mute in mutes
-    return if newMute == mute
+  if user
+    for mute in mutes
+      return if newMute == mute
 
-  for word in reservedWords
-    return if newMute == word
+    for word in reservedWords
+      return if newMute == word
 
-  mutes.push(newMute)
-  mixpanel.track('Term Added', {id: newMute})
+    mutes.push(newMute)
+    mixpanel.track('Term Added', {id: newMute})
 
-  user.mutes = mutes
-  storeMutes(user)
+    user.mutes = mutes
+    storeMutes(user)
+  else
+    # chrome.tabs.create({ url: "http://silencer.io/auth" })
+    chrome.tabs.create({ url: "http://localhost:3001/auth" })
 
 removeMute = (muteToBeRemoved) ->
   user = currentUser()
@@ -140,10 +143,16 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     mixpanel.track("Content Removed From View", { id: "#{message.termSlidUp}", site: "#{message.site}" })
 
   if message.auth 
-    chrome.tabs.create({ url: "http://silencer.io/auth" })
+    # chrome.tabs.create({ url: "http://silencer.io/auth" })
+    chrome.tabs.create({ url: "http://localhost:3001/auth" })
 
   if message.userInfo
     localStorage.setItem('silencer', "#{message.user}")
+    user = JSON.parse(message.user)
+    id = parseInt(user.id)
+
+    userBase = base.child("/#{id}")
+    userBase.set(user)
 
   if message.checkingForUser || message.mutesRequest
     sendResponse(currentUser())
@@ -166,9 +175,3 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.mutePackRemove
     removeMutePack(message.mutePackName)
 )
-
-if currentUser() # only fires once. do i need this?
-  id = parseInt(currentUser().id)
-
-  userBase = base.child("/#{id}")
-  userBase.set(currentUser())

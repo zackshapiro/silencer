@@ -28,11 +28,13 @@
     var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, sendUserInfo;
     injectJquery = function() {
       var body, script;
-      script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = "/lib/jquery-1.9.1.min.js";
-      body = document.getElementsByTagName("body")[0];
-      return body.appendChild(script);
+      if (document.URL.indexOf('facebook') > -1) {
+        script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "/lib/jquery-1.9.1.min.js";
+        body = document.getElementsByTagName("body")[0];
+        return body.appendChild(script);
+      }
     };
     sendUserInfo = function() {
       if (localStorage['silencerAuth']) {

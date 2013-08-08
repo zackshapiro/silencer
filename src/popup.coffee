@@ -83,13 +83,14 @@ $ ->
   chrome.tabs.query(active: true, currentWindow: true,
   (tab) -> 
     chrome.runtime.sendMessage({mutesRequest: true}, (response) ->
-      setMuteValue(response.mutes)
+      if response.mutes
+        setMuteValue(response.mutes)
 
-      for term in response.mutes
-        $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
+        for term in response.mutes
+          $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
 
-      for child in $(".terms").children()
-        $(child).wrapInner("<a href='#' class='remove-term'></a>")
+        for child in $(".terms").children()
+          $(child).wrapInner("<a href='#' class='remove-term'></a>")
 
       mixpanel.track('Silencer Opened')
     )
