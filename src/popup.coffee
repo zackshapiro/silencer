@@ -23,6 +23,7 @@ $ ->
       $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
       $(".add-tb").text("Unmute") if term == "truebloodfilter"
       $(".add-rb").text("Unmute") if term == "royalbabyfilter"
+      $(".add-bb").text("Unmute") if term == "breakingbadfilter"
 
       $(".add-ig").text("Unmute") if term == "instagram.com"
       $(".add-glue").text("Unmute") if term == "getglue"
@@ -113,6 +114,7 @@ $ ->
   $('.add-pll').click (e) -> handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
   $('.add-tb').click (e) -> handleCategory(e, '.add-tb', "True Blood Filter", "tb")
   $('.add-rb').click (e) -> handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
+  $('.add-bb').click (e) -> handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb")
 
   $('.add-ig').click (e) -> handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
   $('.add-ask').click (e) -> handleCategory(e, '.add-ask', "Ask.fm Mute", "ask")

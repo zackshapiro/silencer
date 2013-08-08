@@ -44,6 +44,9 @@
         if (term === "royalbabyfilter") {
           $(".add-rb").text("Unmute");
         }
+        if (term === "breakingbadfilter") {
+          $(".add-bb").text("Unmute");
+        }
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
@@ -193,6 +196,9 @@
     });
     $('.add-rb').click(function(e) {
       return handleCategory(e, '.add-rb', "Royal Baby Filter", "rb");
+    });
+    $('.add-bb').click(function(e) {
+      return handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb");
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");
