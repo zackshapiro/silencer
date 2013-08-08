@@ -14,6 +14,8 @@ royalBabyFilter = [ "catherine", "the queen", "queen elizabeth", "duchess of cam
 
 breakingBadFilter = ["breaking bad", "walt", "walter white", "hank", "walter", "#breakingbad", "breakfast", "skyler", "beneke", "jesse", "pinkman", "gus", "gus fring", "fring", "@breakingbad_amc", "@rjmitte", "#bb", "#brba", "meth", "gilligan", "holly", "schrader", "gomez", "cook", "todd", "grey matter", "cancer", "scarface", "chips", "tuco", "salamanca", "meth lab", "super lab", "ricin", "declan", "mike", "ehrmentraut", "cranston", "gunn", "aaron paul", "mitte", "dean norris", "aaron paul", "@bryancranston", "@aaronpaul_8", "saul", "odenkirk", "jonathan banks", "marie", "walter jr", "junior", "lydia", "schwartz", "lambert", "skinny pete", "badger", "breakingbadfilter"]
 
+orangeNewBlackFilter = ["orange is the new black", "#ointb", "@ointb", "claudette", "sam healy", "sam healey", "larry", "nicky", "sophia", "piper", "tasty", "taystee", "pornstache", "@lavernecox", "susan", "joel", "wanda", "@piper", "daya", "crazy eyes", "aleida", "orangenewblackfilter"]
+
 reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
 ##############################################
@@ -26,6 +28,7 @@ addMutePack = (name) ->
   addTbFilter() if name == "tb"
   addRoyalBabyFilter() if name == "rb"
   addBreakingBadFilter() if name == "bb"
+  addOintbFilter() if name == "ointb"
 
   addMute("instagram.com") if name == "instagram"
   addMute("getglue") if name == "glue"
@@ -47,6 +50,7 @@ removeMutePack = (name) ->
   removeTbFilter() if name == "tb"
   removeRoyalBabyFilter() if name == "rb"
   removeBreakingBadFilter() if name == "bb"
+  removeOintbFilter() if name == "ointb"
 
   removeMute("instagram.com") if name == "instagram"
   removeMute("getglue") if name == "glue"
@@ -81,6 +85,9 @@ removeRoyalBabyFilter = -> removeMute(item) for item in royalBabyFilter
 
 addBreakingBadFilter = -> addMute(item) for item in breakingBadFilter
 removeBreakingBadFilter = -> removeMute(item) for item in breakingBadFilter
+
+addOintbFilter = -> addMute(item) for item in orangeNewBlackFilter
+removeOintbFilter = -> removeMute(item) for item in orangeNewBlackFilter
 
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 

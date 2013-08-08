@@ -47,6 +47,9 @@
         if (term === "breakingbadfilter") {
           $(".add-bb").text("Unmute");
         }
+        if (term === "orangenewblackfilter") {
+          $(".add-ointb").text("Unmute");
+        }
         if (term === "instagram.com") {
           $(".add-ig").text("Unmute");
         }
@@ -201,6 +204,9 @@
     });
     $('.add-bb').click(function(e) {
       return handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb");
+    });
+    $('.add-ointb').click(function(e) {
+      return handleCategory(e, '.add-ointb', "Orange is the New Black Filter", "ointb");
     });
     $('.add-ig').click(function(e) {
       return handleCategory(e, '.add-ig', "Instagram Mute", "instagram");
