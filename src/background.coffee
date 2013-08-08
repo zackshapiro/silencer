@@ -144,7 +144,7 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.contentScriptMutesRequest
     chrome.tabs.query("active": true, "currentWindow": true,
     (tab) ->
-      chrome.tabs.sendMessage(tab[0].id, user: currentUser())
+      chrome.tabs.sendMessage(tab[0].id, terms: currentUser().mutes)
     )
 
   if message.addMute
@@ -165,5 +165,3 @@ if currentUser() # only fires once. do i need this?
 
   userBase = base.child("/#{id}")
   userBase.set(currentUser())
-
-

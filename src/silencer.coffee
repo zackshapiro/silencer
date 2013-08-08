@@ -1,8 +1,18 @@
+namespace = (target, name, block) ->
+  [target, name, block] = [(if typeof exports isnt 'undefined' then exports else window), arguments...] if arguments.length < 3
+  top    = target
+  target = target[item] or= {} for item in name.split '.'
+  block target, top
+
+namespace 'Silencer', (exports, top) ->
+  # `exports` is where you attach namespace members
+  exports.term_vars = []
+  exports.terms = -> exports.term_vars
+
 $ ->
 
   injectJquery = ->
     # only do this on sites that qualify for Silencer
-
     script = document.createElement("script")
     script.type = "text/javascript"
     script.src = "/lib/jquery-1.9.1.min.js"
@@ -12,6 +22,9 @@ $ ->
   sendUserInfo = ->
     if localStorage['silencerAuth']
       chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+
+  getTerms = ->
+    chrome.runtime.sendMessage({contentScriptMutesRequest: true})
 
   detectSite = ->
     if document.URL.indexOf('facebook') > -1
@@ -29,32 +42,19 @@ $ ->
     if document.URL.indexOf("silencer.io/auth") > -1
       setInterval(sendUserInfo, 1500)
 
-  getTerms = (callback) ->
-    debugger
-    chrome.runtime.sendMessage({contentScriptMutesRequest: true})
-
-    chrome.extension.onMessage.addListener (message, sender) ->
-      callback message.user.mutes if message.user
-
   hideChild = (child) -> child.slideUp()
 
   genericFilter = (parentDiv) ->
-    getTerms( (terms) ->
-      parent = parentDiv
-      children = parentDiv.children()
-      console.log terms # each time this runs, it does it one more time than the last time. bad.
+    getTerms()
+    parent = parentDiv
+    children = parentDiv.children()
 
-      # The problem is that each time this runs, it logs an additional thing. First time 1 log, 2nd time 3 total logs, 3rd time 6 total logs
-      # I want to store the value of the callback somewhere to reference each time so I don't have to keep doing a callback
-
-      for child in children
-        for term in terms
-          if $(child).is(":visible")
-            if $($(child)).text().toLowerCase().indexOf(term) > -1
-              hideChild($(child)) 
-              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
-    )
-
+    for child in children
+      for term in @Silencer.terms()
+        if $(child).is(":visible")
+          if $($(child)).text().toLowerCase().indexOf(term) > -1
+            hideChild($(child)) 
+            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
 
   ################## Filters ############################
 
@@ -64,21 +64,24 @@ $ ->
       genericFilter($('.stream-items')) 
 
   filterFacebook = ->
-    getTerms( (terms) ->
-      stream = $(".uiStream")
-      children = $(stream).children(".genericStreamStory")
+    getTerms()
+    stream = $(".uiStream")
+    children = $(stream).children(".genericStreamStory")
 
-      for child in children
-        for term in terms
-          if $(child).is(":visible")
-            if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-              hideChild($(child))
-              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
-    )
+    for child in children
+      for term in @Silencer.terms()
+        if $(child).is(":visible")
+          if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+            hideChild($(child))
+            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
 
   #######################################################
 
   ## Init code stars here ##
 
-  # detects what URL the user is on
+  chrome.extension.onMessage.addListener (message, sender) ->
+    # less data you move around, the faster it iså
+    if message.terms
+      @Silencer.term_vars = message.terms
+
   detectSite()

@@ -342,7 +342,7 @@
         "currentWindow": true
       }, function(tab) {
         return chrome.tabs.sendMessage(tab[0].id, {
-          user: currentUser()
+          terms: currentUser().mutes
         });
       });
     }
