@@ -60,9 +60,6 @@
         filterTwitter();
         setInterval(filterTwitter, 2500);
       }
-      if (document.URL.indexOf("localhost:3001/auth") > -1) {
-        setInterval(sendUserInfo, 1500);
-      }
       if (document.URL.indexOf("silencer.io/auth") > -1) {
         return setInterval(sendUserInfo, 1500);
       }
