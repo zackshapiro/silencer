@@ -12,7 +12,6 @@ namespace 'Silencer', (exports, top) ->
 $ ->
 
   injectJquery = ->
-    # TODO: Only do this for Silencer qualifying sites, can probably detect programatically
     if document.URL.indexOf('facebook') > -1
       script = document.createElement("script")
       script.type = "text/javascript"

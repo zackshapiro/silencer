@@ -414,7 +414,7 @@
       return storeMutes(user);
     } else {
       return chrome.tabs.create({
-        url: "http://localhost:3001/auth"
+        url: "http://silencer.io/auth"
       });
     }
   };
@@ -446,7 +446,7 @@
     }
     if (message.auth) {
       chrome.tabs.create({
-        url: "http://localhost:3001/auth"
+        url: "http://silencer.io/auth"
       });
     }
     if (message.userInfo) {

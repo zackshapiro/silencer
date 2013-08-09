@@ -144,8 +144,8 @@ addMute = (newMute) ->
     user.mutes = mutes
     storeMutes(user)
   else
-    # chrome.tabs.create({ url: "http://silencer.io/auth" })
-    chrome.tabs.create({ url: "http://localhost:3001/auth" })
+    chrome.tabs.create({ url: "http://silencer.io/auth" })
+    # chrome.tabs.create({ url: "http://localhost:3001/auth" })
 
 removeMute = (muteToBeRemoved) ->
   user = currentUser()
@@ -164,8 +164,8 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     mixpanel.track("Content Removed From View", { id: "#{message.termSlidUp}", site: "#{message.site}" })
 
   if message.auth 
-    # chrome.tabs.create({ url: "http://silencer.io/auth" })
-    chrome.tabs.create({ url: "http://localhost:3001/auth" })
+    chrome.tabs.create({ url: "http://silencer.io/auth" })
+    # chrome.tabs.create({ url: "http://localhost:3001/auth" })
 
   if message.userInfo
     localStorage.setItem('silencer', "#{message.user}")
