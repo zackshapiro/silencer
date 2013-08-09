@@ -408,7 +408,7 @@
       }
       mutes.push(newMute);
       mixpanel.track('Term Added', {
-        id: newMute
+        id: "" + newMute
       });
       user.mutes = mutes;
       return storeMutes(user);
@@ -430,7 +430,7 @@
       }
     }
     mixpanel.track("Term Removed", {
-      id: muteToBeRemoved
+      id: "" + muteToBeRemoved
     });
     user.mutes = mutes;
     return storeMutes(user);
