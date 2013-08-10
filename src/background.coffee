@@ -113,6 +113,8 @@ currentUser = ->
 
 getMutes = -> currentUser().mutes
 
+muteCount = -> currentUser().mutes.length
+
 storeMutes = (user) ->
   localStorage.setItem('silencer', JSON.stringify(user))
 
