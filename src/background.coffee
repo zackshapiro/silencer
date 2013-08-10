@@ -139,7 +139,7 @@ addMute = (newMute) ->
       return if newMute == word
 
     mutes.push(newMute)
-    mixpanel.track('Term Added', {id: "#{newMute}"})
+    mixpanel.track("Mute Added", {id: "#{newMute}"})
 
     user.mutes = mutes
     storeMutes(user)
@@ -189,7 +189,10 @@ chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
     removeMute(message.term)
 
   if message.mutePackAdd
-    addMutePack(message.mutePackName)
+    if currentUser()
+      addMutePack(message.mutePackName)
+    else
+      chrome.tabs.create({ url: "http://silencer.io/auth" })
 
   if message.mutePackRemove
     removeMutePack(message.mutePackName)

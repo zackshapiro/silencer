@@ -407,7 +407,7 @@
         }
       }
       mutes.push(newMute);
-      mixpanel.track('Term Added', {
+      mixpanel.track("Mute Added", {
         id: "" + newMute
       });
       user.mutes = mutes;
@@ -476,7 +476,13 @@
       removeMute(message.term);
     }
     if (message.mutePackAdd) {
-      addMutePack(message.mutePackName);
+      if (currentUser()) {
+        addMutePack(message.mutePackName);
+      } else {
+        chrome.tabs.create({
+          url: "http://silencer.io/auth"
+        });
+      }
     }
     if (message.mutePackRemove) {
       return removeMutePack(message.mutePackName);
