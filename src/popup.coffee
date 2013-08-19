@@ -13,8 +13,6 @@ $ ->
     $(".log-in").hide() unless response == false
   )
 
-  newTerm = -> $('.term-to-submit').val()
-
   setMuteValue = (terms) ->
     for term in terms
       $(".add-got").text("Unmute") if term == "gameofthronesfilter"
@@ -66,7 +64,7 @@ $ ->
 
   # Add term (enter pressed)
   $('.my-form').submit ->
-    newTerm = newTerm().toLowerCase()
+    newTerm = $('.term-to-submit').val().toLowerCase()
 
     unless newTerm == ""
       chrome.runtime.sendMessage({addMute: true, term: newTerm})
@@ -75,12 +73,13 @@ $ ->
   # Add term (button clicked)
   $('.mute.submit').click ->
     $('.term-to-submit').focus()
-    newTerm = newTerm().toLowerCase()
+    newTerm = $('.term-to-submit').val().toLowerCase()
 
     unless newTerm == ""
       chrome.runtime.sendMessage({addMute: true, term: newTerm})
       $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{newTerm}", "text": "#{newTerm}"}))
 
+    $('.term-to-submit').val("")
 
   # Show terms
   chrome.tabs.query(active: true, currentWindow: true,

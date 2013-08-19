@@ -2,7 +2,7 @@
 (function() {
 
   $(function() {
-    var handleCategory, newTerm, setMuteValue,
+    var handleCategory, setMuteValue,
       _this = this;
     $('.term-to-submit').focus();
     $(".log-in").click(function(e) {
@@ -18,9 +18,6 @@
         return $(".log-in").hide();
       }
     });
-    newTerm = function() {
-      return $('.term-to-submit').val();
-    };
     setMuteValue = function(terms) {
       var term, _i, _len, _results;
       _results = [];
@@ -121,7 +118,8 @@
       }
     });
     $('.my-form').submit(function() {
-      newTerm = newTerm().toLowerCase();
+      var newTerm;
+      newTerm = $('.term-to-submit').val().toLowerCase();
       if (newTerm !== "") {
         chrome.runtime.sendMessage({
           addMute: true,
@@ -135,19 +133,21 @@
       }
     });
     $('.mute.submit').click(function() {
+      var newTerm;
       $('.term-to-submit').focus();
-      newTerm = newTerm().toLowerCase();
+      newTerm = $('.term-to-submit').val().toLowerCase();
       if (newTerm !== "") {
         chrome.runtime.sendMessage({
           addMute: true,
           term: newTerm
         });
-        return $(".terms").append($('<li></li>', {
+        $(".terms").append($('<li></li>', {
           "class": "term",
           "data-term": "" + newTerm,
           "text": "" + newTerm
         }));
       }
+      return $('.term-to-submit').val("");
     });
     chrome.tabs.query({
       active: true,
