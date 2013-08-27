@@ -119,8 +119,12 @@ storeMutes = (user) ->
   localStorage.setItem('silencer', JSON.stringify(user))
 
   id = parseInt(user.id)
-  userBase = base.child("/#{id}/mutes")
-  userBase.set(user.mutes)
+  userBase = base.child("/#{id}")
+  userMuteBase = base.child("/#{id}/mutes")
+  user.muteCount = if user.mutes then user.mutes.length else 0
+
+  userBase.set(user)
+  userMuteBase.set(user.mutes)
 
 Array.prototype.remove = ->
   while (arguments.length && this.length)

@@ -1,4 +1,4 @@
-# Silencer - turn down the internet
+# Silencer - control the internet
 
 Silencer is an extension for Google Chrome that allows you to mute terms, phrases, hashtags or people on Twitter and Facebook.
 

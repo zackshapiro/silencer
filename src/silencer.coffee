@@ -16,8 +16,7 @@ $ ->
       script = document.createElement("script")
       script.type = "text/javascript"
       script.src = "/lib/jquery-1.9.1.min.js"
-      body = document.getElementsByTagName("body")[0]
-      body.appendChild(script)
+      document.getElementsByTagName("head")[0].appendChild(script)
 
   sendUserInfo = ->
     if localStorage['silencerAuth']
@@ -65,6 +64,7 @@ $ ->
     getTerms()
     stream = $(".uiStream")
     children = $(stream).children(".genericStreamStory")
+    # like = $('.UFIList')
 
     for child in children
       for term in @Silencer.terms()
