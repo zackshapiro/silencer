@@ -19,13 +19,22 @@
 
   namespace('Silencer', function(exports, top) {
     exports.term_vars = [];
-    return exports.terms = function() {
+    exports.terms = function() {
       return exports.term_vars;
+    };
+    return exports.sendUserInfo = function() {
+      if (localStorage['silencerAuth']) {
+        chrome.runtime.sendMessage({
+          userInfo: true,
+          user: localStorage['silencerAuth']
+        });
+        return localStorage.clear();
+      }
     };
   });
 
   $(function() {
-    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery, sendUserInfo;
+    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery;
     injectJquery = function() {
       var script;
       if (document.URL.indexOf('facebook') > -1) {
@@ -33,15 +42,6 @@
         script.type = "text/javascript";
         script.src = "/lib/jquery-1.9.1.min.js";
         return document.getElementsByTagName("head")[0].appendChild(script);
-      }
-    };
-    sendUserInfo = function() {
-      if (localStorage['silencerAuth']) {
-        chrome.runtime.sendMessage({
-          userInfo: true,
-          user: localStorage['silencerAuth']
-        });
-        return localStorage.clear();
       }
     };
     getTerms = function() {
@@ -60,7 +60,10 @@
         setInterval(filterTwitter, 2500);
       }
       if (document.URL.indexOf("silencer.io/auth") > -1) {
-        return setInterval(sendUserInfo, 1500);
+        setInterval(this.Silencer.sendUserInfo, 1500);
+      }
+      if (document.URL.indexOf("localhost:3001/auth") > -1) {
+        return setInterval(this.Silencer.sendUserInfo, 1500);
       }
     };
     hideChild = function(child) {

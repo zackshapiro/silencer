@@ -170,6 +170,10 @@
           _ref1 = $(".terms").children();
           for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
             child = _ref1[_j];
+            $(child).append($('<div></div>', {
+              "class": 'removal',
+              "text": '+'
+            }));
             $(child).wrapInner("<a href='#' class='remove-term'></a>");
           }
         }

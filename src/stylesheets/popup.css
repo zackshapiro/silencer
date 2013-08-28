@@ -38,6 +38,36 @@ input {
   margin: 0 0 4px 24px;
 }
 
+.removal {
+  opacity: 0;
+  filter: alpha(opacity=0);
+  margin-left: -10px;
+  display: inline-block;
+  -webkit-transform: rotate(0deg);
+  -webkit-transition: -webkit-transform 0.5s ease-in-out;
+}
+
+.term:hover .removal {
+  position: relative;
+  left: 13px;
+  opacity: 1;
+  -webkit-transform: rotate(45deg);
+  -webkit-animation: move 0.4s;
+}
+
+@-webkit-keyframes "move" {
+  from {
+    left: 3px;
+    filter: alpha(opacity=0);
+    opacity: 0;
+  }
+  to {
+    left: 13px;
+    filter: alpha(opacity=100);
+    opacity: 1;
+  }
+}
+
 .add-term { padding: 2px 0; }
 
 .button {
@@ -60,11 +90,12 @@ input {
 
 .youre-muting {
   text-align: left;
-  margin-left: 10px;
+  margin: -6px 0 -10px 10px;
 }
 
 .terms {
-  margin-left: -12px;
+  list-style: none;
+  margin-left: -24px;
 }
 
 .term { text-align: left; }

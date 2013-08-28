@@ -92,6 +92,7 @@ $ ->
           $(".terms").append($('<li></li>', {"class": "term", "data-term": "#{term}", "text": "#{term}"} ))
 
         for child in $(".terms").children()
+          $(child).append($('<div></div>', {"class": 'removal', "text": '+'} ))
           $(child).wrapInner("<a href='#' class='remove-term'></a>")
 
       mixpanel.track('Silencer Opened')

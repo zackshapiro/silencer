@@ -8,6 +8,11 @@ namespace 'Silencer', (exports, top) ->
   # `exports` is where you attach namespace members
   exports.term_vars = []
   exports.terms = -> exports.term_vars
+  exports.sendUserInfo = ->
+    if localStorage['silencerAuth']
+      chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+      localStorage.clear()
+
 
 $ ->
 
@@ -17,11 +22,6 @@ $ ->
       script.type = "text/javascript"
       script.src = "/lib/jquery-1.9.1.min.js"
       document.getElementsByTagName("head")[0].appendChild(script)
-
-  sendUserInfo = ->
-    if localStorage['silencerAuth']
-      chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
-      localStorage.clear()
 
   getTerms = ->
     chrome.runtime.sendMessage({contentScriptMutesRequest: true})
@@ -37,7 +37,10 @@ $ ->
       setInterval(filterTwitter, 2500)
 
     if document.URL.indexOf("silencer.io/auth") > -1
-      setInterval(sendUserInfo, 1500)
+      setInterval(@Silencer.sendUserInfo, 1500)
+
+    if document.URL.indexOf("localhost:3001/auth") > -1
+      setInterval(@Silencer.sendUserInfo, 1500)
 
   hideChild = (child) -> child.slideUp()
 
