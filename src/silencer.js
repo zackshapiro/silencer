@@ -85,11 +85,15 @@
             term = _ref[_j];
             if ($(child).is(":visible")) {
               if ($($(child)).text().toLowerCase().indexOf(term) > -1) {
-                hideChild($(child));
-                _results1.push(chrome.runtime.sendMessage({
-                  termSlidUp: "" + term,
-                  site: "twitter"
-                }));
+                if ($(child).find('.fullname').text() !== $('.js-mini-current-user .fullname').first().text()) {
+                  hideChild($(child));
+                  _results1.push(chrome.runtime.sendMessage({
+                    termSlidUp: "" + term,
+                    site: "twitter"
+                  }));
+                } else {
+                  _results1.push(void 0);
+                }
               } else {
                 _results1.push(void 0);
               }

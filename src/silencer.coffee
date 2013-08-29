@@ -53,8 +53,9 @@ $ ->
       for term in @Silencer.terms()
         if $(child).is(":visible")
           if $($(child)).text().toLowerCase().indexOf(term) > -1
-            hideChild($(child)) 
-            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
+            unless $(child).find('.fullname').text() == $('.js-mini-current-user .fullname').first().text()
+              hideChild($(child)) 
+              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
 
   ################## Filters ############################
 
