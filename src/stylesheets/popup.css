@@ -96,6 +96,7 @@ input {
 .terms {
   list-style: none;
   margin-left: -24px;
+  display: inline-block;
 }
 
 .term { text-align: left; }
