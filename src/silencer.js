@@ -113,10 +113,11 @@
       }
     };
     filterFacebook = function() {
-      var child, children, stream, term, _i, _len, _results;
+      var child, children, likeDiv, stream, term, _i, _len, _results;
       getTerms();
       stream = $(".uiStream");
       children = $(stream).children(".genericStreamStory");
+      likeDiv = $('.UFIFirstComponent');
       _results = [];
       for (_i = 0, _len = children.length; _i < _len; _i++) {
         child = children[_i];
@@ -128,11 +129,15 @@
             term = _ref[_j];
             if ($(child).css('display') !== 'none') {
               if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                hideChild($(child));
-                _results1.push(chrome.runtime.sendMessage({
-                  termSlidUp: "" + term,
-                  site: "facebook"
-                }));
+                if (!($(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1)) {
+                  hideChild($(child));
+                  _results1.push(chrome.runtime.sendMessage({
+                    termSlidUp: "" + term,
+                    site: "facebook"
+                  }));
+                } else {
+                  _results1.push(void 0);
+                }
               } else {
                 _results1.push(void 0);
               }

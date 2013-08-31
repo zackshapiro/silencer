@@ -72,14 +72,15 @@ $ ->
     getTerms()
     stream = $(".uiStream")
     children = $(stream).children(".genericStreamStory")
-    # like = $('.UFIList')
+    likeDiv = $('.UFIFirstComponent')
 
     for child in children
       for term in @Silencer.terms()
         if $(child).css('display') != 'none'
           if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-            hideChild($(child))
-            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
+            unless $(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1
+              hideChild($(child))
+              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
 
   #######################################################
 
