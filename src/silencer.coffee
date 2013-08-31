@@ -11,12 +11,17 @@ namespace 'Silencer', (exports, top) ->
 
 $ ->
 
-  # injectJquery = ->
-  #   if document.URL.indexOf('facebook') > -1
-  #     script = document.createElement("script")
-  #     script.type = "text/javascript"
-  #     script.src = "/lib/jquery-1.9.1.min.js"
-  #     document.getElementsByTagName("head")[0].appendChild(script)
+  injectZepto = ->
+    script = document.createElement("script")
+    script.type = "text/javascript"
+    script.src = "/lib/zepto.min.js"
+
+    scriptAlt = document.createElement("scriptAlt")
+    scriptAlt.type = "text/javascript"
+    scriptAlt.src = "/lib/zepto-slides.min.js"
+
+    document.getElementsByTagName("head")[0].appendChild(script)
+    document.getElementsByTagName("head")[0].appendChild(scriptAlt)
 
   sendUserInfo = ->
     if localStorage['silencerAuth']
@@ -28,7 +33,6 @@ $ ->
 
   detectSite = ->
     if document.URL.indexOf('facebook') > -1
-      # injectJquery()
       filterFacebook()
       setInterval(filterFacebook, 2500)
 
@@ -72,7 +76,7 @@ $ ->
 
     for child in children
       for term in @Silencer.terms()
-        if $(child).is(":visible")
+        if $(child).css('display') != 'none'
           if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
             hideChild($(child))
             chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})

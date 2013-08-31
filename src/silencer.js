@@ -25,7 +25,18 @@
   });
 
   $(function() {
-    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, sendUserInfo;
+    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectZepto, sendUserInfo;
+    injectZepto = function() {
+      var script, scriptAlt;
+      script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "/lib/zepto.min.js";
+      scriptAlt = document.createElement("scriptAlt");
+      scriptAlt.type = "text/javascript";
+      scriptAlt.src = "/lib/zepto-slides.min.js";
+      document.getElementsByTagName("head")[0].appendChild(script);
+      return document.getElementsByTagName("head")[0].appendChild(scriptAlt);
+    };
     sendUserInfo = function() {
       if (localStorage['silencerAuth']) {
         chrome.runtime.sendMessage({
@@ -115,7 +126,7 @@
           _results1 = [];
           for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
             term = _ref[_j];
-            if ($(child).is(":visible")) {
+            if ($(child).css('display') !== 'none') {
               if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
                 hideChild($(child));
                 _results1.push(chrome.runtime.sendMessage({
