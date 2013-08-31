@@ -87,7 +87,7 @@ $ ->
   ## Init code stars here ##
 
   chrome.extension.onMessage.addListener (message, sender) ->
-    # less data you move around, the faster it iså
+    # less data you move around, the faster it is
     if message.terms
       @Silencer.term_vars = message.terms
 

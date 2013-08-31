@@ -1,11 +1,9 @@
 body {
-  min-width: 300px;
+  min-width: 360px;
   overflow-x: hidden;
   font-family: "Droid Sans", "Helvetica Neue", Helvetica, sans-serif;
   color: #222;
 }
-
-.email-img { margin: 5px; vertical-align: middle; }
 
 input {
   height: 30px;
@@ -17,9 +15,19 @@ input {
   float: left;
 }
 
-.welcome { text-decoration: underline; font-size: 17px; text-align: center; }
+.header {
+  height: 32px;
+  text-align: center;
+}
 
-.tag-line {
+.name {
+  display: inline-block;
+  margin-right: 4px;
+  font-size: 17px;
+  text-align: center;
+}
+
+.tagline {
   color: #999;
   font-size: 12px;
   margin-top: -12px;
@@ -137,9 +145,16 @@ a.remove-term:hover { opacity: 0.7; }
 
 .packs { font-size: 14px; }
 
+.services { clear: both; }
+
 .services-title {
   padding: 0;
   margin: 0 0 4px -40px;
+  text-decoration: underline;
+}
+
+.nfl-title {
+  font-size: 15px;
   text-decoration: underline;
 }
 
@@ -153,4 +168,39 @@ ul.services { list-style: none; }
   float: right;
   margin: -112px -4px 0 0;
   font-size: 13px;
+}
+
+.nfl {
+  font-size: 13px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  margin-left: -9px;
+}
+
+.afc, .nfc {
+  display: inline-block;
+}
+
+.nfl li {
+  list-style: none;
+}
+
+.nfl .cta {
+  font-size: 11px;
+}
+
+.afc {
+  float: left;
+  width: 218px;
+  margin-left: -40px;
+}
+
+.division {
+  margin-bottom: 4px;
+}
+
+.nfc {
+  float: left;
+  width: 215px;
+  margin-left: -34px;
 }
