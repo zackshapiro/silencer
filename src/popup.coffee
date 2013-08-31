@@ -56,7 +56,7 @@ $ ->
 
   $('.pack-expander').click (e) ->
     e.preventDefault()
-    if $('.filter-packs').is(":visible")
+    if $('.filter-packs').css('display') != 'none'
       $('.filter-packs').slideUp()
     else
       $('.filter-packs').slideDown()

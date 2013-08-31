@@ -110,7 +110,7 @@
     };
     $('.pack-expander').click(function(e) {
       e.preventDefault();
-      if ($('.filter-packs').is(":visible")) {
+      if ($('.filter-packs').css('display') !== 'none') {
         return $('.filter-packs').slideUp();
       } else {
         return $('.filter-packs').slideDown();

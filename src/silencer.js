@@ -19,29 +19,20 @@
 
   namespace('Silencer', function(exports, top) {
     exports.term_vars = [];
-    exports.terms = function() {
+    return exports.terms = function() {
       return exports.term_vars;
     };
-    return exports.sendUserInfo = function() {
+  });
+
+  $(function() {
+    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, sendUserInfo;
+    sendUserInfo = function() {
       if (localStorage['silencerAuth']) {
         chrome.runtime.sendMessage({
           userInfo: true,
           user: localStorage['silencerAuth']
         });
         return localStorage.clear();
-      }
-    };
-  });
-
-  $(function() {
-    var detectSite, filterFacebook, filterTwitter, genericFilter, getTerms, hideChild, injectJquery;
-    injectJquery = function() {
-      var script;
-      if (document.URL.indexOf('facebook') > -1) {
-        script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = "/lib/jquery-1.9.1.min.js";
-        return document.getElementsByTagName("head")[0].appendChild(script);
       }
     };
     getTerms = function() {
@@ -51,7 +42,6 @@
     };
     detectSite = function() {
       if (document.URL.indexOf('facebook') > -1) {
-        injectJquery();
         filterFacebook();
         setInterval(filterFacebook, 2500);
       }
@@ -60,10 +50,10 @@
         setInterval(filterTwitter, 2500);
       }
       if (document.URL.indexOf("silencer.io/auth") > -1) {
-        setInterval(this.Silencer.sendUserInfo, 1500);
+        setInterval(sendUserInfo, 1500);
       }
       if (document.URL.indexOf("localhost:3001/auth") > -1) {
-        return setInterval(this.Silencer.sendUserInfo, 1500);
+        return setInterval(sendUserInfo, 1500);
       }
     };
     hideChild = function(child) {
@@ -83,7 +73,7 @@
           _results1 = [];
           for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
             term = _ref[_j];
-            if ($(child).is(":visible")) {
+            if ($(child).css('display') !== 'none') {
               if ($($(child)).text().toLowerCase().indexOf(term) > -1) {
                 if ($(child).find('.fullname').text() !== $('.js-mini-current-user .fullname').first().text()) {
                   hideChild($(child));

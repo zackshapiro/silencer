@@ -8,27 +8,27 @@ namespace 'Silencer', (exports, top) ->
   # `exports` is where you attach namespace members
   exports.term_vars = []
   exports.terms = -> exports.term_vars
-  exports.sendUserInfo = ->
-    if localStorage['silencerAuth']
-      chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
-      localStorage.clear()
-
 
 $ ->
 
-  injectJquery = ->
-    if document.URL.indexOf('facebook') > -1
-      script = document.createElement("script")
-      script.type = "text/javascript"
-      script.src = "/lib/jquery-1.9.1.min.js"
-      document.getElementsByTagName("head")[0].appendChild(script)
+  # injectJquery = ->
+  #   if document.URL.indexOf('facebook') > -1
+  #     script = document.createElement("script")
+  #     script.type = "text/javascript"
+  #     script.src = "/lib/jquery-1.9.1.min.js"
+  #     document.getElementsByTagName("head")[0].appendChild(script)
+
+  sendUserInfo = ->
+    if localStorage['silencerAuth']
+      chrome.runtime.sendMessage({userInfo: true, user: localStorage['silencerAuth']})
+      localStorage.clear()
 
   getTerms = ->
     chrome.runtime.sendMessage({contentScriptMutesRequest: true})
 
   detectSite = ->
     if document.URL.indexOf('facebook') > -1
-      injectJquery()
+      # injectJquery()
       filterFacebook()
       setInterval(filterFacebook, 2500)
 
@@ -37,10 +37,10 @@ $ ->
       setInterval(filterTwitter, 2500)
 
     if document.URL.indexOf("silencer.io/auth") > -1
-      setInterval(@Silencer.sendUserInfo, 1500)
+      setInterval(sendUserInfo, 1500)
 
     if document.URL.indexOf("localhost:3001/auth") > -1
-      setInterval(@Silencer.sendUserInfo, 1500)
+      setInterval(sendUserInfo, 1500)
 
   hideChild = (child) -> child.slideUp()
 
@@ -51,10 +51,10 @@ $ ->
 
     for child in children
       for term in @Silencer.terms()
-        if $(child).is(":visible")
+        if $(child).css('display') != 'none'
           if $($(child)).text().toLowerCase().indexOf(term) > -1
             unless $(child).find('.fullname').text() == $('.js-mini-current-user .fullname').first().text()
-              hideChild($(child)) 
+              hideChild($(child))
               chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
 
   ################## Filters ############################

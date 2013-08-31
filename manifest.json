@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "matches": ["https://twitter.com/*", "https://www.facebook.com/*", "http://*.silencer.io/*"],
-      "js": ["/lib/jquery-1.9.1.min.js", "/src/silencer.js"],
+      "js": ["/lib/zepto.min.js", "/lib/zepto-slides.min.js", "/src/silencer.js"],
       "all_frames": true
     }
   ], 
