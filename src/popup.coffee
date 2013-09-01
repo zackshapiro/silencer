@@ -39,22 +39,24 @@ $ ->
       $(".add-paper").text("Unmute") if term == "paper.li"
 
 
+      #TODO Do for all NFL here, AFC, NFC
+      $(".add-nfl").text("Unmute all") if term == "nflfilter"
+      $(".add-afc").text("Unmute all") if term == "afcfilter"
+      $(".add-nfc").text("Unmute all") if term == "nfcfilter"
+
       # AFC
       $(".add-bal").text("Unmute") if term == "ravensfilter"
       $(".add-cin").text("Unmute") if term == "bengalsfilter"
       $(".add-cle").text("Unmute") if term == "brownsfilter"
       $(".add-pit").text("Unmute") if term == "steelersfilter"
-
       $(".add-hou").text("Unmute") if term == "texansfilter"
       $(".add-ind").text("Unmute") if term == "coltsfilter"
       $(".add-jax").text("Unmute") if term == "jaguarsfilter"
       $(".add-ten").text("Unmute") if term == "titansfilter"
-
       $(".add-buf").text("Unmute") if term == "billsfilter"
       $(".add-mia").text("Unmute") if term == "dolphinsfilter"
       $(".add-ne").text("Unmute") if term == "patriotsfilter"
       $(".add-nyj").text("Unmute") if term == "jetsfilter"
-
       $(".add-den").text("Unmute") if term == "broncosfilter"
       $(".add-kc").text("Unmute") if term == "chiefsfilter"
       $(".add-oak").text("Unmute") if term == "raidersfilter"
@@ -65,17 +67,14 @@ $ ->
       $(".add-det").text("Unmute") if term == "lionsfilter"
       $(".add-gb").text("Unmute") if term == "packersfilter"
       $(".add-min").text("Unmute") if term == "vikingsfilter"
-
       $(".add-atl").text("Unmute") if term == "falconsfilter"
       $(".add-car").text("Unmute") if term == "panthersfilter"
       $(".add-no").text("Unmute") if term == "saintsfilter"
       $(".add-bucs").text("Unmute") if term == "buccaneersfilter"
-
       $(".add-dal").text("Unmute") if term == "cowboysfilter"
       $(".add-nyg").text("Unmute") if term == "giantsfilter"
       $(".add-phi").text("Unmute") if term == "eaglesfilter"
       $(".add-wsh").text("Unmute") if term == "redskinsfilter"
-
       $(".add-ari").text("Unmute") if term == "cardinalsfilter"
       $(".add-sf").text("Unmute") if term == "fortyninersfilter"
       $(".add-sea").text("Unmute") if term == "seahawksfilter"
@@ -86,24 +85,36 @@ $ ->
 
   handleCategory = (event, selector, message, filterName) ->
     event.preventDefault()
+
     if $(selector).text() == "Mute"
-      mixpanel.track("#{message} Added")
-      chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+      if filterName == "afc" || "nfc"
+        teams = $(selector).parent().parent().children().find('.cta')
+        $(selector).text("Unmute")
+        $(team).text("Unmute") for team in teams
 
-      $(selector).text("Unmute")
+        mixpanel.track("#{message} Added")
+        chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+      else
+        mixpanel.track("#{message} Added")
+        chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+        $(selector).text("Unmute")
     else
-      mixpanel.track("#{message} Removed")
-      chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+      if filterName == "afc" || "nfc"
+        teams = $(selector).parent().parent().children().find('.cta')
+        $(selector).text("Mute")
+        $(team).text("Mute") for team in teams
 
-      $(selector).text("Mute")
+        mixpanel.track("#{message} Removed")
+        chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+      else
+        mixpanel.track("#{message} Removed")
+        chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+        $(selector).text("Mute")
 
 
   $('.pack-expander').click (e) ->
     e.preventDefault()
-    if $('.filter-packs').css('display') != 'none'
-      $('.filter-packs').slideUp()
-    else
-      $('.filter-packs').slideDown()
+    if $('.filter-packs').css('display') != 'none' then $('.filter-packs').slideUp() else $('.filter-packs').slideDown()
 
 
   # Add term (enter pressed)
@@ -155,6 +166,7 @@ $ ->
 
 
   ### Adding filters ### 
+  # TV shows
   $('.add-got').click (e) -> handleCategory(e, '.add-got', "GoT Filter", "got")
   $('.add-mm').click (e) -> handleCategory(e, '.add-mm', "Mad Men Filter", "mm")
   $('.add-ad').click (e) -> handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
@@ -166,6 +178,7 @@ $ ->
   $('.add-dex').click (e) -> handleCategory(e, '.add-dex', "Dexter Filter", "dexter")
   $('.add-newsroom').click (e) -> handleCategory(e, '.add-newsroom', "The Newsroom Filter", "newsroom")
 
+  # Services
   $('.add-ig').click (e) -> handleCategory(e, '.add-ig', "Instagram Mute", "instagram")
   $('.add-ask').click (e) -> handleCategory(e, '.add-ask', "Ask.fm Mute", "ask")
   $('.add-glue').click (e) -> handleCategory(e, '.add-glue', "GetGlue Mute", "glue")
@@ -178,6 +191,10 @@ $ ->
   $('.add-circa').click (e) -> handleCategory(e, '.add-circa', "Circa Mute", "circa")
   $('.add-paper').click (e) -> handleCategory(e, '.add-paper', "Paper.li Mute", "paper")
 
+  # NFL
+  $(".add-nfl").click (e) -> handleCategory(e, ".add-nfl", "NFL Filter", "nfl")
+  $(".add-afc").click (e) -> handleCategory(e, ".add-afc", "NFL Filter", "afc")
+  $(".add-nfc").click (e) -> handleCategory(e, ".add-nfc", "NFL Filter", "nfc")
   # AFC
   $(".add-bal").click (e) -> handleCategory(e, ".add-bal", "Ravens Filter", "bal")
   $(".add-cin").click (e) -> handleCategory(e, ".add-cin", "Bengals Filter", "cin")

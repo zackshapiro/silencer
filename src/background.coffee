@@ -82,6 +82,10 @@ addMutePack = (name) ->
   addMute("cir.ca") if name == "circa"
   addMute("paper.li") if name == "paper"
 
+  addNflFilter() if name == "nfl"
+  addAfcFilter() if name == "afc"
+  addNfcFilter() if name == "nfc"
+
   addRavensFilter() if name == "bal"
   addBengalsFilter() if name == "cin"
   addBrownsFilter() if name == "cle"
@@ -139,6 +143,10 @@ removeMutePack = (name) ->
   removeMute("go.nike.com") if name == "nike"
   removeMute("cir.ca") if name == "circa"
   removeMute("paper.li") if name == "paper"
+
+  removeNflFilter() if name == "nfl"
+  removeAfcFilter() if name == "afc"
+  removeNfcFilter() if name == "nfc"
 
   removeRavensFilter() if name == "bal"
   removeBengalsFilter() if name == "cin"
@@ -206,6 +214,92 @@ addNewsroomFilter = -> addMute(item) for item in newsroomFilter
 removeNewsroomFilter = -> removeMute(item) for item in newsroomFilter
 
 # NFL
+addNflFilter = ->
+  addAfcFilter()
+  addNfcFilter()
+  addTerm("nflfilter") if name == "nfl"
+
+removeNflFilter = ->
+  removeAfcFilter()
+  removeNfcFilter()
+  removeTerm("nflfilter") if name == "nfl"
+
+addAfcFitlter = ->
+  addRavensFilter()
+  addBengalsFilter()
+  addBrownsFilter()
+  addSteelersFilter()
+  addTexansFilter()
+  addColtsFilter()
+  addJaguarsFilter()
+  addTitansFilter()
+  addBillsFilter()
+  addDolphinsFilter()
+  addPatriotsFilter()
+  addJetsFilter()
+  addBroncosFilter()
+  addChiefsFilter()
+  addRaidersFilter()
+  addChargersFilter()
+  addTerm("afcfilter") if name == "afc"
+
+removeAfcFilter = ->
+  removeRavensFilter()
+  removeBengalsFilter()
+  removeBrownsFilter()
+  removeSteelersFilter()
+  removeTexansFilter()
+  removeColtsFilter()
+  removeJaguarsFilter()
+  removeTitansFilter()
+  removeBillsFilter()
+  removeDolphinsFilter()
+  removePatriotsFilter()
+  removeJetsFilter()
+  removeBroncosFilter()
+  removeChiefsFilter()
+  removeRaidersFilter()
+  removeChargersFilter()
+  removeTerm("afcfilter") if name == "afc"
+
+addNfcFilter = ->
+  addBearsFilter()
+  addLionsFilter()
+  addPackersFilter()
+  addVikingsFilter()
+  addFalconsFilter()
+  addPanthersFilter()
+  addSaintsFilter()
+  addBuccaneersFilter()
+  addCowboysFilter()
+  addGiantsFilter()
+  addEaglesFilter()
+  addRedskinsFilter()
+  addCardinalsFilter()
+  addFortyNinersFilter()
+  addSeahawksFilter()
+  addRamsFilter()
+  addTerm("nfcfilter") if name == "nfc"
+
+removeNfcFilter = ->
+  removeBearsFilter()
+  removeLionsFilter()
+  removePackersFilter()
+  removeVikingsFilter()
+  removeFalconsFilter()
+  removePanthersFilter()
+  removeSaintsFilter()
+  removeBuccaneersFilter()
+  removeCowboysFilter()
+  removeGiantsFilter()
+  removeEaglesFilter()
+  removeRedskinsFilter()
+  removeCardinalsFilter()
+  removeFortyNinersFilter()
+  removeSeahawksFilter()
+  removeRamsFilter()
+  removeTerm("nfcfilter") if name == "nfc"
+
 addRavensFilter = -> addMute(item) for item in ravensFilter
 removeRavensFilter = -> removeMute(item) for item in ravensFilter
 
@@ -301,6 +395,7 @@ removeSeahawksFilter = -> removeMute(item) for item in seahawksFilter
 
 addRamsFilter = -> addMute(item) for item in ramsFilter
 removeRamsFilter = -> removeMute(item) for item in ramsFilter
+
 
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 

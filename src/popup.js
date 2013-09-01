@@ -85,6 +85,15 @@
         if (term === "paper.li") {
           $(".add-paper").text("Unmute");
         }
+        if (term === "nflfilter") {
+          $(".add-nfl").text("Unmute all");
+        }
+        if (term === "afcfilter") {
+          $(".add-afc").text("Unmute all");
+        }
+        if (term === "nfcfilter") {
+          $(".add-nfc").text("Unmute all");
+        }
         if (term === "ravensfilter") {
           $(".add-bal").text("Unmute");
         }
@@ -187,21 +196,50 @@
       return _results;
     };
     handleCategory = function(event, selector, message, filterName) {
+      var team, teams, _i, _j, _len, _len1;
       event.preventDefault();
       if ($(selector).text() === "Mute") {
-        mixpanel.track("" + message + " Added");
-        chrome.runtime.sendMessage({
-          mutePackAdd: true,
-          mutePackName: filterName
-        });
-        return $(selector).text("Unmute");
+        if (filterName === "afc" || "nfc") {
+          teams = $(selector).parent().parent().children().find('.cta');
+          $(selector).text("Unmute");
+          for (_i = 0, _len = teams.length; _i < _len; _i++) {
+            team = teams[_i];
+            $(team).text("Unmute");
+          }
+          mixpanel.track("" + message + " Added");
+          return chrome.runtime.sendMessage({
+            mutePackAdd: true,
+            mutePackName: filterName
+          });
+        } else {
+          mixpanel.track("" + message + " Added");
+          chrome.runtime.sendMessage({
+            mutePackAdd: true,
+            mutePackName: filterName
+          });
+          return $(selector).text("Unmute");
+        }
       } else {
-        mixpanel.track("" + message + " Removed");
-        chrome.runtime.sendMessage({
-          mutePackRemove: true,
-          mutePackName: filterName
-        });
-        return $(selector).text("Mute");
+        if (filterName === "afc" || "nfc") {
+          teams = $(selector).parent().parent().children().find('.cta');
+          $(selector).text("Mute");
+          for (_j = 0, _len1 = teams.length; _j < _len1; _j++) {
+            team = teams[_j];
+            $(team).text("Mute");
+          }
+          mixpanel.track("" + message + " Removed");
+          return chrome.runtime.sendMessage({
+            mutePackRemove: true,
+            mutePackName: filterName
+          });
+        } else {
+          mixpanel.track("" + message + " Removed");
+          chrome.runtime.sendMessage({
+            mutePackRemove: true,
+            mutePackName: filterName
+          });
+          return $(selector).text("Mute");
+        }
       }
     };
     $('.pack-expander').click(function(e) {
@@ -350,6 +388,15 @@
     });
     $('.add-paper').click(function(e) {
       return handleCategory(e, '.add-paper', "Paper.li Mute", "paper");
+    });
+    $(".add-nfl").click(function(e) {
+      return handleCategory(e, ".add-nfl", "NFL Filter", "nfl");
+    });
+    $(".add-afc").click(function(e) {
+      return handleCategory(e, ".add-afc", "NFL Filter", "afc");
+    });
+    $(".add-nfc").click(function(e) {
+      return handleCategory(e, ".add-nfc", "NFL Filter", "nfc");
     });
     $(".add-bal").click(function(e) {
       return handleCategory(e, ".add-bal", "Ravens Filter", "bal");
