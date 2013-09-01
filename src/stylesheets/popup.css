@@ -181,6 +181,10 @@ ul.services { list-style: none; }
   display: inline-block;
 }
 
+.nfl ul {
+  padding-left: 0;
+}
+
 .nfl li {
   list-style: none;
 }
@@ -191,16 +195,14 @@ ul.services { list-style: none; }
 
 .afc {
   float: left;
-  width: 218px;
-  margin-left: -40px;
+  width: 176px;
+  margin-right: 5px;
 }
 
-.division {
-  margin-bottom: 4px;
-}
+.division { margin-bottom: 8px; }
 
 .nfc {
   float: left;
-  width: 215px;
-  margin-left: -34px;
+  width: 174px;
+  margin-left: 4px;
 }

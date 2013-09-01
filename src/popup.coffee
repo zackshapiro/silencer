@@ -38,6 +38,50 @@ $ ->
       $(".add-circa").text("Unmute") if term == "cir.ca"
       $(".add-paper").text("Unmute") if term == "paper.li"
 
+
+      # AFC
+      $(".add-bal").text("Unmute") if term == "ravensfilter"
+      $(".add-cin").text("Unmute") if term == "bengalsfilter"
+      $(".add-cle").text("Unmute") if term == "brownsfilter"
+      $(".add-pit").text("Unmute") if term == "steelersfilter"
+
+      $(".add-hou").text("Unmute") if term == "texansfilter"
+      $(".add-ind").text("Unmute") if term == "coltsfilter"
+      $(".add-jax").text("Unmute") if term == "jaguarsfilter"
+      $(".add-ten").text("Unmute") if term == "titansfilter"
+
+      $(".add-buf").text("Unmute") if term == "billsfilter"
+      $(".add-mia").text("Unmute") if term == "dolphinsfilter"
+      $(".add-ne").text("Unmute") if term == "patriotsfilter"
+      $(".add-nyj").text("Unmute") if term == "jetsfilter"
+
+      $(".add-den").text("Unmute") if term == "broncosfilter"
+      $(".add-kc").text("Unmute") if term == "chiefsfilter"
+      $(".add-oak").text("Unmute") if term == "raidersfilter"
+      $(".add-sd").text("Unmute") if term == "chargersfilter"
+
+      # NFC
+      $(".add-chi").text("Unmute") if term == "bearsfilter"
+      $(".add-det").text("Unmute") if term == "lionsfilter"
+      $(".add-gb").text("Unmute") if term == "packersfilter"
+      $(".add-min").text("Unmute") if term == "vikingsfilter"
+
+      $(".add-atl").text("Unmute") if term == "falconsfilter"
+      $(".add-car").text("Unmute") if term == "panthersfilter"
+      $(".add-no").text("Unmute") if term == "saintsfilter"
+      $(".add-bucs").text("Unmute") if term == "buccaneersfilter"
+
+      $(".add-dal").text("Unmute") if term == "cowboysfilter"
+      $(".add-nyg").text("Unmute") if term == "giantsfilter"
+      $(".add-phi").text("Unmute") if term == "eaglesfilter"
+      $(".add-wsh").text("Unmute") if term == "redskinsfilter"
+
+      $(".add-ari").text("Unmute") if term == "cardinalsfilter"
+      $(".add-sf").text("Unmute") if term == "fortyninersfilter"
+      $(".add-sea").text("Unmute") if term == "seahawksfilter"
+      $(".add-stl").text("Unmute") if term == "ramsfilter"
+
+
       # don't forget to add filter triggers below
 
   handleCategory = (event, selector, message, filterName) ->
@@ -111,7 +155,6 @@ $ ->
 
 
   ### Adding filters ### 
-
   $('.add-got').click (e) -> handleCategory(e, '.add-got', "GoT Filter", "got")
   $('.add-mm').click (e) -> handleCategory(e, '.add-mm', "Mad Men Filter", "mm")
   $('.add-ad').click (e) -> handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
@@ -134,3 +177,39 @@ $ ->
   $('.add-nike').click (e) -> handleCategory(e, '.add-nike', "Nike+ Mute", "nike")
   $('.add-circa').click (e) -> handleCategory(e, '.add-circa', "Circa Mute", "circa")
   $('.add-paper').click (e) -> handleCategory(e, '.add-paper', "Paper.li Mute", "paper")
+
+  # AFC
+  $(".add-bal").click (e) -> handleCategory(e, ".add-bal", "Ravens Filter", "bal")
+  $(".add-cin").click (e) -> handleCategory(e, ".add-cin", "Bengals Filter", "cin")
+  $(".add-cle").click (e) -> handleCategory(e, ".add-cle", "Browns Filter", "cle")
+  $(".add-pit").click (e) -> handleCategory(e, ".add-pit", "Steelers Filter", "pit")
+  $(".add-hou").click (e) -> handleCategory(e, ".add-hou", "Texans Filter", "hou")
+  $(".add-ind").click (e) -> handleCategory(e, ".add-ind", "Colts Filter", "ind")
+  $(".add-jax").click (e) -> handleCategory(e, ".add-jax", "Jaguars Filter", "jax")
+  $(".add-ten").click (e) -> handleCategory(e, ".add-ten", "Titans Filter", "ten")
+  $(".add-buf").click (e) -> handleCategory(e, ".add-buf", "Bills Filter", "buf")
+  $(".add-mia").click (e) -> handleCategory(e, ".add-mia", "Dolphins Filter", "mia")
+  $(".add-ne").click (e) -> handleCategory(e, ".add-ne", "Patriots Filter", "ne")
+  $(".add-nyj").click (e) -> handleCategory(e, ".add-nyj", "Jets Filter", "nyj")
+  $(".add-den").click (e) -> handleCategory(e, ".add-den", "Broncos Filter", "den")
+  $(".add-kc").click (e) -> handleCategory(e, ".add-kc", "Chiefs Filter", "kc")
+  $(".add-oak").click (e) -> handleCategory(e, ".add-oak", "Raiders Filter", "oak")
+  $(".add-sd").click (e) -> handleCategory(e, ".add-sd", "Chargers Filter", "sd")
+
+  # NFC
+  $(".add-chi").click (e) -> handleCategory(e, ".add-chi", "Bears Filter", "chi")
+  $(".add-det").click (e) -> handleCategory(e, ".add-det", "Lions Filter", "det")
+  $(".add-gb").click (e) -> handleCategory(e, ".add-gb", "Packers Filter", "gb")
+  $(".add-min").click (e) -> handleCategory(e, ".add-min", "Vikings Filter", "min")
+  $(".add-atl").click (e) -> handleCategory(e, ".add-atl", "Falcons Filter", "atl")
+  $(".add-car").click (e) -> handleCategory(e, ".add-car", "Panthers Filter", "car")
+  $(".add-no").click (e) -> handleCategory(e, ".add-no", "Saints Filter", "no")
+  $(".add-bucs").click (e) -> handleCategory(e, ".add-bucs", "Buccaneers Filter", "bucs")
+  $(".add-dal").click (e) -> handleCategory(e, ".add-dal", "Cowboys Filter", "dal")
+  $(".add-nyg").click (e) -> handleCategory(e, ".add-nyg", "Giants Filter", "nyg")
+  $(".add-phi").click (e) -> handleCategory(e, ".add-phi", "Eagles Filter", "phi")
+  $(".add-wsh").click (e) -> handleCategory(e, ".add-wsh", "Redskins Filter", "wsh")
+  $(".add-ari").click (e) -> handleCategory(e, ".add-ari", "Cardinals Filter", "ari")
+  $(".add-sf").click (e) -> handleCategory(e, ".add-sf", "49ers Filter", "sf")
+  $(".add-sea").click (e) -> handleCategory(e, ".add-sea", "Seahawks Filter", "sea")
+  $(".add-stl").click (e) -> handleCategory(e, ".add-stl", "Rams Filter", "stl")

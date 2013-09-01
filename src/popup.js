@@ -83,7 +83,103 @@
           $(".add-circa").text("Unmute");
         }
         if (term === "paper.li") {
-          _results.push($(".add-paper").text("Unmute"));
+          $(".add-paper").text("Unmute");
+        }
+        if (term === "ravensfilter") {
+          $(".add-bal").text("Unmute");
+        }
+        if (term === "bengalsfilter") {
+          $(".add-cin").text("Unmute");
+        }
+        if (term === "brownsfilter") {
+          $(".add-cle").text("Unmute");
+        }
+        if (term === "steelersfilter") {
+          $(".add-pit").text("Unmute");
+        }
+        if (term === "texansfilter") {
+          $(".add-hou").text("Unmute");
+        }
+        if (term === "coltsfilter") {
+          $(".add-ind").text("Unmute");
+        }
+        if (term === "jaguarsfilter") {
+          $(".add-jax").text("Unmute");
+        }
+        if (term === "titansfilter") {
+          $(".add-ten").text("Unmute");
+        }
+        if (term === "billsfilter") {
+          $(".add-buf").text("Unmute");
+        }
+        if (term === "dolphinsfilter") {
+          $(".add-mia").text("Unmute");
+        }
+        if (term === "patriotsfilter") {
+          $(".add-ne").text("Unmute");
+        }
+        if (term === "jetsfilter") {
+          $(".add-nyj").text("Unmute");
+        }
+        if (term === "broncosfilter") {
+          $(".add-den").text("Unmute");
+        }
+        if (term === "chiefsfilter") {
+          $(".add-kc").text("Unmute");
+        }
+        if (term === "raidersfilter") {
+          $(".add-oak").text("Unmute");
+        }
+        if (term === "chargersfilter") {
+          $(".add-sd").text("Unmute");
+        }
+        if (term === "bearsfilter") {
+          $(".add-chi").text("Unmute");
+        }
+        if (term === "lionsfilter") {
+          $(".add-det").text("Unmute");
+        }
+        if (term === "packersfilter") {
+          $(".add-gb").text("Unmute");
+        }
+        if (term === "vikingsfilter") {
+          $(".add-min").text("Unmute");
+        }
+        if (term === "falconsfilter") {
+          $(".add-atl").text("Unmute");
+        }
+        if (term === "panthersfilter") {
+          $(".add-car").text("Unmute");
+        }
+        if (term === "saintsfilter") {
+          $(".add-no").text("Unmute");
+        }
+        if (term === "buccaneersfilter") {
+          $(".add-bucs").text("Unmute");
+        }
+        if (term === "cowboysfilter") {
+          $(".add-dal").text("Unmute");
+        }
+        if (term === "giantsfilter") {
+          $(".add-nyg").text("Unmute");
+        }
+        if (term === "eaglesfilter") {
+          $(".add-phi").text("Unmute");
+        }
+        if (term === "redskinsfilter") {
+          $(".add-wsh").text("Unmute");
+        }
+        if (term === "cardinalsfilter") {
+          $(".add-ari").text("Unmute");
+        }
+        if (term === "fortyninersfilter") {
+          $(".add-sf").text("Unmute");
+        }
+        if (term === "seahawksfilter") {
+          $(".add-sea").text("Unmute");
+        }
+        if (term === "ramsfilter") {
+          _results.push($(".add-stl").text("Unmute"));
         } else {
           _results.push(void 0);
         }
@@ -252,8 +348,104 @@
     $('.add-circa').click(function(e) {
       return handleCategory(e, '.add-circa', "Circa Mute", "circa");
     });
-    return $('.add-paper').click(function(e) {
+    $('.add-paper').click(function(e) {
       return handleCategory(e, '.add-paper', "Paper.li Mute", "paper");
+    });
+    $(".add-bal").click(function(e) {
+      return handleCategory(e, ".add-bal", "Ravens Filter", "bal");
+    });
+    $(".add-cin").click(function(e) {
+      return handleCategory(e, ".add-cin", "Bengals Filter", "cin");
+    });
+    $(".add-cle").click(function(e) {
+      return handleCategory(e, ".add-cle", "Browns Filter", "cle");
+    });
+    $(".add-pit").click(function(e) {
+      return handleCategory(e, ".add-pit", "Steelers Filter", "pit");
+    });
+    $(".add-hou").click(function(e) {
+      return handleCategory(e, ".add-hou", "Texans Filter", "hou");
+    });
+    $(".add-ind").click(function(e) {
+      return handleCategory(e, ".add-ind", "Colts Filter", "ind");
+    });
+    $(".add-jax").click(function(e) {
+      return handleCategory(e, ".add-jax", "Jaguars Filter", "jax");
+    });
+    $(".add-ten").click(function(e) {
+      return handleCategory(e, ".add-ten", "Titans Filter", "ten");
+    });
+    $(".add-buf").click(function(e) {
+      return handleCategory(e, ".add-buf", "Bills Filter", "buf");
+    });
+    $(".add-mia").click(function(e) {
+      return handleCategory(e, ".add-mia", "Dolphins Filter", "mia");
+    });
+    $(".add-ne").click(function(e) {
+      return handleCategory(e, ".add-ne", "Patriots Filter", "ne");
+    });
+    $(".add-nyj").click(function(e) {
+      return handleCategory(e, ".add-nyj", "Jets Filter", "nyj");
+    });
+    $(".add-den").click(function(e) {
+      return handleCategory(e, ".add-den", "Broncos Filter", "den");
+    });
+    $(".add-kc").click(function(e) {
+      return handleCategory(e, ".add-kc", "Chiefs Filter", "kc");
+    });
+    $(".add-oak").click(function(e) {
+      return handleCategory(e, ".add-oak", "Raiders Filter", "oak");
+    });
+    $(".add-sd").click(function(e) {
+      return handleCategory(e, ".add-sd", "Chargers Filter", "sd");
+    });
+    $(".add-chi").click(function(e) {
+      return handleCategory(e, ".add-chi", "Bears Filter", "chi");
+    });
+    $(".add-det").click(function(e) {
+      return handleCategory(e, ".add-det", "Lions Filter", "det");
+    });
+    $(".add-gb").click(function(e) {
+      return handleCategory(e, ".add-gb", "Packers Filter", "gb");
+    });
+    $(".add-min").click(function(e) {
+      return handleCategory(e, ".add-min", "Vikings Filter", "min");
+    });
+    $(".add-atl").click(function(e) {
+      return handleCategory(e, ".add-atl", "Falcons Filter", "atl");
+    });
+    $(".add-car").click(function(e) {
+      return handleCategory(e, ".add-car", "Panthers Filter", "car");
+    });
+    $(".add-no").click(function(e) {
+      return handleCategory(e, ".add-no", "Saints Filter", "no");
+    });
+    $(".add-bucs").click(function(e) {
+      return handleCategory(e, ".add-bucs", "Buccaneers Filter", "bucs");
+    });
+    $(".add-dal").click(function(e) {
+      return handleCategory(e, ".add-dal", "Cowboys Filter", "dal");
+    });
+    $(".add-nyg").click(function(e) {
+      return handleCategory(e, ".add-nyg", "Giants Filter", "nyg");
+    });
+    $(".add-phi").click(function(e) {
+      return handleCategory(e, ".add-phi", "Eagles Filter", "phi");
+    });
+    $(".add-wsh").click(function(e) {
+      return handleCategory(e, ".add-wsh", "Redskins Filter", "wsh");
+    });
+    $(".add-ari").click(function(e) {
+      return handleCategory(e, ".add-ari", "Cardinals Filter", "ari");
+    });
+    $(".add-sf").click(function(e) {
+      return handleCategory(e, ".add-sf", "49ers Filter", "sf");
+    });
+    $(".add-sea").click(function(e) {
+      return handleCategory(e, ".add-sea", "Seahawks Filter", "sea");
+    });
+    return $(".add-stl").click(function(e) {
+      return handleCategory(e, ".add-stl", "Rams Filter", "stl");
     });
   });
 

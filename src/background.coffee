@@ -22,6 +22,40 @@ newsroomFilter = [ "the newsroom", "acn", "willmcavoyacn", "will", "mcavoy", "#t
 
 reservedWords = [ "reply", "retweet", "favorite", "expand", "more", "like", "comment", "share"]
 
+ravensFilter = []
+bengalsFilter = []
+brownsFilter = []
+steelersFilter = []
+texansFilter = []
+coltsFilter = []
+jaguarsFilter = []
+titansFilter = []
+billsFilter = []
+dolphinsFilter = []
+patriotsFilter = []
+jetsFilter = []
+broncosFilter = []
+chiefsFilter = []
+raidersFilter = []
+chargersFilter = []
+
+bearsFilter = []
+lionsFilter = []
+packersFilter = []
+vikingsFilter = []
+falconsFilter = []
+panthersFilter = []
+saintsFilter = []
+buccaneersFilter = []
+cowboysFilter = []
+giantsFilter = []
+eaglesFilter = []
+redskinsFilter = []
+cardinalsFilter = []
+fortyNinersFilter = []
+seahawksFilter = []
+ramsFilter = []
+
 ##############################################
 
 addMutePack = (name) ->
@@ -48,6 +82,40 @@ addMutePack = (name) ->
   addMute("cir.ca") if name == "circa"
   addMute("paper.li") if name == "paper"
 
+  addRavensFilter() if name == "bal"
+  addBengalsFilter() if name == "cin"
+  addBrownsFilter() if name == "cle"
+  addSteelersFilter() if name == "pit"
+  addTexansFilter() if name == "hou"
+  addColtsFilter() if name == "ind"
+  addJaguarsFilter() if name == "jax"
+  addTitansFilter() if name == "ten"
+  addBillsFilter() if name == "buf"
+  addDolphinsFilter() if name == "mia"
+  addPatriotsFilter() if name == "ne"
+  addJetsFilter() if name == "nyj"
+  addBroncosFilter() if name == "den"
+  addChiefsFilter() if name == "kc"
+  addRaidersFilter() if name == "oak"
+  addChargerFilter() if name == "sd"
+
+  addBearsFilter() if name == "chi"
+  addLionsFilter() if name == "det"
+  addPackersFilter() if name == "gb"
+  addVikingsFilter() if name == "min"
+  addFalconsFilter() if name == "atl"
+  addPanthersFilter() if name == "car"
+  addSaintsFilter() if name == "no"
+  addBucaneersFilter() if name == "bucs"
+  addCowboysFilter() if name == "dal"
+  addGiantsFilter() if name == "nyg"
+  addEaglesFilter() if name == "phi"
+  addRedskinsFilter() if name == "wsh"
+  addCardinalsFilter() if name == "ari"
+  addFortyNinersFilter() if name == "sf"
+  addSeahawksFilter() if name == "sea"
+  addRamsFilter() if name == "stl"
+
 removeMutePack = (name) ->
   removeGoTFilter() if name == "got"
   removeMmFilter() if name == "mm"
@@ -71,6 +139,40 @@ removeMutePack = (name) ->
   removeMute("go.nike.com") if name == "nike"
   removeMute("cir.ca") if name == "circa"
   removeMute("paper.li") if name == "paper"
+
+  removeRavensFilter() if name == "bal"
+  removeBengalsFilter() if name == "cin"
+  removeBrownsFilter() if name == "cle"
+  removeSteelersFilter() if name == "pit"
+  removeTexansFilter() if name == "hou"
+  removeColtsFilter() if name == "ind"
+  removeJaguarsFilter() if name == "jax"
+  removeTitansFilter() if name == "ten"
+  removeBillsFilter() if name == "buf"
+  removeDolphinsFilter() if name == "mia"
+  removePatriotsFilter() if name == "ne"
+  removeJetsFilter() if name == "nyj"
+  removeBroncosFilter() if name == "den"
+  removeChiefsFilter() if name == "kc"
+  removeRaidersFilter() if name == "oak"
+  removeChargerFilter() if name == "sd"
+
+  removeBearsFilter() if name == "chi"
+  removeLionsFilter() if name == "det"
+  removePackersFilter() if name == "gb"
+  removeVikingsFilter() if name == "min"
+  removeFalconsFilter() if name == "atl"
+  removePanthersFilter() if name == "car"
+  removeSaintsFilter() if name == "no"
+  removeBuccaneersFilter() if name == "bucs"
+  removeCowboysFilter() if name == "dal"
+  removeGiantsFilter() if name == "nyg"
+  removeEaglesFilter() if name == "phi"
+  removeRedskinsFilter() if name == "wsh"
+  removeCardinalsFilter() if name == "ari"
+  removeFortyNinersFilter() if name == "sf"
+  removeSeahawksFilter() if name == "sea"
+  removeRamsFilter() if name == "stl"
 
 
 addGoTFilter = -> addMute(item) for item in thronesFilter
@@ -102,6 +204,103 @@ removeDexterFilter = -> removeMute(item) for item in dexterFilter
 
 addNewsroomFilter = -> addMute(item) for item in newsroomFilter
 removeNewsroomFilter = -> removeMute(item) for item in newsroomFilter
+
+# NFL
+addRavensFilter = -> addMute(item) for item in ravensFilter
+removeRavensFilter = -> removeMute(item) for item in ravensFilter
+
+addBengalsFilter = -> addMute(item) for item in bengalsFilter
+removeBengalsFilter = -> removeMute(item) for item in bengalsFilter
+
+addBrownsFilter = -> addMute(item) for item in brownsFilter
+addBrownsFilter = -> removeMute(item) for item in brownsFilter
+
+addSteelersFilter = -> addMute(item) for item in steelersFilter
+removeSteelersFilter = -> removeMute(item) for item in steelersFilter
+
+addTexansFilter = -> addMute(item) for item in texansFilter
+removeTexansFilter = -> removeMute(item) for item in texansFilter
+
+addColtsFilter = -> addMute(item) for item in coltsFilter
+removeColtsFilter = -> removeMute(item) for item in coltsFilter
+
+addJaguarsFilter = -> addMute(item) for item in jaguarsFilter
+removeJaguarsFilter = -> removeMute(item) for item in jaguarsFilter
+
+addTitansFilter = -> addMute(item) for item in titansFilter
+removeTitansFilter = -> removeMute(item) for item in titansFilter
+
+addBillsFilter = -> addMute(item) for item in billsFilter
+removeBillsFilter = -> removeMute(item) for item in billsFilter
+
+addDolphinsFilter = -> addMute(item) for item in dolphinsFilter
+removeDolphinsFilter = -> removeMute(item) for item in dolphinsFilter
+
+addPatriotsFilter = -> addMute(item) for item in patriotsFilter
+removePatriotsFilter = -> removeMute(item) for item in patriotsFilter
+
+addJetsFilter = -> addMute(item) for item in jetsFilter
+removeJetsFilter = -> removeMute(item) for item in jetsFilter
+
+addBroncosFilter = -> addMute(item) for item in broncosFilter
+removeBroncosFilter = -> removeMute(item) for item in broncosFilter
+
+addChiefsFilter = -> addMute(item) for item in chiefsFilter
+removeChiefsFilter = -> removeMute(item) for item in chiefsFilter
+
+addRaidersFilter = -> addMute(item) for item in raidersFilter
+removeRaidersFilter = -> removeMute(item) for item in raidersFilter
+
+addChargersFilter = -> addMute(item) for item in chargersFilter
+removeChargersFilter = -> removeMute(item) for item in chargersFilter
+
+addBearsFilter = -> addMute(item) for item in bearsFilter
+removeBearsFilter = -> removeMute(item) for item in bearsFilter
+
+addLionsFilter = -> addMute(item) for item in lionsFilter
+removeLionsFilter = -> removeMute(item) for item in lionsFilter
+
+addPackersFilter = -> addMute(item) for item in packersFilter
+removePackersFilter = -> removeMute(item) for item in packersFilter
+
+addVikingsFilter = -> addMute(item) for item in vikingsFilter
+removeVikingsFilter = -> removeMute(item) for item in vikingsFilter
+
+addFalconsFilter = -> addMute(item) for item in falconsFilter
+removeFalconsFilter = -> removeMute(item) for item in falconsFilter
+
+addPanthersFilter = -> addMute(item) for item in panthersFilter
+removePanthersFilter = -> removeMute(item) for item in panthersFilter
+
+addSaintsFilter = -> addMute(item) for item in saintsFilter
+removeSaintsFilter = -> removeMute(item) for item in saintsFilter
+
+addBuccaneersFilter = -> addMute(item) for item in buccaneersFilter
+removeBuccaneersFilter = -> removeMute(item) for item in buccaneersFilter
+
+addCowboysFilter = -> addMute(item) for item in cowboysFilter
+removeCowboysFilter = -> removeMute(item) for item in cowboysFilter
+
+addGiantsFilter = -> addMute(item) for item in giantsFilter
+removeGiantsFilter = -> removeMute(item) for item in giantsFilter
+
+addEaglesFilter = -> addMute(item) for item in eaglesFilter
+removeEaglesFilter = -> removeMute(item) for item in eaglesFilter
+
+addRedskinsFilter = -> addMute(item) for item in redskinsFilter
+removeRedskinsFilter = -> removeMute(item) for item in redskinsFilter
+
+addCardinalsFilter = -> addMute(item) for item in cardinalsFilter
+removeCardinalsFilter = -> removeMute(item) for item in cardinalsFilter
+
+addFortyNinersFilter = -> addMute(item) for item in fortyNinersFilter
+removeFortyNinersFilter = -> removeMute(item) for item in fortyNinersFilter
+
+addSeahawksFilter = -> addMute(item) for item in seahawksFilter
+removeSeahawksFilter = -> removeMute(item) for item in seahawksFilter
+
+addRamsFilter = -> addMute(item) for item in ramsFilter
+removeRamsFilter = -> removeMute(item) for item in ramsFilter
 
 base = new Firebase('https://silencerio.firebaseIO.com/users')
 
