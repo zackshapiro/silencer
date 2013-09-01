@@ -40,9 +40,9 @@ $ ->
 
 
       #TODO Do for all NFL here, AFC, NFC
-      $(".add-nfl").text("Unmute all") if term == "nflfilter"
-      $(".add-afc").text("Unmute all") if term == "afcfilter"
-      $(".add-nfc").text("Unmute all") if term == "nfcfilter"
+      $(".add-nfl").text("Unmute") if term == "nflfilter"
+      $(".add-afc").text("Unmute") if term == "afcfilter"
+      $(".add-nfc").text("Unmute") if term == "nfcfilter"
 
       # AFC
       $(".add-bal").text("Unmute") if term == "ravensfilter"
@@ -86,26 +86,35 @@ $ ->
   handleCategory = (event, selector, message, filterName) ->
     event.preventDefault()
 
+    debugger
     if $(selector).text() == "Mute"
-      if filterName == "afc" || "nfc"
+      if filterName == "afc" || filterName == "nfc"
         teams = $(selector).parent().parent().children().find('.cta')
         $(selector).text("Unmute")
         $(team).text("Unmute") for team in teams
 
         mixpanel.track("#{message} Added")
         chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+      else if filterName == "nfl"
+        $('.add-afc').click()
+        $('.add-nfc').click()
+        $(selector).text("Unmute")
       else
         mixpanel.track("#{message} Added")
         chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
         $(selector).text("Unmute")
     else
-      if filterName == "afc" || "nfc"
+      if filterName == "afc" || filterName == "nfc"
         teams = $(selector).parent().parent().children().find('.cta')
         $(selector).text("Mute")
         $(team).text("Mute") for team in teams
 
         mixpanel.track("#{message} Removed")
         chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+      else if filterName == "nfl"
+        $('.add-afc').click()
+        $('.add-nfc').click()
+        $(selector).text("Mute")
       else
         mixpanel.track("#{message} Removed")
         chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})

@@ -86,13 +86,13 @@
           $(".add-paper").text("Unmute");
         }
         if (term === "nflfilter") {
-          $(".add-nfl").text("Unmute all");
+          $(".add-nfl").text("Unmute");
         }
         if (term === "afcfilter") {
-          $(".add-afc").text("Unmute all");
+          $(".add-afc").text("Unmute");
         }
         if (term === "nfcfilter") {
-          $(".add-nfc").text("Unmute all");
+          $(".add-nfc").text("Unmute");
         }
         if (term === "ravensfilter") {
           $(".add-bal").text("Unmute");
@@ -198,8 +198,9 @@
     handleCategory = function(event, selector, message, filterName) {
       var team, teams, _i, _j, _len, _len1;
       event.preventDefault();
+      debugger;
       if ($(selector).text() === "Mute") {
-        if (filterName === "afc" || "nfc") {
+        if (filterName === "afc" || filterName === "nfc") {
           teams = $(selector).parent().parent().children().find('.cta');
           $(selector).text("Unmute");
           for (_i = 0, _len = teams.length; _i < _len; _i++) {
@@ -211,6 +212,10 @@
             mutePackAdd: true,
             mutePackName: filterName
           });
+        } else if (filterName === "nfl") {
+          $('.add-afc').click();
+          $('.add-nfc').click();
+          return $(selector).text("Unmute");
         } else {
           mixpanel.track("" + message + " Added");
           chrome.runtime.sendMessage({
@@ -220,7 +225,7 @@
           return $(selector).text("Unmute");
         }
       } else {
-        if (filterName === "afc" || "nfc") {
+        if (filterName === "afc" || filterName === "nfc") {
           teams = $(selector).parent().parent().children().find('.cta');
           $(selector).text("Mute");
           for (_j = 0, _len1 = teams.length; _j < _len1; _j++) {
@@ -232,6 +237,10 @@
             mutePackRemove: true,
             mutePackName: filterName
           });
+        } else if (filterName === "nfl") {
+          $('.add-afc').click();
+          $('.add-nfc').click();
+          return $(selector).text("Mute");
         } else {
           mixpanel.track("" + message + " Removed");
           chrome.runtime.sendMessage({
