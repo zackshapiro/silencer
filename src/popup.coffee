@@ -86,7 +86,6 @@ $ ->
   handleCategory = (event, selector, message, filterName) ->
     event.preventDefault()
 
-    debugger
     if $(selector).text() == "Mute"
       if filterName == "afc" || filterName == "nfc"
         teams = $(selector).parent().parent().children().find('.cta')
@@ -96,9 +95,10 @@ $ ->
         mixpanel.track("#{message} Added")
         chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
       else if filterName == "nfl"
-        $('.add-afc').click()
-        $('.add-nfc').click()
+        $('.add-afc').click() unless $('.add-afc').text() == "Unmute"
+        $('.add-nfc').click() unless $('.add-nfc').text() == "Unmute"
         $(selector).text("Unmute")
+        mixpanel.track("#{message} Added")
       else
         mixpanel.track("#{message} Added")
         chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
@@ -112,9 +112,10 @@ $ ->
         mixpanel.track("#{message} Removed")
         chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
       else if filterName == "nfl"
-        $('.add-afc').click()
-        $('.add-nfc').click()
+        $('.add-afc').click() unless $('.add-afc').text() == "Mute"
+        $('.add-nfc').click() unless $('.add-nfc').text() == "Mute"
         $(selector).text("Mute")
+        mixpanel.track("#{message} Added")
       else
         mixpanel.track("#{message} Removed")
         chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})

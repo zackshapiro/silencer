@@ -198,7 +198,6 @@
     handleCategory = function(event, selector, message, filterName) {
       var team, teams, _i, _j, _len, _len1;
       event.preventDefault();
-      debugger;
       if ($(selector).text() === "Mute") {
         if (filterName === "afc" || filterName === "nfc") {
           teams = $(selector).parent().parent().children().find('.cta');
@@ -213,9 +212,14 @@
             mutePackName: filterName
           });
         } else if (filterName === "nfl") {
-          $('.add-afc').click();
-          $('.add-nfc').click();
-          return $(selector).text("Unmute");
+          if ($('.add-afc').text() !== "Unmute") {
+            $('.add-afc').click();
+          }
+          if ($('.add-nfc').text() !== "Unmute") {
+            $('.add-nfc').click();
+          }
+          $(selector).text("Unmute");
+          return mixpanel.track("" + message + " Added");
         } else {
           mixpanel.track("" + message + " Added");
           chrome.runtime.sendMessage({
@@ -238,9 +242,14 @@
             mutePackName: filterName
           });
         } else if (filterName === "nfl") {
-          $('.add-afc').click();
-          $('.add-nfc').click();
-          return $(selector).text("Mute");
+          if ($('.add-afc').text() !== "Mute") {
+            $('.add-afc').click();
+          }
+          if ($('.add-nfc').text() !== "Mute") {
+            $('.add-nfc').click();
+          }
+          $(selector).text("Mute");
+          return mixpanel.track("" + message + " Added");
         } else {
           mixpanel.track("" + message + " Removed");
           chrome.runtime.sendMessage({

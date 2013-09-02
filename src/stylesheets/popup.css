@@ -58,7 +58,7 @@ input {
 
 .term:hover .removal {
   opacity: 1;
-  color: red;
+  color: #cc0603;
   left: 13px;
   -webkit-transform: rotate(45deg);
   filter: alpha(opacity=100);
@@ -155,7 +155,6 @@ a.remove-term:hover { opacity: 0.7; }
 
 .nfl-title {
   font-size: 15px;
-  margin-left: 9px;
   margin-bottom: 6px;
   text-decoration: underline;
 }
