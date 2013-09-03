@@ -43,7 +43,7 @@ eaglesFilter = [ "philadelphia eagles", "@eagles", "#eagles", "eagles", "#phi", 
 redskinsFilter = [ "washington redskins", "@redskins", "@rgiii", "rg3", "#was", "skins", "redskins", "#redskins", "#skins", "amerson", "anunoby", "ashworth", "baker", "barnett", "biggers", "bowen", "brace", "briscoe", "burdette", "chester", "cofield", "compton", "cousins", "crawford", "davis", "dawson", "doughty", "elmore", "fletcher", "forbath", "garcon", "garçon", "gettis", "golston", "gomes", "griffin", "grossman", "gumbs", "hall", "hamilton", "hankerson", "helu", "henderson", "jackson", "jamison", "jenkins", "jenkins", "kehl", "kerrigan", "kettani", "kimbrough", "leribeus", "lewis", "lichtensteiger", "matthews", "meriweather", "merling", "minnifield", "montgomery", "morgan", "morris", "moss", "mouton", "muckelroy", "murphy", "neild", "nixon", "ogbuehi", "orakpo", "pashos", "paul", "paulsen", "polumbus", "potter", "pugh", "rambo", "reed", "reeves", "riley", "robinson", "rocca", "royster", "sooto", "stallworth", "stevens", "sundberg", "tapp", "thomas", "thompson", "trueblood", "white", "williams", "wilson", "young", "carriker", "hurt", "davis", "jackson", "redskinsfilter" ]
 cardinalsFilter = [ "arizona cardinals", "@azcardinals", "cardinals", "#birdgang", "bruce", "arians", "abraham", "acho", "alexander", "amaya", "arenas", "batson", "bell", "bethel", "bice", "brinkley", "brown", "brown", "buckner", "campbell", "caprioglio", "carter", "cason", "colledge", "cooper", "dansby", "demens", "dillard", "dockett", "dray", "edwards", "ellington", "fanaika", "feely", "fitzgerald", "fleming", "floyd", "gallington", "gibson", "gill", "gottlieb", "hagans", "harris", "hawkins", "housler", "dc. jefferson", "jefferson", "johnson-webb", "johnson", "kolb", "jones", "kelemete", "king", "leach", "lindley", "lumpkin", "massie", "mathieu", "mathis", "mccann", "mendenhall", "minter", "nash", "okafor", "palmer", "parker", "peterson", "potter", "powers", "quinn", "rachal", "roberts", "rowe", "rucker", "scott", "sendlein", "shaughnessy", "shuler", "smith", "sperry", "stanton", "talley", "taylor", "taylor", "taylor", "terbush", "toma", "walker", "washington", "watford", "wedige", "williams", "williams", "winston", "yell", "zastudil", "cardinalsfilter" ]
 fortyNinersFilter = [ "san francisco 49ers", "49ers", "@49ers", "@vernondavis85", "#49ers", "@kaepernick7", "niners", "#niners", "forty niners", "forty-niners", "harbaugh", "jim harbaugh", "asomugha", "boldin", "boone", "bowman", "brock", "brooks", "brown", "bykowski", "celek", "collie", "cooper", "cox", "culliver", "dahl", "daniels", "davis", "dawson", "divens", "dixon", "dobbs", "dorsey", "goodwin", "gore", "gray", "hall", "hampton", "haralson", "harper", "hawkins", "hunter", "iupati", "jacobs", "james", "jenkins", "jennings", "jerod-eddie", "johnson", "kaepernick", "kilgore", "lee", "lemonier", "lockette", "looney", "mcbath", "mccoy", "mcdermott", "mcdonald", "mike", "miller", "moody", "moore", "morris", "netter", "okoye", "omameh", "osgood", "patton", "reid", "robinson", "rogers", "schepler", "schmidt", "skuta", "smith", "snyder", "spillman", "staley", "stupar", "thomas", "tolzien", "tribue", "tukuafu", "ventrone", "whitner", "wiggins", "wilhoite", "williams", "willis", "carswell", "debniak", "fleming", "carradine", "dial", "lattimore", "marquardt", "wright", "crabtree", "manningham", "fortyninersfilter" ]
-seahawksFilter = [ "seattle seahawks", "@seahawks", "seahawks", "#seahawks", "#hawks", "@petecarroll", "pete carroll", "carroll", "ashford", "avril", "bailey", "baldwin", "bates", "bennett", "blackmon", "boatright", "bowie", "bradford", "brooks", "browner", "bryant", "carpenter", "chancellor", "clark", "coleman", "farwell", "fells", "giacomini", "gresham", "guy", "harper", "hauschka", "helfet", "hill", "howard", "irvin", "jackson", "jeanpierre", "johnson", "kearse", "kemp", "knox", "konz", "lane", "lintz", "lotulelei", "lynch", "maragos", "maxwell", "mayowa", "mcdaniel", "mcdonald", "mcgrath", "mcquistan", "mebane", "michael", "moffitt", "morgan", "nelson", "okung", "parker", "parker", "person", "powell", "quinn", "rice", "robinson", "ryan", "schofield", "seymour", "shead", "sherman", "smith", "swain", "sweezy", "tate", "thomas", "thurmond", "turbin", "unger", "wagner", "walters", "ware", "wiggs", "wilkins", "williams", "willson", "wilson", "winfield", "wright", "fenner", "mccoy", "toomer", "clemons", "harvin", "miller", "scruggs", "simon", "seahwaksfilter" ]
+seahawksFilter = [ "seattle seahawks", "@seahawks", "seahawks", "#seahawks", "#hawks", "@petecarroll", "pete carroll", "carroll", "ashford", "avril", "bailey", "baldwin", "bates", "bennett", "blackmon", "boatright", "bowie", "bradford", "brooks", "browner", "bryant", "carpenter", "chancellor", "clark", "coleman", "farwell", "fells", "giacomini", "gresham", "guy", "harper", "hauschka", "helfet", "hill", "howard", "irvin", "jackson", "jeanpierre", "johnson", "kearse", "kemp", "knox", "konz", "lane", "lintz", "lotulelei", "lynch", "maragos", "maxwell", "mayowa", "mcdaniel", "mcdonald", "mcgrath", "mcquistan", "mebane", "michael", "moffitt", "morgan", "nelson", "okung", "parker", "parker", "person", "powell", "quinn", "rice", "robinson", "ryan", "schofield", "seymour", "shead", "sherman", "smith", "swain", "sweezy", "tate", "thomas", "thurmond", "turbin", "unger", "wagner", "walters", "ware", "wiggs", "wilkins", "williams", "willson", "wilson", "winfield", "wright", "fenner", "mccoy", "toomer", "clemons", "harvin", "miller", "scruggs", "simon", "seahawksfilter" ]
 ramsFilter = [ "st. louis rams", "@stlouisrams", "rams", "#rams", "#stl", "armstrong", "austin", "baer", "bailey", "barksdale", "barnes", "bates", "blake", "bradford", "brockers", "brodine", "brown", "clemens", "conrath", "cook", "cudjo", "cunningham", "dahl", "daniels", "davis", "davis", "dunbar", "fields", "finnegan", "ganaway", "giordano", "givens", "goebel", "graham", "hall", "harkey", "hayes", "hekker", "helmick", "hooey", "hull", "hus", "jenkins", "johnson", "jones", "kendricks", "langford", "lapuaho", "laurinaitis", "lebeau", "lee", "long", "lutzenkirchen", "mcdonald", "mcgee", "mcleod", "mcneill", "mcquaide", "nsekhe", "ogletree", "pead", "pettis", "pocic", "pointer", "potter", "prince", "quick", "quinn", "radway", "reynolds", "richardson", "rivers", "saffold", "sims", "smith", "stacy", "steeples", "stevens", "stewart", "thomas", "veltung", "washington", "wells", "williams", "witherspoon", "woodard", "young", "zuerlein", "akins", "steward", "ramsfilter" ]
 
 ##############################################
@@ -71,10 +71,6 @@ addMutePack = (name) ->
   addMute("cir.ca") if name == "circa"
   addMute("paper.li") if name == "paper"
 
-  addNflFilter() if name == "nfl"
-  addAfcFilter() if name == "afc"
-  addNfcFilter() if name == "nfc"
-
   addRavensFilter() if name == "bal"
   addBengalsFilter() if name == "cin"
   addBrownsFilter() if name == "cle"
@@ -90,7 +86,7 @@ addMutePack = (name) ->
   addBroncosFilter() if name == "den"
   addChiefsFilter() if name == "kc"
   addRaidersFilter() if name == "oak"
-  addChargerFilter() if name == "sd"
+  addChargersFilter() if name == "sd"
 
   addBearsFilter() if name == "chi"
   addLionsFilter() if name == "det"
@@ -99,7 +95,7 @@ addMutePack = (name) ->
   addFalconsFilter() if name == "atl"
   addPanthersFilter() if name == "car"
   addSaintsFilter() if name == "no"
-  addBucaneersFilter() if name == "bucs"
+  addBuccaneersFilter() if name == "bucs"
   addCowboysFilter() if name == "dal"
   addGiantsFilter() if name == "nyg"
   addEaglesFilter() if name == "phi"
@@ -132,10 +128,6 @@ removeMutePack = (name) ->
   removeMute("cir.ca") if name == "circa"
   removeMute("paper.li") if name == "paper"
 
-  removeNflFilter() if name == "nfl"
-  removeAfcFilter() if name == "afc"
-  removeNfcFilter() if name == "nfc"
-
   removeRavensFilter() if name == "bal"
   removeBengalsFilter() if name == "cin"
   removeBrownsFilter() if name == "cle"
@@ -151,7 +143,7 @@ removeMutePack = (name) ->
   removeBroncosFilter() if name == "den"
   removeChiefsFilter() if name == "kc"
   removeRaidersFilter() if name == "oak"
-  removeChargerFilter() if name == "sd"
+  removeChargersFilter() if name == "sd"
 
   removeBearsFilter() if name == "chi"
   removeLionsFilter() if name == "det"
@@ -199,92 +191,6 @@ addNewsroomFilter = -> addMute(item) for item in newsroomFilter
 removeNewsroomFilter = -> removeMute(item) for item in newsroomFilter
 
 # NFL
-addNflFilter = ->
-  addAfcFilter()
-  addNfcFilter()
-  addTerm("nflfilter") if name == "nfl"
-
-removeNflFilter = ->
-  removeAfcFilter()
-  removeNfcFilter()
-  removeTerm("nflfilter") if name == "nfl"
-
-addAfcFitlter = ->
-  addRavensFilter()
-  addBengalsFilter()
-  addBrownsFilter()
-  addSteelersFilter()
-  addTexansFilter()
-  addColtsFilter()
-  addJaguarsFilter()
-  addTitansFilter()
-  addBillsFilter()
-  addDolphinsFilter()
-  addPatriotsFilter()
-  addJetsFilter()
-  addBroncosFilter()
-  addChiefsFilter()
-  addRaidersFilter()
-  addChargersFilter()
-  addTerm("afcfilter") if name == "afc"
-
-removeAfcFilter = ->
-  removeRavensFilter()
-  removeBengalsFilter()
-  removeBrownsFilter()
-  removeSteelersFilter()
-  removeTexansFilter()
-  removeColtsFilter()
-  removeJaguarsFilter()
-  removeTitansFilter()
-  removeBillsFilter()
-  removeDolphinsFilter()
-  removePatriotsFilter()
-  removeJetsFilter()
-  removeBroncosFilter()
-  removeChiefsFilter()
-  removeRaidersFilter()
-  removeChargersFilter()
-  removeTerm("afcfilter") if name == "afc"
-
-addNfcFilter = ->
-  addBearsFilter()
-  addLionsFilter()
-  addPackersFilter()
-  addVikingsFilter()
-  addFalconsFilter()
-  addPanthersFilter()
-  addSaintsFilter()
-  addBuccaneersFilter()
-  addCowboysFilter()
-  addGiantsFilter()
-  addEaglesFilter()
-  addRedskinsFilter()
-  addCardinalsFilter()
-  addFortyNinersFilter()
-  addSeahawksFilter()
-  addRamsFilter()
-  addTerm("nfcfilter") if name == "nfc"
-
-removeNfcFilter = ->
-  removeBearsFilter()
-  removeLionsFilter()
-  removePackersFilter()
-  removeVikingsFilter()
-  removeFalconsFilter()
-  removePanthersFilter()
-  removeSaintsFilter()
-  removeBuccaneersFilter()
-  removeCowboysFilter()
-  removeGiantsFilter()
-  removeEaglesFilter()
-  removeRedskinsFilter()
-  removeCardinalsFilter()
-  removeFortyNinersFilter()
-  removeSeahawksFilter()
-  removeRamsFilter()
-  removeTerm("nfcfilter") if name == "nfc"
-
 addRavensFilter = -> addMute(item) for item in ravensFilter
 removeRavensFilter = -> removeMute(item) for item in ravensFilter
 
@@ -292,7 +198,7 @@ addBengalsFilter = -> addMute(item) for item in bengalsFilter
 removeBengalsFilter = -> removeMute(item) for item in bengalsFilter
 
 addBrownsFilter = -> addMute(item) for item in brownsFilter
-addBrownsFilter = -> removeMute(item) for item in brownsFilter
+removeBrownsFilter = -> removeMute(item) for item in brownsFilter
 
 addSteelersFilter = -> addMute(item) for item in steelersFilter
 removeSteelersFilter = -> removeMute(item) for item in steelersFilter

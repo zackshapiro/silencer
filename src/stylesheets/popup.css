@@ -190,6 +190,8 @@ ul.services { list-style: none; }
   list-style: none;
 }
 
+.afc-title, .nfc-title { text-decoration: underline; }
+
 .division { margin-bottom: 8px; }
 
 .nfl .cta { font-size: 11px; margin-top: 2px; }

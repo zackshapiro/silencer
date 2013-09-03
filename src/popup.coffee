@@ -37,12 +37,6 @@ $ ->
       $(".add-circa").text("Unmute") if term == "cir.ca"
       $(".add-paper").text("Unmute") if term == "paper.li"
 
-
-      #TODO Do for all NFL here, AFC, NFC
-      $(".add-nfl").text("Unmute") if term == "nflfilter"
-      $(".add-afc").text("Unmute") if term == "afcfilter"
-      $(".add-nfc").text("Unmute") if term == "nfcfilter"
-
       # AFC
       $(".add-bal").text("Unmute") if term == "ravensfilter"
       $(".add-cin").text("Unmute") if term == "bengalsfilter"
@@ -86,39 +80,13 @@ $ ->
     event.preventDefault()
 
     if $(selector).text() == "Mute"
-      if filterName == "afc" || filterName == "nfc"
-        teams = $(selector).parent().parent().children().find('.cta')
-        $(selector).text("Unmute")
-        $(team).text("Unmute") for team in teams
-
-        mixpanel.track("#{message} Added")
-        chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
-      else if filterName == "nfl"
-        $('.add-afc').click() unless $('.add-afc').text() == "Unmute"
-        $('.add-nfc').click() unless $('.add-nfc').text() == "Unmute"
-        $(selector).text("Unmute")
-        mixpanel.track("#{message} Added")
-      else
-        mixpanel.track("#{message} Added")
-        chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
-        $(selector).text("Unmute")
+      mixpanel.track("#{message} Added")
+      chrome.runtime.sendMessage({mutePackAdd: true, mutePackName: filterName})
+      $(selector).text("Unmute")
     else
-      if filterName == "afc" || filterName == "nfc"
-        teams = $(selector).parent().parent().children().find('.cta')
-        $(selector).text("Mute")
-        $(team).text("Mute") for team in teams
-
-        mixpanel.track("#{message} Removed")
-        chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
-      else if filterName == "nfl"
-        $('.add-afc').click() unless $('.add-afc').text() == "Mute"
-        $('.add-nfc').click() unless $('.add-nfc').text() == "Mute"
-        $(selector).text("Mute")
-        mixpanel.track("#{message} Added")
-      else
-        mixpanel.track("#{message} Removed")
-        chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
-        $(selector).text("Mute")
+      mixpanel.track("#{message} Removed")
+      chrome.runtime.sendMessage({mutePackRemove: true, mutePackName: filterName})
+      $(selector).text("Mute")
 
 
   $('.pack-expander').click (e) ->
