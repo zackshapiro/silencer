@@ -20,7 +20,6 @@ $ ->
       $(".add-ad").text("Unmute") if term == "arresteddevelopmentfilter"
       $(".add-pll").text("Unmute") if term == "prettylittleliarsfilter"
       $(".add-tb").text("Unmute") if term == "truebloodfilter"
-      $(".add-rb").text("Unmute") if term == "royalbabyfilter"
       $(".add-bb").text("Unmute") if term == "breakingbadfilter"
       $(".add-ointb").text("Unmute") if term == "orangenewblackfilter"
       $(".add-dex").text("Unmute") if term == "dexterfilter"
@@ -182,7 +181,6 @@ $ ->
   $('.add-ad').click (e) -> handleCategory(e, '.add-ad', "Arrested Development Filter", "ad")
   $('.add-pll').click (e) -> handleCategory(e, '.add-pll', "Prety Little Liars Filter", "pll")
   $('.add-tb').click (e) -> handleCategory(e, '.add-tb', "True Blood Filter", "tb")
-  $('.add-rb').click (e) -> handleCategory(e, '.add-rb', "Royal Baby Filter", "rb")
   $('.add-bb').click (e) -> handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb")
   $('.add-ointb').click (e) -> handleCategory(e, '.add-ointb', "Orange is the New Black Filter", "ointb")
   $('.add-dex').click (e) -> handleCategory(e, '.add-dex', "Dexter Filter", "dexter")

@@ -37,9 +37,6 @@
         if (term === "truebloodfilter") {
           $(".add-tb").text("Unmute");
         }
-        if (term === "royalbabyfilter") {
-          $(".add-rb").text("Unmute");
-        }
         if (term === "breakingbadfilter") {
           $(".add-bb").text("Unmute");
         }
@@ -358,9 +355,6 @@
     });
     $('.add-tb').click(function(e) {
       return handleCategory(e, '.add-tb', "True Blood Filter", "tb");
-    });
-    $('.add-rb').click(function(e) {
-      return handleCategory(e, '.add-rb', "Royal Baby Filter", "rb");
     });
     $('.add-bb').click(function(e) {
       return handleCategory(e, '.add-bb', "Breaking Bad Filter", "bb");
