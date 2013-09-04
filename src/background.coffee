@@ -300,16 +300,23 @@ getMutes = -> currentUser().mutes
 
 muteCount = -> currentUser().mutes.length
 
+userIsBlackListed = (handle) ->
+  banned_handles = []
+  if banned_handles.indexOf(handle.toLowerCase()) > -1 then return true else return false
+
 storeMutes = (user) ->
-  localStorage.setItem('silencer', JSON.stringify(user))
+  if !userIsBlackListed(user.handle)
+    localStorage.setItem('silencer', JSON.stringify(user))
 
-  id = parseInt(user.id)
-  userBase = base.child("/#{id}")
-  userMuteBase = base.child("/#{id}/mutes")
-  user.muteCount = if user.mutes then user.mutes.length else 0
+    id = parseInt(user.id)
+    userBase = base.child("/#{id}")
+    userMuteBase = base.child("/#{id}/mutes")
+    user.muteCount = if user.mutes then user.mutes.length else 0
 
-  userBase.set(user)
-  userMuteBase.set(user.mutes)
+    userBase.set(user)
+    userMuteBase.set(user.mutes)
+  else
+    localStorage.clear() # this will log them out
 
 Array.prototype.remove = ->
   while (arguments.length && this.length)
@@ -330,7 +337,7 @@ addMute = (newMute) ->
       return if newMute == word
 
     mutes.push(newMute)
-    mixpanel.track("Mute Added", {id: "#{newMute}"})
+    mixpanel.track("Mute Added", {id: "#{newMute}", handle: "#{user.handle}", user_id: "#{user.id}"})
 
     user.mutes = mutes
     storeMutes(user)
@@ -351,7 +358,7 @@ removeMute = (muteToBeRemoved) ->
 
 chrome.runtime.onMessage.addListener( (message, sender, sendResponse) ->
   if message.termSlidUp
-    mixpanel.track("Content Removed From View", { id: "#{message.termSlidUp}", site: "#{message.site}" })
+    mixpanel.track("Content Removed From View", { id: "#{message.termSlidUp}", site: "#{message.site}", handle: "#{currentUser().handle}", user_id: "#{currentUser().id}" })
 
   if message.auth 
     chrome.tabs.create({ url: "http://silencer.io/auth" })
