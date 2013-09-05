@@ -84,17 +84,13 @@
           _results1 = [];
           for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
             term = _ref[_j];
-            if ($(child).css('display') !== 'none') {
-              if ($($(child)).text().toLowerCase().indexOf(term) > -1) {
-                if ($(child).find('.fullname').text() !== $('.js-mini-current-user .fullname').first().text()) {
-                  hideChild($(child));
-                  _results1.push(chrome.runtime.sendMessage({
-                    termSlidUp: "" + term,
-                    site: "twitter"
-                  }));
-                } else {
-                  _results1.push(void 0);
-                }
+            if ($(child).css("display") === "list-item" && $($(child)).text().toLowerCase().indexOf(term) > -1) {
+              if ($(child).find('.fullname').text() !== $('.js-mini-current-user .fullname').first().text()) {
+                hideChild($(child));
+                _results1.push(chrome.runtime.sendMessage({
+                  termSlidUp: "" + term,
+                  site: "twitter"
+                }));
               } else {
                 _results1.push(void 0);
               }
@@ -127,17 +123,13 @@
           _results1 = [];
           for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
             term = _ref[_j];
-            if ($(child).css('display') !== 'none') {
-              if ($(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
-                if (!($(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1)) {
-                  hideChild($(child));
-                  _results1.push(chrome.runtime.sendMessage({
-                    termSlidUp: "" + term,
-                    site: "facebook"
-                  }));
-                } else {
-                  _results1.push(void 0);
-                }
+            if ($(child).css("display") === "list-item" && $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1) {
+              if (!($(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1)) {
+                hideChild($(child));
+                _results1.push(chrome.runtime.sendMessage({
+                  termSlidUp: "" + term,
+                  site: "facebook"
+                }));
               } else {
                 _results1.push(void 0);
               }

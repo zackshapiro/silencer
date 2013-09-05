@@ -55,11 +55,10 @@ $ ->
 
     for child in children
       for term in @Silencer.terms()
-        if $(child).css('display') != 'none'
-          if $($(child)).text().toLowerCase().indexOf(term) > -1
-            unless $(child).find('.fullname').text() == $('.js-mini-current-user .fullname').first().text()
-              hideChild($(child))
-              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
+        if $(child).css("display") == "list-item" && $($(child)).text().toLowerCase().indexOf(term) > -1
+          unless $(child).find('.fullname').text() == $('.js-mini-current-user .fullname').first().text() # checks to see if it's the user's tweet
+            hideChild($(child))
+            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "twitter"})
 
   ################## Filters ############################
 
@@ -76,11 +75,10 @@ $ ->
 
     for child in children
       for term in @Silencer.terms()
-        if $(child).css('display') != 'none'
-          if $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
-            unless $(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1
-              hideChild($(child))
-              chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
+        if $(child).css("display") == "list-item" && $(child).text().toLowerCase().indexOf(term.toLowerCase()) > -1
+          unless $(child).find(likeDiv).text().toLowerCase().indexOf(term) > -1
+            hideChild($(child))
+            chrome.runtime.sendMessage({termSlidUp: "#{term}", site: "facebook"})
 
   #######################################################
 

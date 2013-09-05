@@ -300,23 +300,16 @@ getMutes = -> currentUser().mutes
 
 muteCount = -> currentUser().mutes.length
 
-userIsBlackListed = (handle) ->
-  banned_handles = []
-  if banned_handles.indexOf(handle.toLowerCase()) > -1 then return true else return false
-
 storeMutes = (user) ->
-  if !userIsBlackListed(user.handle)
-    localStorage.setItem('silencer', JSON.stringify(user))
+  localStorage.setItem('silencer', JSON.stringify(user))
 
-    id = parseInt(user.id)
-    userBase = base.child("/#{id}")
-    userMuteBase = base.child("/#{id}/mutes")
-    user.muteCount = if user.mutes then user.mutes.length else 0
+  id = parseInt(user.id)
+  userBase = base.child("/#{id}")
+  userMuteBase = base.child("/#{id}/mutes")
+  user.muteCount = if user.mutes then user.mutes.length else 0
 
-    userBase.set(user)
-    userMuteBase.set(user.mutes)
-  else
-    localStorage.clear() # this will log them out
+  userBase.set(user)
+  userMuteBase.set(user.mutes)
 
 Array.prototype.remove = ->
   while (arguments.length && this.length)
