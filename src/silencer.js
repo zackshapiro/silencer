@@ -86,11 +86,17 @@
             term = _ref[_j];
             if ($(child).css("display") === "list-item" && $($(child)).text().toLowerCase().indexOf(term) > -1) {
               if ($(child).find('.fullname').text() !== $('.js-mini-current-user .fullname').first().text()) {
-                hideChild($(child));
-                _results1.push(chrome.runtime.sendMessage({
-                  termSlidUp: "" + term,
-                  site: "twitter"
-                }));
+                if ($(child).attr('class').match(["original-tweet-item"])) {
+                  _results1.push($(child).hide());
+                } else if ($(child).attr('class').match(["conversation-tweet-item"])) {
+                  _results1.push($(child).hide());
+                } else {
+                  hideChild($(child));
+                  _results1.push(chrome.runtime.sendMessage({
+                    termSlidUp: "" + term,
+                    site: "twitter"
+                  }));
+                }
               } else {
                 _results1.push(void 0);
               }
