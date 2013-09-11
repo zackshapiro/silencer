@@ -283,6 +283,9 @@
         term: term
       });
     }));
+    $(".menu-button").click(function(event) {
+      return $(".main-layer").toggleClass('slid-over');
+    });
     /* Adding filters*/
 
     $('.add-got').click(function(e) {

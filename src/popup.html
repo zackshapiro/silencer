@@ -7,265 +7,278 @@
     <script src="/lib/zepto.min.js"></script>
     <script src="/lib/zepto-slides.min.js"></script>
     <script src="popup.js"></script>
+    <script src="/lib/twitter-share.js"></script>
   </head>
 
   <body>
-    <div class="header">
-      <span class="name">Silencer</span>
-      <span class="tagline">control the internet</span>
+    <div class="sub-layer">
+
     </div>
 
-    <div class="add-term">
-      <form class="my-form">
-        <input class="term-to-submit" type="text" placeholder="Enter a term to mute"></input>
-        <a href="#" class="primary button mute submit">Mute</a>
-        <p class="examples">(ex. Yankees, 4sq.com, country music, #sxsw)</p>
-      </form>
-    </div>
-
-    <a href="#" class="log-in">Log in</a>
-
-    <p class="pack-expander">Mute Packs</p>
-
-    <ul class="filter-packs">
-      <div class="packs">
-        <li class="breaking-bad">
-          Breaking Bad (57 mutes)
-          <a href="#" class="add-bb cta">Mute</a>
-        </li>
-        <li class="true-blood">
-          True Blood (48 mutes)
-          <a href="#" class="add-tb cta">Mute</a>
-        </li>
-        <li class="orange-new-black">
-          Orange is the New Black (22 mutes)
-          <a href="#" class="add-ointb cta">Mute</a>
-        </li>
-        <li class="dexter">
-          Dexter (36 mutes)
-          <a href="#" class="add-dex cta">Mute</a>
-        </li>
-        <li class="newsroom">
-          The Newsroom (41 mutes)
-          <a href="#" class="add-newsroom cta">Mute</a>
-        </li>
-        <li class="pretty-little-liars">
-          Pretty Little Liars (22 mutes)
-          <a href="#" class="add-pll cta">Mute</a>
-        </li>
-        <li class="game-of-thrones">
-          Game of Thrones (46 mutes) 
-          <a href="#" class="add-got cta">Mute</a>
-        </li>
-        <li class="mad-men">
-          Mad Men (31 mutes) 
-          <a href="#" class="add-mm cta">Mute</a>
-        </li>
-        <li class="arrested-development">
-          Arrested Development (38 mutes) 
-          <a href="#" class="add-ad cta">Mute</a>
-        </li>
+    <div class="main-layer">
+      <div class="header">
+        <span class="name">Silencer</span>
+        <span class="tagline">control the internet</span>
       </div>
 
-      <div class="nfl">
-        <div class="afc">
-          <p class="afc-title">AFC</p>
-
-          <ul class="afc-north division">
-            <li>
-              Baltimore Ravens
-              <a href="#" class="add-bal cta">Mute</a>
-            </li>
-            <li>
-              Cincinnati Bengals
-              <a href="#" class="add-cin cta">Mute</a>
-            </li>
-            <li>
-              Cleveland Browns
-              <a href="#" class="add-cle cta">Mute</a>
-            </li>
-            <li>
-              Pittsburgh Steelers
-              <a href="#" class="add-pit cta">Mute</a>
-            </li>
-          </ul>
-          <ul class="afc-south division">
-            <li>
-              Houston Texans
-              <a href="#" class="add-hou cta">Mute</a>
-            </li>
-            <li>
-              Indianapolis Colts
-              <a href="#" class="add-ind cta">Mute</a>
-            </li>
-            <li>
-              Jacksonville Jaguars
-              <a href="#" class="add-jax cta">Mute</a>
-            </li>
-            <li>
-              Tennessee Titans
-              <a href="#" class="add-ten cta">Mute</a>
-            </li>
-          </ul>
-          <ul class="afc-east division">
-            <li>
-              Buffalo Bills
-              <a href="#" class="add-buf cta">Mute</a>
-            </li>
-            <li>
-              Miami Dolpins
-              <a href="#" class="add-mia cta">Mute</a>
-            </li>
-            <li>
-              New England Patriots
-              <a href="#" class="add-ne cta">Mute</a>
-            </li>
-            <li>
-              New York Jets
-              <a href="#" class="add-nyj cta">Mute</a>
-            </li>
-          </ul>
-          <ul class="afc-west">
-            <li>
-              Denver Broncos
-              <a href="#" class="add-den cta">Mute</a>
-            </li>
-            <li>
-              Kansas City Chiefs
-              <a href="#" class="add-kc cta">Mute</a>
-            </li>
-            <li>
-              Oakland Raiders
-              <a href="#" class="add-oak cta">Mute</a>
-            </li>
-            <li>
-              San Diego Chargers
-              <a href="#" class="add-sd cta">Mute</a>
-            </li>
-          </ul>
-        </div>
-        
-        <div class="nfc">
-          <p class="nfc-title">NFC</p>
-
-          <ul class="nfc-north division">
-            <li>
-                Chicago Bears
-                <a href="#" class="add-chi cta">Mute</a>
-              </li>
-            <li>
-                Detroit Lions
-                <a href="#" class="add-det cta">Mute</a>
-              </li>
-            <li>
-                Green Bay Packers
-                <a href="#" class="add-gb cta">Mute</a>
-              </li>
-            <li>
-                Minnesota Vikings
-                <a href="#" class="add-min cta">Mute</a>
-              </li>
-          </ul>
-          <ul class="nfc-south division">
-            <li>
-                Atlanta Falcons
-                <a href="#" class="add-atl cta">Mute</a>
-              </li>
-            <li>
-                Carolina Panthers
-                <a href="#" class="add-car cta">Mute</a>
-              </li>
-            <li>
-                New Orleans Saints
-                <a href="#" class="add-no cta">Mute</a>
-              </li>
-            <li>
-                Tampa Bay Bucs
-                <a href="#" class="add-bucs cta">Mute</a>
-              </li>
-          </ul>
-          <ul class="nfc-east division">
-            <li>
-                Dallas Cowboys
-                <a href="#" class="add-dal cta">Mute</a>
-              </li>
-            <li>
-                New York Giants
-                <a href="#" class="add-nyg cta">Mute</a>
-              </li>
-            <li>
-                Philadelphia Eagles
-                <a href="#" class="add-phi cta">Mute</a>
-              </li>
-            <li>
-                Washington Redskins
-                <a href="#" class="add-wsh cta">Mute</a>
-              </li>
-          </ul>
-          <ul class="nfc-west">
-            <li>
-                Arizona Cardinals
-                <a href="#" class="add-ari cta">Mute</a>
-              </li>
-            <li>
-                San Francisco 49ers
-                <a href="#" class="add-sf cta">Mute</a>
-              </li>
-            <li>
-                Seattle Seahawks
-                <a href="#" class="add-sea cta">Mute</a>
-              </li>
-            <li>
-                St. Louis Rams
-                <a href="#" class="add-stl cta">Mute</a>
-              </li>
-          </ul>
-        </div>
+      <div class="add-term">
+        <form class="my-form">
+          <input class="term-to-submit" type="text" placeholder="Enter a term to mute"></input>
+          <a href="#" class="primary button mute submit">Mute</a>
+          <p class="examples">(ex. Yankees, 4sq.com, country music, #sxsw)</p>
+        </form>
       </div>
 
-      <ul class="services">
-        <p class="services-title">Services</p>
+      <a href="#" class="log-in">Log in</a>
 
-        <li class="service">instagram
-          <a href="#" class="add-ig cta">Mute</a>
-        </li>
-        <li class="service">get glue
-          <a href="#" class="add-glue cta">Mute</a>
-        </li>
-        <li class="service">ask.fm
-          <a href="#" class="add-ask cta">Mute</a>
-        </li>
-        <li class="service">vine
-          <a href="#" class="add-vine cta">Mute</a>
-        </li>
-        <li class="service">foursquare
-          <a href="#" class="add-4sq cta">Mute</a>
-        </li>
-        <li class="service">path
-          <a href="#" class="add-path cta">Mute</a>
-        </li>
-        <li class="service">timehop
-          <a href="#" class="add-th cta">Mute</a>
-        </li>
-        <li class="service">medium
-          <a href="#" class="add-medium cta">Mute</a>
-        </li>
-        <li class="service">nike+
-          <a href="#" class="add-nike cta">Mute</a>
-        </li>
-        <li class="service">circa
-          <a href="#" class="add-circa cta">Mute</a>
-        </li>
-        <li class="service">paper.li
-          <a href="#" class="add-paper cta">Mute</a>
-        </li>
+      <div class="menu-button">
+        <div class="line first"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+
+      <p class="pack-expander">Mute Packs</p>
+
+      <ul class="filter-packs">
+        <div class="packs">
+          <li class="breaking-bad">
+            Breaking Bad (57 mutes)
+            <a href="#" class="add-bb cta">Mute</a>
+          </li>
+          <li class="true-blood">
+            True Blood (48 mutes)
+            <a href="#" class="add-tb cta">Mute</a>
+          </li>
+          <li class="orange-new-black">
+            Orange is the New Black (22 mutes)
+            <a href="#" class="add-ointb cta">Mute</a>
+          </li>
+          <li class="dexter">
+            Dexter (36 mutes)
+            <a href="#" class="add-dex cta">Mute</a>
+          </li>
+          <li class="newsroom">
+            The Newsroom (41 mutes)
+            <a href="#" class="add-newsroom cta">Mute</a>
+          </li>
+          <li class="pretty-little-liars">
+            Pretty Little Liars (22 mutes)
+            <a href="#" class="add-pll cta">Mute</a>
+          </li>
+          <li class="game-of-thrones">
+            Game of Thrones (46 mutes) 
+            <a href="#" class="add-got cta">Mute</a>
+          </li>
+          <li class="mad-men">
+            Mad Men (31 mutes) 
+            <a href="#" class="add-mm cta">Mute</a>
+          </li>
+          <li class="arrested-development">
+            Arrested Development (38 mutes) 
+            <a href="#" class="add-ad cta">Mute</a>
+          </li>
+        </div>
+
+        <div class="nfl">
+          <div class="afc">
+            <p class="afc-title">AFC</p>
+
+            <ul class="afc-north division">
+              <li>
+                Baltimore Ravens
+                <a href="#" class="add-bal cta">Mute</a>
+              </li>
+              <li>
+                Cincinnati Bengals
+                <a href="#" class="add-cin cta">Mute</a>
+              </li>
+              <li>
+                Cleveland Browns
+                <a href="#" class="add-cle cta">Mute</a>
+              </li>
+              <li>
+                Pittsburgh Steelers
+                <a href="#" class="add-pit cta">Mute</a>
+              </li>
+            </ul>
+            <ul class="afc-south division">
+              <li>
+                Houston Texans
+                <a href="#" class="add-hou cta">Mute</a>
+              </li>
+              <li>
+                Indianapolis Colts
+                <a href="#" class="add-ind cta">Mute</a>
+              </li>
+              <li>
+                Jacksonville Jaguars
+                <a href="#" class="add-jax cta">Mute</a>
+              </li>
+              <li>
+                Tennessee Titans
+                <a href="#" class="add-ten cta">Mute</a>
+              </li>
+            </ul>
+            <ul class="afc-east division">
+              <li>
+                Buffalo Bills
+                <a href="#" class="add-buf cta">Mute</a>
+              </li>
+              <li>
+                Miami Dolpins
+                <a href="#" class="add-mia cta">Mute</a>
+              </li>
+              <li>
+                New England Patriots
+                <a href="#" class="add-ne cta">Mute</a>
+              </li>
+              <li>
+                New York Jets
+                <a href="#" class="add-nyj cta">Mute</a>
+              </li>
+            </ul>
+            <ul class="afc-west">
+              <li>
+                Denver Broncos
+                <a href="#" class="add-den cta">Mute</a>
+              </li>
+              <li>
+                Kansas City Chiefs
+                <a href="#" class="add-kc cta">Mute</a>
+              </li>
+              <li>
+                Oakland Raiders
+                <a href="#" class="add-oak cta">Mute</a>
+              </li>
+              <li>
+                San Diego Chargers
+                <a href="#" class="add-sd cta">Mute</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="nfc">
+            <p class="nfc-title">NFC</p>
+
+            <ul class="nfc-north division">
+              <li>
+                  Chicago Bears
+                  <a href="#" class="add-chi cta">Mute</a>
+                </li>
+              <li>
+                  Detroit Lions
+                  <a href="#" class="add-det cta">Mute</a>
+                </li>
+              <li>
+                  Green Bay Packers
+                  <a href="#" class="add-gb cta">Mute</a>
+                </li>
+              <li>
+                  Minnesota Vikings
+                  <a href="#" class="add-min cta">Mute</a>
+                </li>
+            </ul>
+            <ul class="nfc-south division">
+              <li>
+                  Atlanta Falcons
+                  <a href="#" class="add-atl cta">Mute</a>
+                </li>
+              <li>
+                  Carolina Panthers
+                  <a href="#" class="add-car cta">Mute</a>
+                </li>
+              <li>
+                  New Orleans Saints
+                  <a href="#" class="add-no cta">Mute</a>
+                </li>
+              <li>
+                  Tampa Bay Bucs
+                  <a href="#" class="add-bucs cta">Mute</a>
+                </li>
+            </ul>
+            <ul class="nfc-east division">
+              <li>
+                  Dallas Cowboys
+                  <a href="#" class="add-dal cta">Mute</a>
+                </li>
+              <li>
+                  New York Giants
+                  <a href="#" class="add-nyg cta">Mute</a>
+                </li>
+              <li>
+                  Philadelphia Eagles
+                  <a href="#" class="add-phi cta">Mute</a>
+                </li>
+              <li>
+                  Washington Redskins
+                  <a href="#" class="add-wsh cta">Mute</a>
+                </li>
+            </ul>
+            <ul class="nfc-west">
+              <li>
+                  Arizona Cardinals
+                  <a href="#" class="add-ari cta">Mute</a>
+                </li>
+              <li>
+                  San Francisco 49ers
+                  <a href="#" class="add-sf cta">Mute</a>
+                </li>
+              <li>
+                  Seattle Seahawks
+                  <a href="#" class="add-sea cta">Mute</a>
+                </li>
+              <li>
+                  St. Louis Rams
+                  <a href="#" class="add-stl cta">Mute</a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="services">
+          <p class="services-title">Services</p>
+
+          <li class="service">instagram
+            <a href="#" class="add-ig cta">Mute</a>
+          </li>
+          <li class="service">get glue
+            <a href="#" class="add-glue cta">Mute</a>
+          </li>
+          <li class="service">ask.fm
+            <a href="#" class="add-ask cta">Mute</a>
+          </li>
+          <li class="service">vine
+            <a href="#" class="add-vine cta">Mute</a>
+          </li>
+          <li class="service">foursquare
+            <a href="#" class="add-4sq cta">Mute</a>
+          </li>
+          <li class="service">path
+            <a href="#" class="add-path cta">Mute</a>
+          </li>
+          <li class="service">timehop
+            <a href="#" class="add-th cta">Mute</a>
+          </li>
+          <li class="service">medium
+            <a href="#" class="add-medium cta">Mute</a>
+          </li>
+          <li class="service">nike+
+            <a href="#" class="add-nike cta">Mute</a>
+          </li>
+          <li class="service">circa
+            <a href="#" class="add-circa cta">Mute</a>
+          </li>
+          <li class="service">paper.li
+            <a href="#" class="add-paper cta">Mute</a>
+          </li>
+        </ul>
       </ul>
-    </ul>
 
-    <div class="term-holder">
-      <p class="youre-muting">You're muting:</p>
-      <ul class="terms"></ul>
-    </div>
+      <div class="term-holder">
+        <p class="youre-muting">You're muting:</p>
+        <ul class="terms"></ul>
+      </div>
+    </div> 
 
   </body>
 </html>

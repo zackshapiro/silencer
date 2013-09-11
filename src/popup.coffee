@@ -93,7 +93,6 @@ $ ->
     e.preventDefault()
     if $('.filter-packs').css('display') != 'none' then $('.filter-packs').slideUp() else $('.filter-packs').slideDown()
 
-
   # Add term (enter pressed)
   $('.my-form').submit ->
     newTerm = $('.term-to-submit').val().toLowerCase()
@@ -141,6 +140,7 @@ $ ->
     chrome.runtime.sendMessage({removeMute: true, term: term})
   ))
 
+  $(".menu-button").click (event) -> $(".main-layer").toggleClass('slid-over')
 
   ### Adding filters ### 
   # TV shows
