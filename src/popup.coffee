@@ -130,9 +130,15 @@ $ ->
     )
   )
 
+  $(".terms").on('click', 'li .sharer', ( (e) =>
+    event.preventDefault()
+    # it's calling _this instead of this, _this being Window
+    console.log $(event.currentTarget).find(that).siblings().text()
+  ))
+
 
   # Remove term
-  $(".terms").on('click', 'li a', ( (e) => 
+  $(".terms").on('click', 'li .remove-term', ( (e) => 
     e.preventDefault()
     term = $(e.currentTarget).parent().data("term")
     $(e.currentTarget).parent().slideUp()

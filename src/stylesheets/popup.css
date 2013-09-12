@@ -35,10 +35,30 @@ input {
   left: 4px;
 }
 
+.menu-items {
+  margin-top: 0px;
+  padding-left: 0;
+}
+
+.menu-items li {
+  color: white;
+  list-style: none;
+  border-top: 1px solid white;
+  padding: 10px 0px 10px 6px;
+}
+
+.menu-items li:first-child {
+  border-top: none;
+}
+
+.menu-items li:last-child {
+  border-bottom: 1px solid white;
+}
+
 .main-layer.slid-over {
   position: relative;
   left: 130px;
-  -webkit-transition: left 0.2s ease-in;
+  -webkit-transition: left 0.3s ease-in;
 }
 
 .header {
@@ -79,7 +99,7 @@ input {
   margin-left: -10px;
   display: inline-block;
   -webkit-transform: rotate(0deg);
-  -webkit-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
 }
 
 .term:hover .removal {
@@ -108,7 +128,6 @@ input {
   margin-left: 8px;
   float: left;
 }
-.button:hover {}
 
 .youre-muting {
   text-align: left;
@@ -251,6 +270,7 @@ ul.services { list-style: none; }
 }
 
 .line {
+  border-radius: 4px;
   width: 10px;
   height: 1px;
   border: 1px solid #424242;

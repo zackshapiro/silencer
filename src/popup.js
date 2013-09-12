@@ -273,7 +273,11 @@
         return mixpanel.track('Silencer Opened');
       });
     });
-    $(".terms").on('click', 'li a', (function(e) {
+    $(".terms").on('click', 'li .sharer', (function(e) {
+      event.preventDefault();
+      return console.log($(event.currentTarget).find(that).siblings().text());
+    }));
+    $(".terms").on('click', 'li .remove-term', (function(e) {
       var term;
       e.preventDefault();
       term = $(e.currentTarget).parent().data("term");
