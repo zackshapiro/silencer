@@ -17,6 +17,4 @@ It is currently in its early stages and is always rapidly evolving.
 * You have to develop in the master branch, as far as I can tell. Chrome doesn't seem to recognize code that's in a branch that you're actively working on
 * The latest production build of Silencer can be found [here](https://chrome.google.com/webstore/detail/silencer/liddmepmaofgllnbdbepbcgfgclcelno?utm_source=chrome-ntp-icon)
 
-#### crafted with love by [Zack Shapiro](http://twitter.com/zackshapiro)
-
-*(This can be anything you want it to be)*
+#### created by [Zack Shapiro](http://twitter.com/zackshapiro)
